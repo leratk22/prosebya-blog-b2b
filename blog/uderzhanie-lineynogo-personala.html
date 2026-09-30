@@ -1,0 +1,280 @@
+<!-- Шаблон страницы статьи для tools/build.py. Не открывать напрямую. -->
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Удержание линейного персонала: что держит массовый штат</title>
+<meta name="description" content="Текучесть линии в рознице доходит до 85%, а уход одного стоит около 40% оклада. Что удерживает продавцов и склад вместо сложных бонусов.">
+<link rel="canonical" href="https://prosebya.ru/blog-b2b/uderzhanie-lineynogo-personala">
+<link rel="icon" href="https://static.tildacdn.com/tild3466-6233-4539-a362-353234643636/2.png">
+<link rel="preload" href="../fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 164 46">
+    <path d="M12.525 35.379H21.031V9.085H0V35.379H8.506V15.653H12.525V35.379Z"/>
+    <path d="M93.185 39.529H74.658V45.57H93.185V39.529Z"/>
+    <path d="M39.505 8.508C36.043 8.508 34.385 10.666 33.72 13.824H33.102L32.644 9.141H26.092V45.569H34.503V31.635H35.029C35.652 34.127 37.096 35.839 40.065 35.839C45.51 35.839 46.844 28.895 46.844 20.994C46.844 13.705 44.271 8.508 39.507 8.508M36.215 29.223C34.62 29.223 33.962 27.146 33.962 21.835C33.962 16.523 34.885 15.069 36.215 15.069C37.373 15.069 38.379 16.578 38.379 21.686C38.379 27.789 37.48 29.223 36.215 29.223Z"/>
+    <path d="M133.024 11.309C129.408 11.309 127.832 13.211 127.124 15.756L126.577 15.69C126.8 11.531 128.401 8.516 133.023 7.988C135.609 7.693 140.744 7.308 140.744 7.308V0C140.744 0 138.434 0.215 133.023 0.981C122.743 2.435 120.406 9.753 120.406 19.763C120.406 30.558 124.063 35.839 131.057 35.839C138.051 35.839 141.49 30.817 141.49 22.606C141.49 18.002 140.772 11.309 133.024 11.309ZM130.977 29.338C129.333 29.338 128.875 27.744 128.875 23.144C128.875 18.545 129.59 16.949 130.977 16.949C132.365 16.949 133.024 18.197 133.024 23.144C133.024 28.091 132.62 29.338 130.977 29.338Z"/>
+    <path d="M157.254 9.085H152.302C147.154 9.085 143.93 11.913 143.93 17.877C143.93 22.023 146.014 24.241 148.651 25.328L142.5 35.38H150.97L155.311 26.17C155.542 26.149 155.766 26.126 155.984 26.098V35.38H164V9.085H157.255H157.254ZM155.456 23.588C153.073 23.588 152.342 21.868 152.342 18.633C152.342 15.62 153.153 13.976 154.993 13.976C155.583 13.976 155.963 14.041 155.963 14.041L155.984 13.963V23.588H155.456Z"/>
+    <path d="M84.186 29.166C82.366 29.166 82.194 26.227 82.194 22.515C82.194 17.602 82.229 15.126 84.049 15.126C85.869 15.126 86.012 17.482 86.012 21.733H93.981C94.275 15.126 92.989 8.452 83.919 8.452C75.707 8.452 73.858 14.377 73.858 22.104C73.858 33.199 78.326 35.84 84.182 35.84C89.67 35.84 93.981 32.665 93.981 25.339H86.012C86.012 27.933 85.552 29.166 84.186 29.166Z"/>
+    <path d="M60.498 8.452C54.603 8.452 49.984 11.798 49.984 21.872C49.984 31.947 53.262 35.84 60.498 35.84C67.734 35.84 71.067 32.128 71.067 21.872C71.067 11.616 66.434 8.452 60.498 8.452ZM60.498 29.338C58.395 29.338 58.358 26.087 58.358 21.872C58.358 17.96 58.538 15.298 60.498 15.298C62.458 15.298 62.709 18.082 62.709 21.872C62.709 25.662 62.599 29.338 60.498 29.338Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M105.161 24.593C105.351 28.058 106.092 29.466 107.634 29.466H107.635C108.79 29.466 109.44 28.509 109.57 26.67H117.524C117.03 33.055 113.605 35.84 107.7 35.84C101.395 35.84 96.925 33.2 96.925 22.104C96.925 14.377 98.775 8.452 106.987 8.452C116.498 8.452 118.284 15.301 117.523 24.594L117.519 24.593H105.161ZM105.124 20.977H109.548C109.492 17.17 108.973 14.827 107.265 14.827C105.644 14.827 105.201 16.974 105.124 20.977Z"/>
+  </symbol>
+</svg>
+
+<header class="site-header site-header--article">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+    </a>
+    <nav class="site-nav" aria-label="Основное меню">
+      <a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a>
+      <a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a>
+      <a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a>
+      <a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </nav>
+    <button class="site-header__burger" type="button" data-menu-open aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Меню">
+  <div class="mobile-menu__top">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)" style="width:100px;height:28px"><use href="#logo"/></svg>
+    </a>
+    <button class="site-header__burger" type="button" data-menu-close aria-label="Закрыть меню" style="display:flex">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <ul class="mobile-menu__list">
+    <li><a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a></li>
+    <li><a href="https://prosebya.ru/business">Для бизнеса</a></li>
+    <li><a href="https://prosebya.ru/launch">Для людей</a></li>
+    <li><a href="https://prosebya.ru/gifts">Сертификаты</a></li>
+  </ul>
+  <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+</div>
+
+<main class="container">
+  <div class="article-layout">
+    <article class="article-main">
+      <header>
+        <ol class="breadcrumbs" aria-label="Навигация">
+          <li><a href="../index.html">Блог</a></li>
+          <li><a href="../index.html?cat=tekuchest-i-vygoranie">Текучесть и выгорание</a></li>
+        </ol>
+        <h1 class="article-title">Удержание линейного персонала: ритейл, склад, производство</h1>
+        <p class="article-lead">Текучесть линии в рознице доходит до 85%, а уход одного стоит около 40% оклада. Что удерживает продавцов и склад вместо сложных бонусов.</p>
+        <div class="article-meta">
+          <div class="article-meta__info">
+            <span class="author"><span class="avatar" aria-hidden="true"></span>Просебя</span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-17">17 августа 2026</time></span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>6 мин</span>
+          </div>
+          <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+        </div>
+        <figure class="article-cover">
+          <img src="https://optim.tildacdn.com/tild3164-3262-4735-b163-363663633532/-/format/webp/15.png.webp" width="720" height="540" alt="" fetchpriority="high">
+        </figure>
+      </header>
+
+      <details class="toc-mobile">
+        <summary>Содержание (9)<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+        <ol>
+          <li><a href="#liniya-i-ofis-dve-raznye-zadachi-vnutri-odnoy-kompanii">Линия и офис: две разные задачи внутри одной компании</a></li>
+          <li><a href="#skolko-stoit-uhod-lineynogo-sotrudnika">Сколько стоит уход линейного сотрудника</a></li>
+          <li><a href="#pochemu-sotrudniki-uhodyat-s-linii">Почему сотрудники уходят с линии</a></li>
+          <li><a href="#predskazuemyy-grafik-pomogaet-biznesu">Предсказуемый график помогает бизнесу</a></li>
+          <li><a href="#rukovoditel-na-linii-vliyaet-na-opyt-sotrudnika">Руководитель на линии влияет на опыт сотрудника</a></li>
+          <li><a href="#pochemu-korporativnaya-podderzhka-mozhet-ne-dohodit-do-linii">Почему корпоративная поддержка может не доходить до линии</a></li>
+          <li><a href="#chto-dolzhno-byt-v-programme-dlya-lineynogo-personala">Что должно быть в программе для линейного персонала</a></li>
+          <li><a href="#chto-delat-hr-esli-tekuchest-na-linii-rastet">Что делать HR, если текучесть на линии растет</a></li>
+          <li><a href="#chto-mozhno-sdelat-v-blizhayshee-vremya">Что можно сделать в ближайшее время</a></li>
+        </ol>
+      </details>
+
+      <div class="prose" id="article-body">
+        <p>Для линейного персонала условия работы напрямую влияют на удержание: график, физическая нагрузка, руководитель на месте и доступ к корпоративным сервисам.</p>
+        <p>Масштаб текучести может сильно различаться между отраслями, компаниями и категориями сотрудников. Внутри одной организации показатели линейного и офисного персонала также могут заметно отличаться: на них влияют график, уровень оплаты, нагрузка, стиль управления, возможности роста и условия работы.<br>Общая текучесть по компании скрывает различия между подразделениями и профессиями. Для управления удержанием показатели стоит считать отдельно по подразделениям, профессиям и типам персонала.</p>
+        <p>В этой статье разберем, сколько стоит уход линейного сотрудника, какие меры помогают их удержать и что делать HR, если текучесть растет.</p>
+        <h2 id="liniya-i-ofis-dve-raznye-zadachi-vnutri-odnoy-kompanii">Линия и офис: две разные задачи внутри одной компании</h2>
+        <p>Текучесть линейного персонала нельзя оценивать по одному показателю для всей компании. У сотрудников магазина, склада, производства и офиса разные условия работы, графики и способы взаимодействия с работодателем.</p>
+        <p>Поэтому программу удержания стоит адаптировать под конкретную группу сотрудников. Длинное письмо на корпоративную почту, например, не поможет человеку, который всю смену работает в торговом зале, на складе или на производственной площадке.</p>
+        <p>Для линейного персонала важны доступные каналы коммуникации, возможность обратиться без рабочего компьютера и поддержка, которой можно воспользоваться с учетом сменного графика.</p>
+        <h2 id="skolko-stoit-uhod-lineynogo-sotrudnika">Сколько стоит уход линейного сотрудника</h2>
+        <p><a href="https://www.gallup.com/workplace/650174/employee-retention-depends-getting-recognition-right.aspx">Gallup оценивает</a> стоимость замены frontline-сотрудника примерно в 40% его годовой зарплаты. Для технических специалистов оценка составляет около 80%, для руководителей и менеджеров — около 200%. Эти оценки включают затраты на замену, но не учитывают некоторые сложно измеримые потери, например знания и влияние на мораль команды.</p>
+        <p>Для массового персонала важна не только стоимость одной замены, но и их количество. При высокой текучести расходы на подбор, оформление, обучение и адаптацию повторяются снова и снова. Поэтому стоимость текучести стоит считать отдельно по массовым позициям и подразделениям.</p>
+        <h2 id="pochemu-sotrudniki-uhodyat-s-linii">Почему сотрудники уходят с линии</h2>
+        <p>Причины текучести линейного персонала обычно связаны с несколькими факторами: сочетанием оплаты, графика, нагрузки, отношений с руководителем и возможностей развития.</p>
+        <p><a href="https://www.gallup.com/workplace/646538/employee-turnover-preventable-often-ignored.aspx">Согласно исследованиям Gallup</a>, 42% сотрудников, которые добровольно покинули организацию, считают, что компания или руководитель могли что-то сделать, чтобы предотвратить их уход. Среди таких действий сотрудники называли:</p>
+        <ul><li>компенсации и льготы — 30%;</li><li>более качественное взаимодействие с руководителем — 21%;</li><li>решение организационных проблем — 13%;</li><li>возможности карьерного роста — 11%;</li><li>вопросы нагрузки и нехватки людей — 9%.</li></ul>
+        <p>Зарплата и бонусы влияют на решение сотрудника остаться, особенно если оплата заметно ниже предложений на рынке. Но повышение зарплаты не решает проблемы, связанные с непредсказуемым графиком, нехваткой людей в смене, постоянными переработками или конфликтами с руководителем.</p>
+        <p>Поэтому причины увольнений стоит проверять на уровне конкретных подразделений. Для этого можно сопоставить данные exit-интервью, коротких опросов действующих сотрудников, обращений в HR и показатели по графикам, нагрузке, оплате и руководителям.</p>
+        <h2 id="predskazuemyy-grafik-pomogaet-biznesu">Предсказуемый график помогает бизнесу</h2>
+        <p>График — важная часть условий работы для линейного сотрудника. От расписания зависит, когда человек может отдыхать, проводить время с семьей или планировать вторую работу.</p>
+        <p><a href="https://pubsonline.informs.org/doi/10.1287/mnsc.2021.4291">В рандомизированном исследовании 28 магазинов Gap Inc.</a> сотрудники получили более стабильные графики, больше контроля над сменами и другие изменения в организации расписания. За 9 месяцев производительность магазинов выросла на 5,1%, продажи выросли на 3,3%, а количество трудовых часов снизилось на 1,8%.</p>
+        <p>Здесь изменения в расписании помогли компании повлиять на операционные результаты. Такие инициативы могут влиять и на удержание персонала. Прежде чем повышать стоимость часа, HR полезно проверить, насколько предсказуемо человек понимает свои смены и насколько легко может управлять своим расписанием.</p>
+        <h2 id="rukovoditel-na-linii-vliyaet-na-opyt-sotrudnika">Руководитель на линии влияет на опыт сотрудника</h2>
+        <p>У линейного сотрудника руководитель часто находится рядом: это мастер, начальник смены, администратор магазина или руководитель участка. Поэтому корпоративные программы зависят от того, как их представляет руководитель. Если информация не доходит до команды, доступный бенефит может оставаться невостребованным.</p>
+        <p><a href="https://www.microsoft.com/en-us/worklab/work-trend-index/technology-unlocks-a-new-future-for-frontline">В исследовании Microsoft Work Trend Index</a> 63% frontline-сотрудников сказали, что сообщения руководства до них не доходят. 51% сотрудников без управленческих функций не чувствовали себя ценными для компании. Среди основных источников рабочего стресса они называли нагрузку — 45%, низкую оплату — 44%, длинный рабочий день — 41% и работу с клиентами — 35%.</p>
+        <p>Когда в компании есть программы поддержки, для HR важно уточнять, знают ли о ней сотрудники и умеют ли руководители объяснять, как ей воспользоваться.</p>
+        <h2 id="pochemu-korporativnaya-podderzhka-mozhet-ne-dohodit-do-linii">Почему корпоративная поддержка может не доходить до линии</h2>
+        <p>Программа поддержки становится неудобной для линейного персонала, если ее единственный сценарий выглядит так: сотрудник получает письмо на корпоративную почту, переходит по ссылке с рабочего компьютера и записывается на консультацию в рабочее время. Для сотрудника магазина, склада или производства это может быть неудобно.</p>
+        <p>При этом массовые категории занимают значительную часть рынка вакансий. <a href="https://stats.hh.ru/api/v1/monthly-report/f-983c2f9a-0568-4976-8b30-83bce102140b">В марте 2026 года 20,8% активных вакансий на hh.ru</a> приходились на рабочий персонал, 20,5% — на продажи и обслуживание клиентов, 16,2% — на производство и сервисное обслуживание, 14,7% — на строительство, 14% — на транспорт и логистику, 11,9% — на розничную торговлю.</p>
+        <p>Розница оставалась одной из самых дефицитных сфер: hh.индекс составлял 3,8 против 11,4 в среднем по России. По методологии hh.ru значение ниже 4 означает дефицит соискателей.</p>
+        <p>Поэтому поддержку для линейного персонала нужно проектировать с учетом его рабочего сценария: без корпоративного компьютера и с возможностью обратиться в удобное время.</p>
+        <h2 id="chto-dolzhno-byt-v-programme-dlya-lineynogo-personala">Что должно быть в программе для линейного персонала</h2>
+        <p>Сначала стоит определить сценарий использования. Сотруднику может быть важно:</p>
+        <ul><li>узнать о поддержке там, где он ее действительно увидит;</li><li>обратиться без корпоративного компьютера;</li><li>выбрать время с учетом сменного графика;</li><li>понимать, какую помощь он может получить;</li><li>знать, как обеспечивается конфиденциальность обращения.</li></ul>
+        <p>Руководитель может рассказать о программе и помочь сориентироваться, но не должен становиться посредником между сотрудником и специалистом.</p>
+        <h2 id="chto-delat-hr-esli-tekuchest-na-linii-rastet">Что делать HR, если текучесть на линии растет</h2>
+        <p><strong>Разделить показатели. </strong>Считать текучесть отдельно по магазинам, складам, производственным площадкам, профессиям и сменам. Общая цифра по компании может скрывать проблему конкретного подразделения.</p>
+        <p><strong>Разобраться в причинах.</strong> Не ограничиваться предположением, что сотрудники уходят из-за зарплаты. Сопоставлять данные exit-интервью, опросов, обращений сотрудников и показатели по подразделениям.</p>
+        <p><strong>Проверить условия работы.</strong> Посмотреть на графики, нагрузку, укомплектованность смен, работу руководителей и доступность инструментов.</p>
+        <p><strong>Сделать поддержку доступной на линии. </strong>Проверить, может ли сотрудник воспользоваться программой с личного устройства и в удобное для него время.</p>
+        <p><strong>Измерять результат.</strong> Сравнивать текучесть, использование программы и состояние сотрудников по подразделениям. При этом не приписывать программе снижение увольнений автоматически: на текучесть одновременно влияют зарплата, рынок, руководитель, нагрузка и условия работы.</p>
+        <h2 id="chto-mozhno-sdelat-v-blizhayshee-vremya">Что можно сделать в ближайшее время</h2>
+        <p>Возьмите одно подразделение с высокой текучестью и ответьте на пять вопросов:</p>
+        <ol><li>Сколько сотрудников ушло за последние 12 месяцев?</li><li>Какова доля добровольных увольнений?</li><li>На каком сроке чаще всего уходят новые сотрудники?</li><li>Какие причины они называют при увольнении?</li><li>Какой поддержкой сотрудник реально может воспользоваться во время смены?</li></ol>
+        <p>Если программа существует только формально, но сотрудник не знает о ней или не понимает, как получить помощь, она не выполняет свою задачу.</p>
+      </div>
+
+      <section class="sources" aria-labelledby="sources-title">
+        <h2 id="sources-title">Источники</h2>
+        <ol>
+          <li><span><a href="https://www.gallup.com/workplace/650174/employee-retention-depends-getting-recognition-right.aspx">Gallup</a> <span class="sources__ctx">— Gallup оценивает</span></span></li>
+          <li><span><a href="https://www.gallup.com/workplace/646538/employee-turnover-preventable-often-ignored.aspx">Gallup</a> <span class="sources__ctx">— Согласно исследованиям Gallup</span></span></li>
+          <li><span><a href="https://pubsonline.informs.org/doi/10.1287/mnsc.2021.4291">INFORMS</a> <span class="sources__ctx">— В рандомизированном исследовании 28 магазинов Gap Inc</span></span></li>
+          <li><span><a href="https://www.microsoft.com/en-us/worklab/work-trend-index/technology-unlocks-a-new-future-for-frontline">Microsoft</a> <span class="sources__ctx">— В исследовании Microsoft Work Trend Index</span></span></li>
+          <li><span><a href="https://stats.hh.ru/api/v1/monthly-report/f-983c2f9a-0568-4976-8b30-83bce102140b">hh.ru</a> <span class="sources__ctx">— В марте 2026 года 20,8% активных вакансий на hh.ru</span></span></li>
+        </ol>
+      </section>
+
+      <div class="share-row">
+        <span>Статья была полезна? Поделитесь с коллегами</span>
+        <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+      </div>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <div>
+          <h2 id="cta-title">Психологическая поддержка для ваших сотрудников</h2>
+          <p>Удержание линейного персонала начинается с условий работы: понятного графика, адекватной нагрузки, конкурентной оплаты и нормального взаимодействия с руководителем. Психологическая поддержка может быть дополнительным инструментом при других причинах увольнения: стрессе, выгорании и эмоциональной нагрузке.</p>
+          <p>Чтобы заранее работать с рисками ухода, Просебя помогает организовать психологическую поддержку сотрудников. Работники могут обращаться к специалистам, пользоваться инструментами и заботиться о своем состоянии. HR получит доступ к обезличенной аналитике и сможет заранее заметить риски конфликтов, выгорания или перегруза в командах.</p>
+          <p>Специалисты проходят строгий отбор: опыт от 3 лет, высшее образование и минимум 50 часов супервизий. Запуск EAP-платформы занимает от 1 до 10 дней в зависимости от задачи и инфраструктуры компании.</p>
+          <p>Посмотрите, как может быть устроена такая программа: <a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">психолог для сотрудников от Просебя</a>.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+          <a class="link-arrow" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Как это работает <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="article-aside">
+      <nav class="toc" aria-label="Содержание">
+        <div class="toc__title">Содержание</div>
+        <ol class="toc__list">
+          <li><a href="#liniya-i-ofis-dve-raznye-zadachi-vnutri-odnoy-kompanii">Линия и офис: две разные задачи внутри одной компании</a></li>
+          <li><a href="#skolko-stoit-uhod-lineynogo-sotrudnika">Сколько стоит уход линейного сотрудника</a></li>
+          <li><a href="#pochemu-sotrudniki-uhodyat-s-linii">Почему сотрудники уходят с линии</a></li>
+          <li><a href="#predskazuemyy-grafik-pomogaet-biznesu">Предсказуемый график помогает бизнесу</a></li>
+          <li><a href="#rukovoditel-na-linii-vliyaet-na-opyt-sotrudnika">Руководитель на линии влияет на опыт сотрудника</a></li>
+          <li><a href="#pochemu-korporativnaya-podderzhka-mozhet-ne-dohodit-do-linii">Почему корпоративная поддержка может не доходить до линии</a></li>
+          <li><a href="#chto-dolzhno-byt-v-programme-dlya-lineynogo-personala">Что должно быть в программе для линейного персонала</a></li>
+          <li><a href="#chto-delat-hr-esli-tekuchest-na-linii-rastet">Что делать HR, если текучесть на линии растет</a></li>
+          <li><a href="#chto-mozhno-sdelat-v-blizhayshee-vremya">Что можно сделать в ближайшее время</a></li>
+        </ol>
+      </nav>
+    </aside>
+  </div>
+
+  <section class="related" aria-labelledby="related-title">
+    <div class="related__head">
+      <h2 id="related-title">Похожие статьи</h2>
+      <a class="link-arrow" href="../index.html?cat=tekuchest-i-vygoranie">Все статьи категории <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <ul class="cards" id="related"></ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+        <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+      </a>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Психологическая поддержка сотрудников</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a></li>
+        <li><a class="link-quiet" href="../index.html">Блог</a></li>
+      </ul>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="mailto:service@prosebya.ru">service@prosebya.ru</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/">Поддержка пользователей</a></li>
+      </ul>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__legal">
+        <a href="https://prosebya.ru/legal">Юридические документы</a>
+        <p>ООО «ПРОСЕБЯ» (ИНН 9725119144, ОГРН 1237700218832) — разработка цифровых сервисов для управления психологическим здоровьем. № 36 286 в реестре ИТ-компаний Минцифры. Москва, Крылатская улица, 17, корп. 1</p>
+      </div>
+      <div class="site-footer__apps">
+        <div class="site-footer__stores">
+          <a class="store" href="#">App Store</a>
+          <a class="store" href="#">RuStore</a>
+          <a class="store" href="#">Google Play</a>
+        </div>
+        <div class="site-footer__copy">© 2022–2026 ООО «ПРОСЕБЯ»</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>window.BLOG_BASE = "../";</script>
+<script src="../assets/posts.js"></script>
+<script src="../assets/blog.js"></script>
+<script>
+  Blog.mountHeader();
+  Blog.mountArticle({
+    body: document.getElementById("article-body"),
+    progress: document.getElementById("read-progress"),
+  });
+  // Похожие: 3 свежие статьи той же категории, без текущей
+  const current = "uderzhanie-lineynogo-personala";
+  const cat = BLOG_POSTS.find(p => p.slug === current).cat;
+  document.getElementById("related").append(
+    ...BLOG_POSTS.filter(p => p.cat === cat && p.slug !== current).slice(0, 3).map(p => Blog.renderCard(p))
+  );
+</script>
+</body>
+</html>

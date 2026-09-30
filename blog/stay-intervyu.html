@@ -1,0 +1,285 @@
+<!-- Шаблон страницы статьи для tools/build.py. Не открывать напрямую. -->
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stay-интервью: что держит и выталкивает сотрудников</title>
+<meta name="description" content="Метод Финнегана: пять вопросов, кто ведёт разговор, чем stay-интервью отличается от выходного и что честно известно про его пользу.">
+<link rel="canonical" href="https://prosebya.ru/blog-b2b/stay-intervyu">
+<link rel="icon" href="https://static.tildacdn.com/tild3466-6233-4539-a362-353234643636/2.png">
+<link rel="preload" href="../fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 164 46">
+    <path d="M12.525 35.379H21.031V9.085H0V35.379H8.506V15.653H12.525V35.379Z"/>
+    <path d="M93.185 39.529H74.658V45.57H93.185V39.529Z"/>
+    <path d="M39.505 8.508C36.043 8.508 34.385 10.666 33.72 13.824H33.102L32.644 9.141H26.092V45.569H34.503V31.635H35.029C35.652 34.127 37.096 35.839 40.065 35.839C45.51 35.839 46.844 28.895 46.844 20.994C46.844 13.705 44.271 8.508 39.507 8.508M36.215 29.223C34.62 29.223 33.962 27.146 33.962 21.835C33.962 16.523 34.885 15.069 36.215 15.069C37.373 15.069 38.379 16.578 38.379 21.686C38.379 27.789 37.48 29.223 36.215 29.223Z"/>
+    <path d="M133.024 11.309C129.408 11.309 127.832 13.211 127.124 15.756L126.577 15.69C126.8 11.531 128.401 8.516 133.023 7.988C135.609 7.693 140.744 7.308 140.744 7.308V0C140.744 0 138.434 0.215 133.023 0.981C122.743 2.435 120.406 9.753 120.406 19.763C120.406 30.558 124.063 35.839 131.057 35.839C138.051 35.839 141.49 30.817 141.49 22.606C141.49 18.002 140.772 11.309 133.024 11.309ZM130.977 29.338C129.333 29.338 128.875 27.744 128.875 23.144C128.875 18.545 129.59 16.949 130.977 16.949C132.365 16.949 133.024 18.197 133.024 23.144C133.024 28.091 132.62 29.338 130.977 29.338Z"/>
+    <path d="M157.254 9.085H152.302C147.154 9.085 143.93 11.913 143.93 17.877C143.93 22.023 146.014 24.241 148.651 25.328L142.5 35.38H150.97L155.311 26.17C155.542 26.149 155.766 26.126 155.984 26.098V35.38H164V9.085H157.255H157.254ZM155.456 23.588C153.073 23.588 152.342 21.868 152.342 18.633C152.342 15.62 153.153 13.976 154.993 13.976C155.583 13.976 155.963 14.041 155.963 14.041L155.984 13.963V23.588H155.456Z"/>
+    <path d="M84.186 29.166C82.366 29.166 82.194 26.227 82.194 22.515C82.194 17.602 82.229 15.126 84.049 15.126C85.869 15.126 86.012 17.482 86.012 21.733H93.981C94.275 15.126 92.989 8.452 83.919 8.452C75.707 8.452 73.858 14.377 73.858 22.104C73.858 33.199 78.326 35.84 84.182 35.84C89.67 35.84 93.981 32.665 93.981 25.339H86.012C86.012 27.933 85.552 29.166 84.186 29.166Z"/>
+    <path d="M60.498 8.452C54.603 8.452 49.984 11.798 49.984 21.872C49.984 31.947 53.262 35.84 60.498 35.84C67.734 35.84 71.067 32.128 71.067 21.872C71.067 11.616 66.434 8.452 60.498 8.452ZM60.498 29.338C58.395 29.338 58.358 26.087 58.358 21.872C58.358 17.96 58.538 15.298 60.498 15.298C62.458 15.298 62.709 18.082 62.709 21.872C62.709 25.662 62.599 29.338 60.498 29.338Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M105.161 24.593C105.351 28.058 106.092 29.466 107.634 29.466H107.635C108.79 29.466 109.44 28.509 109.57 26.67H117.524C117.03 33.055 113.605 35.84 107.7 35.84C101.395 35.84 96.925 33.2 96.925 22.104C96.925 14.377 98.775 8.452 106.987 8.452C116.498 8.452 118.284 15.301 117.523 24.594L117.519 24.593H105.161ZM105.124 20.977H109.548C109.492 17.17 108.973 14.827 107.265 14.827C105.644 14.827 105.201 16.974 105.124 20.977Z"/>
+  </symbol>
+</svg>
+
+<header class="site-header site-header--article">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+    </a>
+    <nav class="site-nav" aria-label="Основное меню">
+      <a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a>
+      <a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a>
+      <a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a>
+      <a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </nav>
+    <button class="site-header__burger" type="button" data-menu-open aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Меню">
+  <div class="mobile-menu__top">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)" style="width:100px;height:28px"><use href="#logo"/></svg>
+    </a>
+    <button class="site-header__burger" type="button" data-menu-close aria-label="Закрыть меню" style="display:flex">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <ul class="mobile-menu__list">
+    <li><a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a></li>
+    <li><a href="https://prosebya.ru/business">Для бизнеса</a></li>
+    <li><a href="https://prosebya.ru/launch">Для людей</a></li>
+    <li><a href="https://prosebya.ru/gifts">Сертификаты</a></li>
+  </ul>
+  <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+</div>
+
+<main class="container">
+  <div class="article-layout">
+    <article class="article-main">
+      <header>
+        <ol class="breadcrumbs" aria-label="Навигация">
+          <li><a href="../index.html">Блог</a></li>
+          <li><a href="../index.html?cat=tekuchest-i-vygoranie">Текучесть и выгорание</a></li>
+        </ol>
+        <h1 class="article-title">Stay-интервью: как узнать, что держит и что выталкивает людей</h1>
+        <p class="article-lead">Метод Финнегана: пять вопросов, кто ведёт разговор, чем stay-интервью отличается от выходного и что честно известно про его пользу.</p>
+        <div class="article-meta">
+          <div class="article-meta__info">
+            <span class="author"><span class="avatar" aria-hidden="true"></span>Просебя</span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-15">15 августа 2026</time></span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>6 мин</span>
+          </div>
+          <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+        </div>
+        <figure class="article-cover article-cover--framed">
+          <img src="https://optim.tildacdn.com/tild3433-3464-4632-a630-303032346363/-/format/webp/13.png.webp" width="720" height="540" alt="" fetchpriority="high">
+        </figure>
+      </header>
+
+      <details class="toc-mobile">
+        <summary>Содержание (9)<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+        <ol>
+          <li><a href="#otkuda-vzyalsya-metod">Откуда взялся метод</a></li>
+          <li><a href="#pyat-voprosov-s-kotoryh-mozhno-nachat">Пять вопросов, с которых можно начать</a></li>
+          <li><a href="#kto-provodit-razgovor">Кто проводит разговор</a></li>
+          <li><a href="#kogda-provodit-stay-intervyu">Когда проводить stay-интервью</a></li>
+          <li><a href="#chem-stay-intervyu-otlichaetsya-ot-exit-intervyu">Чем stay-интервью отличается от exit-интервью</a></li>
+          <li><a href="#kakie-voprosy-zadavat">Какие вопросы задавать</a></li>
+          <li><a href="#chto-delat-s-otvetami">Что делать с ответами</a></li>
+          <li><a href="#ne-vse-problemy-reshaet-rukovoditel">Не все проблемы решает руководитель</a></li>
+          <li><a href="#chto-mozhno-sdelat-v-blizhayshee-vremya">Что можно сделать в ближайшее время</a></li>
+        </ol>
+      </details>
+
+      <div class="prose" id="article-body">
+        <p>Иногда, заявление об уходе становится первым честным разговором о том, что сотрудника давно не устраивало. Но ждать заявления необязательно.</p>
+        <p>Stay-интервью — это беседа с сотрудником, который пока остается в компании. Руководитель спрашивает, что человеку нравится в работе, что заставляет его задумываться об уходе и что компания может изменить.</p>
+        <p>В этой статье узнаем, откуда появился метод и разберемся, какие вопросы задавать и чем это отличается от exit-интервью.</p>
+        <h2 id="otkuda-vzyalsya-metod">Откуда взялся метод</h2>
+        <p>Stay-интервью в современном HR-контексте популяризировал американский консультант Ричард Финнеган. В 2012 году вышла его книга The Power of Stay Interviews for Engagement and Retention, а в 2018 году — второе издание.</p>
+        <p>Подход Финнегана строится вокруг разговора руководителя с сотрудником. Идея в том, чтобы не ждать exit-интервью после увольнения, а заранее выяснять, что человеку нравится в работе, что его раздражает и что может заставить его уйти.</p>
+        <p>Это важно правильно обозначать: stay-интервью — инструмент из практики управления персоналом, а не метод, эффективность которого доказана большим массивом независимых экспериментов.</p>
+        <h2 id="pyat-voprosov-s-kotoryh-mozhno-nachat">Пять вопросов, с которых можно начать</h2>
+        <p>В классическом подходе Финнегана разговор строится вокруг этих вопросов:</p>
+        <ol><li><strong>Что вам нравится в вашей работе?</strong> Этот вопрос помогает понять, что мотивирует сотрудника.</li><li><strong>Чему вы учитесь здесь и чему хотели бы научиться? </strong>Показывает, видит ли сотрудник возможности для развития.</li><li><strong>Что заставляет вас оставаться в компании? </strong>Помогает понять, что уже удерживает сотрудника в компании.</li><li><strong>Когда вы в последний раз думали об уходе и что стало поводом? </strong>Дает возможность заметить проблему до того, как она превратится в заявление.</li><li><strong>Что я как руководитель могу сделать, чтобы ваша работа стала лучше? </strong>Переводит разговор в действие: руководителю полезно выслушать и понять, что он действительно может изменить в процессе.</li></ol>
+        <p>Не стоит превращать эти вопросов в обязательный сценарий. Если сотрудник начинает рассказывать о нагрузке после вопроса о развитии, не нужно возвращать его к чек-листу. Ценность stay-интервью как раз в том, чтобы услышать то, что компания заранее не придумала за сотрудника.</p>
+        <h2 id="kto-provodit-razgovor">Кто проводит разговор</h2>
+        <p>В подходе Финнегана stay-интервью проводит непосредственный руководитель. Руководитель ближе всего к ежедневной работе сотрудника и может быстрее изменить часть условий: задачи, приоритеты, нагрузку, обратную связь или возможности для развития.</p>
+        <p>Важно, чтобы разговор не стал частью оценки эффективности. Когда сотрудник думает, что сказанное повлияет на премию, аттестацию или карьеру в целом, он будет выбирать формулировки осторожнее. Руководителю стоит заранее объяснить цель встречи как разговор о том, что помогает ему работать и что мешает.</p>
+        <p>HR может подготовить руководителей, помочь сформулировать вопросы, собрать повторяющиеся темы по подразделениям и отслеживать, какие договоренности выполняются.</p>
+        <h2 id="kogda-provodit-stay-intervyu">Когда проводить stay-интервью</h2>
+        <p>Для новых сотрудников разговор можно провести после адаптационного периода, когда первые впечатления уже сформировались. С опытными сотрудниками имеет смысл возвращаться к теме регулярно, например, раз в несколько месяцев или в рамках регулярных one-to-one.</p>
+        <p>Отдельное внимание стоит уделить группам, где цена ухода особенно высока:</p>
+        <ul><li>сотрудникам на дефицитных позициях;</li><li>специалистам с редкой экспертизой;</li><li>руководителям;</li><li>сотрудникам с высокой результативностью;</li><li>командам с растущей текучестью.</li></ul>
+        <p>Если времени у руководителей достаточно, разговоры можно проводить шире: иногда именно массовая проблема в конкретном подразделении важнее индивидуального риска ухода одного специалиста.</p>
+        <h2 id="chem-stay-intervyu-otlichaetsya-ot-exit-intervyu">Чем stay-интервью отличается от exit-интервью</h2>
+        <p>Разница в моменте проведения. Exit-интервью проводится, когда сотрудник уже решил уйти. Оно помогает понять, что произошло и какие проблемы могли привести к увольнению. Stay-интервью проводится с теми, кто остается. Его задача — узнать, что удерживает сотрудника сейчас и что может заставить его начать искать другую работу.</p>
+        <p>Это не взаимозаменяемые инструменты. Exit-интервью дает компании данные о тех, кого она уже потеряла. Stay-интервью позволяет поговорить с теми, чье решение еще не принято.</p>
+        <p>Оба подхода будут полезны, а повторяющаяся причина в exit-интервью может стать темой для stay-разговоров: например, если сотрудники регулярно уходят из-за перегрузки, стоит спросить остающихся, как они оценивают свою нагрузку сейчас.</p>
+        <h2 id="kakie-voprosy-zadavat">Какие вопросы задавать</h2>
+        <p>Необязательно ограничиваться пятью вопросами Финнегана. В зависимости от задачи разговор можно дополнить.</p>
+        <h3>Что удерживает</h3>
+        <ul><li>Что вам больше всего нравится в работе здесь?</li><li>Что в этой компании вы не хотели бы потерять?</li><li>Что заставляет вас оставаться?</li></ul>
+        <p>Эти вопросы помогают увидеть сильные стороны команды, которые легко не заметить, потому что они уже стали привычными.</p>
+        <h3>Что выталкивает</h3>
+        <ul><li>Что сейчас больше всего мешает вам работать?</li><li>Есть ли что-то, из-за чего вы начали бы искать другую работу?</li><li>Когда вы в последний раз думали об уходе? Что тогда происходило?</li></ul>
+        <p>Здесь важно не спорить с ответом. Если сотрудник говорит «слишком много задач», ответ руководителя «у всех сейчас много работы» закрывает разговор. Гораздо полезнее уточнить: «Какая часть нагрузки сейчас самая сложная?».</p>
+        <h3>Что можно изменить</h3>
+        <ul><li>Что мы могли бы сделать иначе?</li><li>Что я как руководитель могу изменить?</li><li>Какой один шаг сделал бы вашу работу заметно лучше?</li></ul>
+        <p>Последний вопрос помогает выделить конкретное дальнейшее действие.</p>
+        <h2 id="chto-delat-s-otvetami">Что делать с ответами</h2>
+        <p>Если сотрудник говорит, что ему не хватает развития, недостаточно записать это в заметки. Нужно договориться о конкретном шаге.</p>
+        <p><strong>Пример: </strong>сотрудник понял, что хочет больше задач, связанных с аналитикой.</p>
+        <p>Необязательно сразу обещать повышение. Можно договориться о проекте, обучении или новой зоне ответственности и определить срок, когда вы вернетесь к вопросу.</p>
+        <p>После разговора полезно зафиксировать:</p>
+        <ul><li>что сотрудник считает проблемой;</li><li>что руководитель готов изменить;</li><li>что сделать не получится;</li><li>кто отвечает за следующий шаг;</li><li>когда вернуться к договоренности.</li></ul>
+        <p>Если сотрудник откровенно рассказал о проблеме, а через месяц ничего не изменилось и никто не вернулся к теме, следующий разговор будет сложнее.</p>
+        <h2 id="ne-vse-problemy-reshaet-rukovoditel">Не все проблемы решает руководитель</h2>
+        <p>Stay-интервью помогает увидеть проблему, но не делает руководителя ответственным за все. Часть причин находится в его зоне влияния: обратная связь, распределение задач, приоритеты, развитие, коммуникация.</p>
+        <p>Другие вопросы требуют решений HR или компании в целом: система оплаты, штатная численность, политика льгот, структура должностей.</p>
+        <p>Есть причины, которые компания вообще не может устранить. Сотрудник может переезжать, менять профессию или уходить по личным обстоятельствам.</p>
+        <p>После разговора полезно разделить ответы на эти три группы: можно изменить здесь и сейчас, можно изменить на уровне компании, не находится в зоне контроля работодателя. Так руководитель не дает обещаний, которые не сможет выполнить.</p>
+        <h2 id="chto-mozhno-sdelat-v-blizhayshee-vremya">Что можно сделать в ближайшее время</h2>
+        <p>Выберите одну команду и предложите провести интервью. Не пытайтесь сразу исправить все, что услышите.</p>
+        <p>Для каждого сотрудника зафиксируйте ответы на вопросы. Можно использовать такую таблицу:</p>
+        <div class="table-block" data-name="stay-intervyu">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица">
+            <table><tbody><tr><th scope="row">Что держит?</th><td>Команда, руководитель, интересные задачи</td><td>Удобный график, развитие</td></tr><tr><th scope="row">Что выталкивает?</th><td>Нагрузка, отсутствие роста</td><td>Отношения в команде, компенсация</td></tr><tr><th scope="row">Что можно изменить?</th><td>Изменить процессы, дать новый проект</td><td>Уточнить роли в команде, пересмотреть KPI</td></tr></tbody></table>
+          </div>
+          <div class="table-actions">
+            <button class="table-action" type="button" data-table-copy><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="4.25" y="4.25" width="8" height="8" rx="1.75" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M9.75 2.25H3.75C2.92 2.25 2.25 2.92 2.25 3.75V9.75" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><span>Скопировать таблицу</span></button>
+            <button class="table-action" type="button" data-table-csv><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2V9M7 9L4.25 6.25M7 9L9.75 6.25M2.5 11.75H11.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Скачать CSV</span></button>
+          </div>
+        </div>
+        <p>Если разговоры регулярно выявляют одну и ту же проблему у нескольких сотрудников, это уже не индивидуальный запрос. Это сигнал для HR и руководства.</p>
+      </div>
+
+      <div class="share-row">
+        <span>Статья была полезна? Поделитесь с коллегами</span>
+        <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+      </div>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <div>
+          <h2 id="cta-title">Психологическая поддержка для ваших сотрудников</h2>
+          <p>Чтобы заранее работать с причинами увольнения, Просебя помогает организовать психологическую поддержку сотрудников. Работники могут обращаться к специалистам, пользоваться инструментами и заботиться о своем состоянии. HR получит доступ к обезличенной аналитике и сможет заранее заметить риски конфликтов, выгорания или перегруза в командах.</p>
+          <p>Специалисты проходят строгий отбор: опыт от 3 лет, высшее образование и минимум 50 часов супервизий. Запуск EAP-платформы занимает от 1 до 10 дней в зависимости от задачи и инфраструктуры компании.</p>
+          <p>Посмотрите, как может быть устроена такая программа: <a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">психолог для сотрудников от Просебя</a>.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+          <a class="link-arrow" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Как это работает <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="article-aside">
+      <nav class="toc" aria-label="Содержание">
+        <div class="toc__title">Содержание</div>
+        <ol class="toc__list">
+          <li><a href="#otkuda-vzyalsya-metod">Откуда взялся метод</a></li>
+          <li><a href="#pyat-voprosov-s-kotoryh-mozhno-nachat">Пять вопросов, с которых можно начать</a></li>
+          <li><a href="#kto-provodit-razgovor">Кто проводит разговор</a></li>
+          <li><a href="#kogda-provodit-stay-intervyu">Когда проводить stay-интервью</a></li>
+          <li><a href="#chem-stay-intervyu-otlichaetsya-ot-exit-intervyu">Чем stay-интервью отличается от exit-интервью</a></li>
+          <li><a href="#kakie-voprosy-zadavat">Какие вопросы задавать</a></li>
+          <li><a href="#chto-delat-s-otvetami">Что делать с ответами</a></li>
+          <li><a href="#ne-vse-problemy-reshaet-rukovoditel">Не все проблемы решает руководитель</a></li>
+          <li><a href="#chto-mozhno-sdelat-v-blizhayshee-vremya">Что можно сделать в ближайшее время</a></li>
+        </ol>
+      </nav>
+    </aside>
+  </div>
+
+  <section class="related" aria-labelledby="related-title">
+    <div class="related__head">
+      <h2 id="related-title">Похожие статьи</h2>
+      <a class="link-arrow" href="../index.html?cat=tekuchest-i-vygoranie">Все статьи категории <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <ul class="cards" id="related"></ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+        <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+      </a>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Психологическая поддержка сотрудников</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a></li>
+        <li><a class="link-quiet" href="../index.html">Блог</a></li>
+      </ul>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="mailto:service@prosebya.ru">service@prosebya.ru</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/">Поддержка пользователей</a></li>
+      </ul>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__legal">
+        <a href="https://prosebya.ru/legal">Юридические документы</a>
+        <p>ООО «ПРОСЕБЯ» (ИНН 9725119144, ОГРН 1237700218832) — разработка цифровых сервисов для управления психологическим здоровьем. № 36 286 в реестре ИТ-компаний Минцифры. Москва, Крылатская улица, 17, корп. 1</p>
+      </div>
+      <div class="site-footer__apps">
+        <div class="site-footer__stores">
+          <a class="store" href="#">App Store</a>
+          <a class="store" href="#">RuStore</a>
+          <a class="store" href="#">Google Play</a>
+        </div>
+        <div class="site-footer__copy">© 2022–2026 ООО «ПРОСЕБЯ»</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>window.BLOG_BASE = "../";</script>
+<script src="../assets/posts.js"></script>
+<script src="../assets/blog.js"></script>
+<script>
+  Blog.mountHeader();
+  Blog.mountArticle({
+    body: document.getElementById("article-body"),
+    progress: document.getElementById("read-progress"),
+  });
+  // Похожие: 3 свежие статьи той же категории, без текущей
+  const current = "stay-intervyu";
+  const cat = BLOG_POSTS.find(p => p.slug === current).cat;
+  document.getElementById("related").append(
+    ...BLOG_POSTS.filter(p => p.cat === cat && p.slug !== current).slice(0, 3).map(p => Blog.renderCard(p))
+  );
+</script>
+</body>
+</html>

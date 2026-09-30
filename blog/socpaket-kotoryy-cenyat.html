@@ -1,0 +1,294 @@
+<!-- Шаблон страницы статьи для tools/build.py. Не открывать напрямую. -->
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Соцпакет для сотрудников: как собрать под команду</title>
+<meta name="description" content="Из чего состоит соцпакет в российских компаниях по свежим опросам и как за пять шагов собрать набор льгот, которым команда реально пользуется.">
+<link rel="canonical" href="https://prosebya.ru/blog-b2b/socpaket-kotoryy-cenyat">
+<link rel="icon" href="https://static.tildacdn.com/tild3466-6233-4539-a362-353234643636/2.png">
+<link rel="preload" href="../fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 164 46">
+    <path d="M12.525 35.379H21.031V9.085H0V35.379H8.506V15.653H12.525V35.379Z"/>
+    <path d="M93.185 39.529H74.658V45.57H93.185V39.529Z"/>
+    <path d="M39.505 8.508C36.043 8.508 34.385 10.666 33.72 13.824H33.102L32.644 9.141H26.092V45.569H34.503V31.635H35.029C35.652 34.127 37.096 35.839 40.065 35.839C45.51 35.839 46.844 28.895 46.844 20.994C46.844 13.705 44.271 8.508 39.507 8.508M36.215 29.223C34.62 29.223 33.962 27.146 33.962 21.835C33.962 16.523 34.885 15.069 36.215 15.069C37.373 15.069 38.379 16.578 38.379 21.686C38.379 27.789 37.48 29.223 36.215 29.223Z"/>
+    <path d="M133.024 11.309C129.408 11.309 127.832 13.211 127.124 15.756L126.577 15.69C126.8 11.531 128.401 8.516 133.023 7.988C135.609 7.693 140.744 7.308 140.744 7.308V0C140.744 0 138.434 0.215 133.023 0.981C122.743 2.435 120.406 9.753 120.406 19.763C120.406 30.558 124.063 35.839 131.057 35.839C138.051 35.839 141.49 30.817 141.49 22.606C141.49 18.002 140.772 11.309 133.024 11.309ZM130.977 29.338C129.333 29.338 128.875 27.744 128.875 23.144C128.875 18.545 129.59 16.949 130.977 16.949C132.365 16.949 133.024 18.197 133.024 23.144C133.024 28.091 132.62 29.338 130.977 29.338Z"/>
+    <path d="M157.254 9.085H152.302C147.154 9.085 143.93 11.913 143.93 17.877C143.93 22.023 146.014 24.241 148.651 25.328L142.5 35.38H150.97L155.311 26.17C155.542 26.149 155.766 26.126 155.984 26.098V35.38H164V9.085H157.255H157.254ZM155.456 23.588C153.073 23.588 152.342 21.868 152.342 18.633C152.342 15.62 153.153 13.976 154.993 13.976C155.583 13.976 155.963 14.041 155.963 14.041L155.984 13.963V23.588H155.456Z"/>
+    <path d="M84.186 29.166C82.366 29.166 82.194 26.227 82.194 22.515C82.194 17.602 82.229 15.126 84.049 15.126C85.869 15.126 86.012 17.482 86.012 21.733H93.981C94.275 15.126 92.989 8.452 83.919 8.452C75.707 8.452 73.858 14.377 73.858 22.104C73.858 33.199 78.326 35.84 84.182 35.84C89.67 35.84 93.981 32.665 93.981 25.339H86.012C86.012 27.933 85.552 29.166 84.186 29.166Z"/>
+    <path d="M60.498 8.452C54.603 8.452 49.984 11.798 49.984 21.872C49.984 31.947 53.262 35.84 60.498 35.84C67.734 35.84 71.067 32.128 71.067 21.872C71.067 11.616 66.434 8.452 60.498 8.452ZM60.498 29.338C58.395 29.338 58.358 26.087 58.358 21.872C58.358 17.96 58.538 15.298 60.498 15.298C62.458 15.298 62.709 18.082 62.709 21.872C62.709 25.662 62.599 29.338 60.498 29.338Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M105.161 24.593C105.351 28.058 106.092 29.466 107.634 29.466H107.635C108.79 29.466 109.44 28.509 109.57 26.67H117.524C117.03 33.055 113.605 35.84 107.7 35.84C101.395 35.84 96.925 33.2 96.925 22.104C96.925 14.377 98.775 8.452 106.987 8.452C116.498 8.452 118.284 15.301 117.523 24.594L117.519 24.593H105.161ZM105.124 20.977H109.548C109.492 17.17 108.973 14.827 107.265 14.827C105.644 14.827 105.201 16.974 105.124 20.977Z"/>
+  </symbol>
+</svg>
+
+<header class="site-header site-header--article">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+    </a>
+    <nav class="site-nav" aria-label="Основное меню">
+      <a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a>
+      <a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a>
+      <a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a>
+      <a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </nav>
+    <button class="site-header__burger" type="button" data-menu-open aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Меню">
+  <div class="mobile-menu__top">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)" style="width:100px;height:28px"><use href="#logo"/></svg>
+    </a>
+    <button class="site-header__burger" type="button" data-menu-close aria-label="Закрыть меню" style="display:flex">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <ul class="mobile-menu__list">
+    <li><a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a></li>
+    <li><a href="https://prosebya.ru/business">Для бизнеса</a></li>
+    <li><a href="https://prosebya.ru/launch">Для людей</a></li>
+    <li><a href="https://prosebya.ru/gifts">Сертификаты</a></li>
+  </ul>
+  <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+</div>
+
+<main class="container">
+  <div class="article-layout">
+    <article class="article-main">
+      <header>
+        <ol class="breadcrumbs" aria-label="Навигация">
+          <li><a href="../index.html">Блог</a></li>
+          <li><a href="../index.html?cat=lgoty-i-motivaciya">Льготы и мотивация</a></li>
+        </ol>
+        <h1 class="article-title">Соцпакет, который ценят: как собрать его под свою команду</h1>
+        <p class="article-lead">Из чего состоит соцпакет в российских компаниях по свежим опросам и как за пять шагов собрать набор льгот, которым команда реально пользуется.</p>
+        <div class="article-meta">
+          <div class="article-meta__info">
+            <span class="author"><span class="avatar" aria-hidden="true"></span>Просебя</span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-07">7 августа 2026</time></span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>6 мин</span>
+          </div>
+          <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+        </div>
+        <figure class="article-cover">
+          <img src="https://optim.tildacdn.com/tild3439-3035-4563-a364-383336626465/-/format/webp/5.png.webp" width="720" height="540" alt="" fetchpriority="high">
+        </figure>
+      </header>
+
+      <details class="toc-mobile">
+        <summary>Содержание (9)<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+        <ol>
+          <li><a href="#chto-chasche-vsego-vhodit-v-socpaket">Что чаще всего входит в соцпакет</a></li>
+          <li><a href="#shag-pervyy-nachnite-s-komandy">Шаг первый: начните с команды</a></li>
+          <li><a href="#shag-vtoroy-proverte-chto-uzhe-rabotaet">Шаг второй: проверьте, что уже работает</a></li>
+          <li><a href="#shag-tretiy-posmotrite-chto-vazhno-sotrudnikam-seychas">Шаг третий: посмотрите, что важно сотрудникам сейчас</a></li>
+          <li><a href="#shag-chetvertyy-sravnite-stoimost-lgoty-i-ee-cennost">Шаг четвертый: сравните стоимость льготы и ее ценность</a></li>
+          <li><a href="#shag-pyatyy-proverte-nalogovye-usloviya">Шаг пятый: проверьте налоговые условия</a></li>
+          <li><a href="#primer-kak-peresmotret-dms">Пример: как пересмотреть ДМС</a></li>
+          <li><a href="#psihologicheskaya-podderzhka-kak-chast-socpaketa">Психологическая поддержка как часть соцпакета</a></li>
+          <li><a href="#s-chego-nachat-v-blizhayshee-vremya">С чего начать в ближайшее время</a></li>
+        </ol>
+      </details>
+
+      <div class="prose" id="article-body">
+        <p>Хороший соцпакет — тот, которым сотрудники пользуются. <a href="https://press.rabota.ru/43-rossiyan-zhdut-rasshireniya-sotspaketa-ot-rabotodateley">По данным «Работы.ру» и СберПодбора</a>, в августе 2024 года 43% работающих россиян хотели бы расширить социальный пакет. Еще 23% не имели соцпакета и при поиске работы ориентировались на работодателей, которые его предоставляют.</p>
+        <p>Универсального набора льгот нет. Разные исследования работодателей дают разные результаты: состав выборки и формулировки вопросов отличаются. В этой статье разберем 5 шагов, которые помогут собрать соцпакет по потребностям своей команды.</p>
+        <h2 id="chto-chasche-vsego-vhodit-v-socpaket">Что чаще всего входит в соцпакет</h2>
+        <p>Летом 2025 года <a href="https://www.rgs.ru/about/news/issledovanie-rosgosstrakha-i-hh-ru-dms-samaya-vostrebovannaya-optsiya-sotspaketa">Росгосстрах и hh.ru опросили 1232 работодателя</a> из разных федеральных округов. Чаще всего компании называли:</p>
+        <ul><li>корпоративные мероприятия и подарки — 76%,</li><li>ДМС — 73%,</li><li>обучение — 63%;</li><li>корпоративную связь — 58%,</li><li>гибкий график или удаленную работу — 40%.</li></ul>
+        <p>Также в ноябре 2024 года <a href="https://press.rabota.ru/kompanii-rasskazali-o-samykh-populyarnykh-benefitakh-sredi-sotrudnikov">«Работа.ру» и СберПодбор изучили соцпакеты</a> у 250 представителей компаний, где он уже есть. Чаще всего в них встречались:</p>
+        <ul><li>материальная поддержка — 73%,</li><li>рабочее оборудование — 48%,</li><li>удаленная работа — 38%,</li><li>ДМС и транспорт — по 31%,</li><li>питание — 28%,</li><li>спорт — 21%.</li></ul>
+        <p>Разница в опросах показывает, что соцпакет важно собирать по потребностям сотрудников конкретной компании.</p>
+        <h2 id="shag-pervyy-nachnite-s-komandy">Шаг первый: начните с команды</h2>
+        <p>Прежде чем добавлять новую льготу, посмотрите, кто работает в компании и что важно разным группам сотрудников.</p>
+        <p>Учитывайте:</p>
+        <ul><li>формат работы — офис, гибрид или удаленка;</li><li>регионы;</li><li>должности;</li><li>уже действующие льготы;</li><li>результаты опросов;</li><li>фактическое использование программ.</li></ul>
+        <p>Например, компенсация транспорта может быть важна сотрудникам, которые каждый день ездят в офис, и почти бесполезна для полностью удаленной команды.</p>
+        <p>Каталог бенефитов может запутать, если сотрудник не может найти в нем то, что ему нужно. Полезнее узнать, какие потребности и задачи есть у команд.</p>
+        <h2 id="shag-vtoroy-proverte-chto-uzhe-rabotaet">Шаг второй: проверьте, что уже работает</h2>
+        <p>Наличие льготы и ее использование — разные показатели. <a href="https://www.rgs.ru/about/news/issledovanie-rosgosstrakha-i-hh-ru-dms-samaya-vostrebovannaya-optsiya-sotspaketa">В исследовании Росгосстраха и hh.ru</a> 76% работодателей сообщили, что включают корпоративные мероприятия и подарки в соцпакет. При этом 35% работодателей указали, что сотрудники пользуются этой опцией.</p>
+        <p>Низкое использование не всегда означает, что льгота не нужна. Сначала стоит выяснить, знают ли о ней сотрудники, насколько легко ей воспользоваться и подходят ли условия. Возможно, у сотрудников есть какие-то ограничения к использованию по месту или формату работы.</p>
+        <h2 id="shag-tretiy-posmotrite-chto-vazhno-sotrudnikam-seychas">Шаг третий: посмотрите, что важно сотрудникам сейчас</h2>
+        <p>Не все льготы одинаково важны для разных команд. <a href="https://press.rabota.ru/43-rossiyan-zhdut-rasshireniya-sotspaketa-ot-rabotodateley">В исследовании «Работы.ру» и СберПодбора</a> в августе 2024 года компенсацию проезда важной назвали 48% опрошенных работающих россиян, скидки на фитнес — 22%, психологическую поддержку — 14%.</p>
+        <p>Чтобы узнать, что важно сотрудникам сейчас, компании полезно провести собственный опрос. Вопросы, которые помогут узнать потребности команды:</p>
+        <ul><li>Какие расходы сотрудники хотели бы компенсировать?</li><li>Какими действующими льготами они пользуются?</li><li>Что они считают бесполезным?</li><li>Чего им не хватает?</li></ul>
+        <p>Так можно увидеть потребности, которых нет в отраслевых исследованиях или статистике использования.</p>
+        <h2 id="shag-chetvertyy-sravnite-stoimost-lgoty-i-ee-cennost">Шаг четвертый: сравните стоимость льготы и ее ценность</h2>
+        <p>После этого оцените экономику каждой опции. Корпоративный тариф, централизованная закупка или договор с одним поставщиком могут сделать льготу выгоднее, чем если бы каждый сотрудник покупал ту же услугу самостоятельно.</p>
+        <p>Для каждой позиции полезно смотреть на 4 показателя:</p>
+        <ul><li>сколько сотрудников имеют доступ;</li><li>сколько активировали или подключили программу, если это применимо;</li><li>сколько воспользовались ей за выбранный период;</li><li>сколько компания потратила на одного пользователя.</li></ul>
+        <p>Сравнивать только цену тоже неправильно. Дорогая программа может быть востребована, а дешевая почти никому не нужна. Если программа используется редко, стоит проверить причину, прежде чем ее отменять. Возможно, сотрудники не знают о ней или сталкиваются с неудобной процедурой подключения.</p>
+        <h2 id="shag-pyatyy-proverte-nalogovye-usloviya">Шаг пятый: проверьте налоговые условия</h2>
+        <p>Налоговые правила могут влиять на стоимость отдельных льгот, но здесь важно не путать налоговый лимит с лимитом самого соцпакета.</p>
+        <p>Например, взносы работодателя по договорам ДМС сроком не менее года можно учитывать в расходах на оплату труда для целей налога на прибыль в пределах 6% от суммы расходов на оплату труда при соблюдении условий, предусмотренных пунктом 16 статьи 255 НК РФ. Это лимит для признания расходов при налогообложении, а не максимальная сумма, которую компания может потратить на ДМС.</p>
+        <p>Компенсация расходов дистанционного сотрудника на использование оборудования и других средств для работы также имеет отдельные правила. По статье 217 НК РФ НДФЛ не облагается компенсация в размере, установленном документами работодателя, но не более 35 рублей за каждый день дистанционной работы. Другой вариант — возмещение фактически произведенных и документально подтвержденных расходов.</p>
+        <p>Порядок, сроки и размеры компенсации при дистанционной работе должны быть закреплены в соответствующих документах работодателя. Статья 312.6 ТК РФ также определяет правила обеспечения дистанционных работников оборудованием и компенсации при использовании собственной техники.</p>
+        <p>Конкретные условия лучше проверять вместе с бухгалтером и юристом: для разных льгот действуют разные требования.</p>
+        <h2 id="primer-kak-peresmotret-dms">Пример: как пересмотреть ДМС</h2>
+        <p>ДМС часто оказывается одной из самых распространенных льгот и здесь есть возможности сделать пакет полезнее. <a href="https://www.insur-info.ru/pressr/90186/">Исследование Росгосстраха и hh.ru показывает</a>, что только 5% компаний позволяют бесплатно включить родственников сотрудника в ДМС. В 25% компаний это возможно по корпоративному тарифу, в 38% через отдельный договор, а 31% компаний не допускают включение родственников.</p>
+        <p>Одна и та же льгота может иметь разную ценность. Чтобы понять это, HR полезно узнать, насколько условия подходят сотрудникам и что хотелось бы дополнить.</p>
+        <p>Для семейных сотрудников важными могут оказаться условия для родственников. Для распределенной команды — доступность дистанционных медицинских сервисов. Для других групп состав клиник или перечень услуг.</p>
+        <h2 id="psihologicheskaya-podderzhka-kak-chast-socpaketa">Психологическая поддержка как часть соцпакета</h2>
+        <p>Психологическая поддержка пока не стала обязательной частью корпоративного пакета.</p>
+        <p>В исследовании «Работы.ру» и СберПодбора 14% работающих россиян назвали её среди желаемых льгот. При этом по данным Росгосстраха и hh.ru, психологическая помощь включена только в 25% программ ДМС.<a href="https://press.rabota.ru/43-rossiyan-zhdut-rasshireniya-sotspaketa-ot-rabotodateley"> </a><a href="https://press.rabota.ru/43-rossiyan-zhdut-rasshireniya-sotspaketa-ot-rabotodateley">Источник</a>.</p>
+        <p>Это один из вариантов, который компания может рассмотреть при пересмотре соцпакета. Особенно если сотрудники уже говорят о высокой нагрузке, сложностях с балансом работы и личной жизни или потребности в дополнительной поддержке.</p>
+        <p>Здесь, как и с любой другой льготой, важно смотреть не только на наличие услуги, но и на доступность, удобство подключения и реальное использование.</p>
+        <h2 id="s-chego-nachat-v-blizhayshee-vremya">С чего начать в ближайшее время</h2>
+        <p>Пересматривать соцпакет можно без полной перестройки бюджета. Начните с простой таблицы по действующим льготам:</p>
+        <div class="table-block" data-name="socpaket-kotoryy-cenyat">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица">
+            <table><tbody><tr><th scope="row">Охват
+Кто может воспользоваться</th><td></td><td></td></tr><tr><th scope="row">Активации и обращения
+Кто дейстительно пользуется</th><td></td><td></td></tr><tr><th scope="row">Осведомленность и условия подключения
+Что мешает пользоваться чаще</th><td></td><td></td></tr><tr><th scope="row">Опросы и обратная связь
+Что сотрудники считают ценным</th><td></td><td></td></tr></tbody></table>
+          </div>
+          <div class="table-actions">
+            <button class="table-action" type="button" data-table-copy><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="4.25" y="4.25" width="8" height="8" rx="1.75" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M9.75 2.25H3.75C2.92 2.25 2.25 2.92 2.25 3.75V9.75" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><span>Скопировать таблицу</span></button>
+            <button class="table-action" type="button" data-table-csv><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2V9M7 9L4.25 6.25M7 9L9.75 6.25M2.5 11.75H11.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Скачать CSV</span></button>
+          </div>
+        </div>
+        <p>Так вы поймете, какие опции востребованы и что стоит изменить. Вы можете исправить барьеры там, где программа нужна и после этого принимать решение, какие льготы добавлять или убирать. При таком подходе соцпакет соцпакет становится частью системы работы с потребностями команды.</p>
+      </div>
+
+      <section class="sources" aria-labelledby="sources-title">
+        <h2 id="sources-title">Источники</h2>
+        <ol>
+          <li><span><a href="https://press.rabota.ru/43-rossiyan-zhdut-rasshireniya-sotspaketa-ot-rabotodateley">Работа.ру</a> <span class="sources__ctx">— По данным «Работы.ру» и СберПодбора</span></span></li>
+          <li><span><a href="https://www.rgs.ru/about/news/issledovanie-rosgosstrakha-i-hh-ru-dms-samaya-vostrebovannaya-optsiya-sotspaketa">Росгосстрах</a> <span class="sources__ctx">— Росгосстрах и hh.ru опросили 1232 работодателя</span></span></li>
+          <li><span><a href="https://press.rabota.ru/kompanii-rasskazali-o-samykh-populyarnykh-benefitakh-sredi-sotrudnikov">Работа.ру</a> <span class="sources__ctx">— «Работа.ру» и СберПодбор изучили соцпакеты</span></span></li>
+          <li><span><a href="https://www.insur-info.ru/pressr/90186/">Insur-info</a> <span class="sources__ctx">— Исследование Росгосстраха и hh.ru показывает</span></span></li>
+        </ol>
+      </section>
+
+      <div class="share-row">
+        <span>Статья была полезна? Поделитесь с коллегами</span>
+        <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+      </div>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <div>
+          <h2 id="cta-title">Психологическая поддержка для сотрудников</h2>
+          <p>Если компания хочет добавить в соцпакет психологическую поддержку, можно выбрать отдельный сервис.</p>
+          <p>Просебя помогает организовать психологическую поддержку сотрудников. Работники могут обращаться к специалистам, пользоваться инструментами самопомощи и заботиться о своем состоянии. HR получит доступ к обезличенной аналитике и сможет заранее заметить риски конфликтов, выгорания или перегруза в командах.</p>
+          <p>Специалисты проходят строгий отбор: опыт от 3 лет, высшее образование и минимум 50 часов супервизий. Запуск EAP-платформы занимает от 1 до 10 дней в зависимости от задачи и инфраструктуры компании.</p>
+          <p>Посмотрите, как может быть устроена такая программа: <a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">психолог для сотрудников от Просебя</a>.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+          <a class="link-arrow" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Как это работает <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="article-aside">
+      <nav class="toc" aria-label="Содержание">
+        <div class="toc__title">Содержание</div>
+        <ol class="toc__list">
+          <li><a href="#chto-chasche-vsego-vhodit-v-socpaket">Что чаще всего входит в соцпакет</a></li>
+          <li><a href="#shag-pervyy-nachnite-s-komandy">Шаг первый: начните с команды</a></li>
+          <li><a href="#shag-vtoroy-proverte-chto-uzhe-rabotaet">Шаг второй: проверьте, что уже работает</a></li>
+          <li><a href="#shag-tretiy-posmotrite-chto-vazhno-sotrudnikam-seychas">Шаг третий: посмотрите, что важно сотрудникам сейчас</a></li>
+          <li><a href="#shag-chetvertyy-sravnite-stoimost-lgoty-i-ee-cennost">Шаг четвертый: сравните стоимость льготы и ее ценность</a></li>
+          <li><a href="#shag-pyatyy-proverte-nalogovye-usloviya">Шаг пятый: проверьте налоговые условия</a></li>
+          <li><a href="#primer-kak-peresmotret-dms">Пример: как пересмотреть ДМС</a></li>
+          <li><a href="#psihologicheskaya-podderzhka-kak-chast-socpaketa">Психологическая поддержка как часть соцпакета</a></li>
+          <li><a href="#s-chego-nachat-v-blizhayshee-vremya">С чего начать в ближайшее время</a></li>
+        </ol>
+      </nav>
+    </aside>
+  </div>
+
+  <section class="related" aria-labelledby="related-title">
+    <div class="related__head">
+      <h2 id="related-title">Похожие статьи</h2>
+      <a class="link-arrow" href="../index.html?cat=lgoty-i-motivaciya">Все статьи категории <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <ul class="cards" id="related"></ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+        <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+      </a>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Психологическая поддержка сотрудников</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a></li>
+        <li><a class="link-quiet" href="../index.html">Блог</a></li>
+      </ul>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="mailto:service@prosebya.ru">service@prosebya.ru</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/">Поддержка пользователей</a></li>
+      </ul>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__legal">
+        <a href="https://prosebya.ru/legal">Юридические документы</a>
+        <p>ООО «ПРОСЕБЯ» (ИНН 9725119144, ОГРН 1237700218832) — разработка цифровых сервисов для управления психологическим здоровьем. № 36 286 в реестре ИТ-компаний Минцифры. Москва, Крылатская улица, 17, корп. 1</p>
+      </div>
+      <div class="site-footer__apps">
+        <div class="site-footer__stores">
+          <a class="store" href="#">App Store</a>
+          <a class="store" href="#">RuStore</a>
+          <a class="store" href="#">Google Play</a>
+        </div>
+        <div class="site-footer__copy">© 2022–2026 ООО «ПРОСЕБЯ»</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>window.BLOG_BASE = "../";</script>
+<script src="../assets/posts.js"></script>
+<script src="../assets/blog.js"></script>
+<script>
+  Blog.mountHeader();
+  Blog.mountArticle({
+    body: document.getElementById("article-body"),
+    progress: document.getElementById("read-progress"),
+  });
+  // Похожие: 3 свежие статьи той же категории, без текущей
+  const current = "socpaket-kotoryy-cenyat";
+  const cat = BLOG_POSTS.find(p => p.slug === current).cat;
+  document.getElementById("related").append(
+    ...BLOG_POSTS.filter(p => p.cat === cat && p.slug !== current).slice(0, 3).map(p => Blog.renderCard(p))
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!-- Шаблон страницы статьи для tools/build.py. Не открывать напрямую. -->
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как снизить текучесть персонала: системный метод</title>
+<meta name="description" content="Считаем цену ухода, отделяем управляемую текучесть и строим удержание по шагам: диагностика, адресные меры, замер результата.">
+<link rel="canonical" href="https://prosebya.ru/blog-b2b/kak-snizit-tekuchest-personala">
+<link rel="icon" href="https://static.tildacdn.com/tild3466-6233-4539-a362-353234643636/2.png">
+<link rel="preload" href="../fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/blog.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 164 46">
+    <path d="M12.525 35.379H21.031V9.085H0V35.379H8.506V15.653H12.525V35.379Z"/>
+    <path d="M93.185 39.529H74.658V45.57H93.185V39.529Z"/>
+    <path d="M39.505 8.508C36.043 8.508 34.385 10.666 33.72 13.824H33.102L32.644 9.141H26.092V45.569H34.503V31.635H35.029C35.652 34.127 37.096 35.839 40.065 35.839C45.51 35.839 46.844 28.895 46.844 20.994C46.844 13.705 44.271 8.508 39.507 8.508M36.215 29.223C34.62 29.223 33.962 27.146 33.962 21.835C33.962 16.523 34.885 15.069 36.215 15.069C37.373 15.069 38.379 16.578 38.379 21.686C38.379 27.789 37.48 29.223 36.215 29.223Z"/>
+    <path d="M133.024 11.309C129.408 11.309 127.832 13.211 127.124 15.756L126.577 15.69C126.8 11.531 128.401 8.516 133.023 7.988C135.609 7.693 140.744 7.308 140.744 7.308V0C140.744 0 138.434 0.215 133.023 0.981C122.743 2.435 120.406 9.753 120.406 19.763C120.406 30.558 124.063 35.839 131.057 35.839C138.051 35.839 141.49 30.817 141.49 22.606C141.49 18.002 140.772 11.309 133.024 11.309ZM130.977 29.338C129.333 29.338 128.875 27.744 128.875 23.144C128.875 18.545 129.59 16.949 130.977 16.949C132.365 16.949 133.024 18.197 133.024 23.144C133.024 28.091 132.62 29.338 130.977 29.338Z"/>
+    <path d="M157.254 9.085H152.302C147.154 9.085 143.93 11.913 143.93 17.877C143.93 22.023 146.014 24.241 148.651 25.328L142.5 35.38H150.97L155.311 26.17C155.542 26.149 155.766 26.126 155.984 26.098V35.38H164V9.085H157.255H157.254ZM155.456 23.588C153.073 23.588 152.342 21.868 152.342 18.633C152.342 15.62 153.153 13.976 154.993 13.976C155.583 13.976 155.963 14.041 155.963 14.041L155.984 13.963V23.588H155.456Z"/>
+    <path d="M84.186 29.166C82.366 29.166 82.194 26.227 82.194 22.515C82.194 17.602 82.229 15.126 84.049 15.126C85.869 15.126 86.012 17.482 86.012 21.733H93.981C94.275 15.126 92.989 8.452 83.919 8.452C75.707 8.452 73.858 14.377 73.858 22.104C73.858 33.199 78.326 35.84 84.182 35.84C89.67 35.84 93.981 32.665 93.981 25.339H86.012C86.012 27.933 85.552 29.166 84.186 29.166Z"/>
+    <path d="M60.498 8.452C54.603 8.452 49.984 11.798 49.984 21.872C49.984 31.947 53.262 35.84 60.498 35.84C67.734 35.84 71.067 32.128 71.067 21.872C71.067 11.616 66.434 8.452 60.498 8.452ZM60.498 29.338C58.395 29.338 58.358 26.087 58.358 21.872C58.358 17.96 58.538 15.298 60.498 15.298C62.458 15.298 62.709 18.082 62.709 21.872C62.709 25.662 62.599 29.338 60.498 29.338Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M105.161 24.593C105.351 28.058 106.092 29.466 107.634 29.466H107.635C108.79 29.466 109.44 28.509 109.57 26.67H117.524C117.03 33.055 113.605 35.84 107.7 35.84C101.395 35.84 96.925 33.2 96.925 22.104C96.925 14.377 98.775 8.452 106.987 8.452C116.498 8.452 118.284 15.301 117.523 24.594L117.519 24.593H105.161ZM105.124 20.977H109.548C109.492 17.17 108.973 14.827 107.265 14.827C105.644 14.827 105.201 16.974 105.124 20.977Z"/>
+  </symbol>
+</svg>
+
+<header class="site-header site-header--article">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+    </a>
+    <nav class="site-nav" aria-label="Основное меню">
+      <a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a>
+      <a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a>
+      <a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a>
+      <a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </nav>
+    <button class="site-header__burger" type="button" data-menu-open aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Меню">
+  <div class="mobile-menu__top">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)" style="width:100px;height:28px"><use href="#logo"/></svg>
+    </a>
+    <button class="site-header__burger" type="button" data-menu-close aria-label="Закрыть меню" style="display:flex">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <ul class="mobile-menu__list">
+    <li><a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a></li>
+    <li><a href="https://prosebya.ru/business">Для бизнеса</a></li>
+    <li><a href="https://prosebya.ru/launch">Для людей</a></li>
+    <li><a href="https://prosebya.ru/gifts">Сертификаты</a></li>
+  </ul>
+  <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+</div>
+
+<main class="container">
+  <div class="article-layout">
+    <article class="article-main">
+      <header>
+        <ol class="breadcrumbs" aria-label="Навигация">
+          <li><a href="../index.html">Блог</a></li>
+          <li><a href="../index.html?cat=tekuchest-i-vygoranie">Текучесть и выгорание</a></li>
+        </ol>
+        <h1 class="article-title">Как снизить текучесть персонала: системный подход</h1>
+        <p class="article-lead">Считаем цену ухода, отделяем управляемую текучесть и строим удержание по шагам: диагностика, адресные меры, замер результата.</p>
+        <div class="article-meta">
+          <div class="article-meta__info">
+            <span class="author"><span class="avatar" aria-hidden="true"></span>Просебя</span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-11">11 августа 2026</time></span>
+            <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>5 мин</span>
+          </div>
+          <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+        </div>
+        <figure class="article-cover">
+          <img src="https://optim.tildacdn.com/tild6661-6664-4432-a338-663432303364/-/format/webp/9.png.webp" width="720" height="540" alt="" fetchpriority="high">
+        </figure>
+      </header>
+
+      <details class="toc-mobile">
+        <summary>Содержание (6)<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+        <ol>
+          <li><a href="#snachala-poschitayte-cenu-odnogo-uhoda">Сначала посчитайте цену одного ухода</a></li>
+          <li><a href="#razdelite-vybytie-dobrovolnuyu-i-upravlyaemuyu-tekuchest">Разделите выбытие, добровольную и управляемую текучесть</a></li>
+          <li><a href="#bolshaya-chast-prichin-mozhet-nahoditsya-vnutri-kompanii">Большая часть причин может находиться внутри компании</a></li>
+          <li><a href="#diagnostika-svoi-cifry-a-ne-otraslevoy-benchmark">Диагностика: свои цифры, а не отраслевой бенчмарк</a></li>
+          <li><a href="#adresnye-mery-pod-naydennye-prichiny">Адресные меры под найденные причины</a></li>
+          <li><a href="#zamer-proverte-chto-mera-srabotala">Замер: проверьте, что мера сработала</a></li>
+        </ol>
+      </details>
+
+      <div class="prose" id="article-body">
+        <p>Бывает, что HR делает многое для снижения текучести: есть тимбилдинги, ДМС, регулярная индексация зарплаты и опросы сотрудников, но сотрудники все равно уходят. Так может происходить, если компания не знает, почему именно люди уходят. Системная работа с текучестью состоит из 3 шагов: понять стоимость ухода, найти конкретные причины и проверить, изменились ли они после изменений.</p>
+        <p>Ниже в тексте разбираем, как посчитать стоимость замены, где искать причины увольнения и какие меры предпринимать, чтобы удержание работало системно.</p>
+        <h2 id="snachala-poschitayte-cenu-odnogo-uhoda">Сначала посчитайте цену одного ухода</h2>
+        <p>Текучесть обходится компании дороже публикации вакансии. В стоимость ухода входят: подбор и оформление; адаптация и обучение; время рекрутера, руководителя и наставника; период до выхода нового сотрудника на нужную производительность; дополнительная нагрузка на команду и потеря экспертизы и рабочих связей.</p>
+        <p><a href="https://www.gallup.com/workplace/650174/employee-retention-depends-getting-recognition-right.aspx">Gallup оценивает</a> стоимость замены в зависимости от роли: около 40% годового оклада для линейного сотрудника, 80% для технического специалиста и около 200% для руководителя или менеджера.</p>
+        <p>Чтобы не ориентироваться на рыночные показатели и управлять экономикой на основании конкретных данных, полезно рассчитать собственную модель. Для каждой критичной группы посчитайте стоимость подбора, среднее время закрытия вакансии, нагрузку на команду и время адаптации. Так станет понятно, какие категории сотрудников требуют отдельной стратегии удержания.</p>
+        <h2 id="razdelite-vybytie-dobrovolnuyu-i-upravlyaemuyu-tekuchest">Разделите выбытие, добровольную и управляемую текучесть</h2>
+        <p>Общий показатель выбытия может ввести в заблуждение. Внутри одного показателя разные ситуации: увольнения по инициативе работодателя и сотрудника, сокращения, завершение срочных договоров, выход на пенсию и другие причины.</p>
+        <p>Добровольная текучесть — это уходы по инициативе сотрудников. Их динамика важнее для программы удержания. Чтобы определить степень влияния на компанию, можно разделить добровольные уходы подробнее:</p>
+        <ul><li>по причинам, на которые компания может влиять;</li><li>по сроку работы, например, первые 90 дней, полгода или год;</li><li>по подразделениям;</li><li>по должностям;</li><li>по критичным ролям.</li></ul>
+        <p>Это помогает работать с нежелательными уходами вместо снижения показателя любыми способами.</p>
+        <h2 id="bolshaya-chast-prichin-mozhet-nahoditsya-vnutri-kompanii">Большая часть причин может находиться внутри компании</h2>
+        <p><a href="https://www.prnewswire.com/news-releases/employees-reveal-top-reasons-for-leaving-in-scientific-study-from-work-institute-300446109.html">Work Institute в отчете 2017 года оценил</a> более 75% причин добровольного ухода как предотвратимые работодателем. В исследовании были проанализированы более 34 тысяч exit-интервью за 2016 год; среди наиболее частых категорий назывались карьерное развитие, баланс работы и личной жизни, поведение руководителя, компенсации и благополучие.</p>
+        <p>При этом Work Institute отдельно подчеркивает: профиль причин у каждой организации может отличаться. В анализе 173 компаний одинаковая комбинация 3 главных причин ухода встречалась только у 7,6% организаций. Поэтому отраслевой бенчмарк полезен для контекста, но не заменяет собственные данные.</p>
+        <p>Российские данные подтверждают, что причины ухода складываются из нескольких факторов. <a href="https://sberanalytics.ru/news/smena-raboty">В исследовании «Работа.ру» и СберАналитики</a> среди более чем 3 500 россиян 35% назвали причиной ухода с предыдущей работы неготовность работодателя повышать зарплату, 34% — профессиональное выгорание, стресс или состояние здоровья, 24% — отсутствие карьерного роста.</p>
+        <p>Объединять такие данные в один рейтинг некорректно. Но оба источника показывают, что зарплата не всегда является главной причиной ухода сотрудника.</p>
+        <h2 id="diagnostika-svoi-cifry-a-ne-otraslevoy-benchmark">Диагностика: свои цифры, а не отраслевой бенчмарк</h2>
+        <p>Чтобы определить, что именно происходит в конкретной компании, можно использовать разные инструменты. Лучше, когда источников данных несколько:</p>
+        <p>Exit-интервью помогают понять причины уже произошедших уходов. Также можно поговорить с теми, кто остается: stay-интервью поможет выяснить, что им нравится, что мешает работать и что может заставить искать другую работу. Опросы сотрудники показывают, насколько распространена конкретная проблема. Еще бывает HR-аналитика по подразделениям, она нужна, чтобы увидеть группы риска по должностям, стажу и определить команды, в которых текучесть выше.</p>
+        <p>Один источник редко дает полноценное основание для изменений. Например, сотрудник может назвать зарплату причиной ухода, но анализ по подразделению покажет, что проблема возникает только у одной команды. Тогда нужно проверить не только компенсацию, но и управление.</p>
+        <h3>Как считать текучесть</h3>
+        <p>Базовый коэффициент:</p>
+        <p>Количество уволившихся за период ÷ среднесписочная численность за период × 100%.</p>
+        <p>Важно: для введения изменений общей цифры может быть недостаточно. Считайте показатель отдельно по подразделениям, должностям, стажу и типу увольнения.</p>
+        <h2 id="adresnye-mery-pod-naydennye-prichiny">Адресные меры под найденные причины</h2>
+        <p>Мера работает как часть системы удержания тогда, когда связана с конкретной проблемой. Например:</p>
+        <ol><li>Сотрудники уходят из-за неконкурентной зарплаты → Пересматривать систему вознаграждения.</li><li>Причина связана с карьерой → Разбираться с возможностями роста, развитием.</li><li>Есть проблемы с руководителем → Обсудить управленческие практики конкретного менеджера.</li><li>Регулярные жалобы на перегрузку → Менять распределение задач, процессы, график работы.</li><li>Стресс в командах или эмоциональное истощение → Обеспечить доступ к профессиональной поддержке.</li></ol>
+        <p>Отдельно смотрите на новых сотрудников. <a href="https://workinstitute.com/first-year-turnover/">Work Institute отмечает</a>, что более трети новых сотрудников уходят в течение первого года. При этом период выхода нового человека на полноценную производительность, по оценке организации, может занимать от 8 месяцев до 2 лет в зависимости от роли. Чтобы компания не теряла деньги, которые вкладывает в подбор, для нового сотрудника нужны понятный онбординг, доступ к информации, наставник и регулярная обратная связь в первые недели.</p>
+        <h2 id="zamer-proverte-chto-mera-srabotala">Замер: проверьте, что мера сработала</h2>
+        <p>Для оценки изменений количества проведенных мероприятий недостаточно. Чтобы проверить, верное ли направление было выбрано, нужны замеры до запуска.</p>
+        <p>До изменений зафиксируйте:</p>
+        <ul><li>добровольную текучесть;</li><li>текучесть в проблемной группе;</li><li>ранние уходы;</li><li>причины увольнений;</li><li>результаты stay-интервью;</li><li>состояние и вовлеченность сотрудников.</li></ul>
+        <p>После изменений сравните показатели за сопоставимый период. Например, если компания изменила адаптацию, смотрите общую текучесть и долю сотрудников, которые ушли в первые 90 дней или первые 6 месяцев.</p>
+      </div>
+
+      <section class="sources" aria-labelledby="sources-title">
+        <h2 id="sources-title">Источники</h2>
+        <ol>
+          <li><span><a href="https://www.gallup.com/workplace/650174/employee-retention-depends-getting-recognition-right.aspx">Gallup</a> <span class="sources__ctx">— Gallup оценивает</span></span></li>
+          <li><span><a href="https://www.prnewswire.com/news-releases/employees-reveal-top-reasons-for-leaving-in-scientific-study-from-work-institute-300446109.html">PR Newswire</a> <span class="sources__ctx">— Work Institute в отчете 2017 года оценил</span></span></li>
+          <li><span><a href="https://sberanalytics.ru/news/smena-raboty">СберАналитика</a> <span class="sources__ctx">— В исследовании «Работа.ру» и СберАналитики</span></span></li>
+          <li><span><a href="https://workinstitute.com/first-year-turnover/">Work Institute</a> <span class="sources__ctx">— Work Institute отмечает</span></span></li>
+        </ol>
+      </section>
+
+      <div class="share-row">
+        <span>Статья была полезна? Поделитесь с коллегами</span>
+        <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+      </div>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <div>
+          <h2 id="cta-title">Психологическая поддержка для сотрудников</h2>
+          <p>Стресс и эмоциональное выгорание — причины, которые сотрудники называют при увольнении. Чтобы заранее работать с этими причинами ухода, Просебя помогает организовать психологическую поддержку сотрудников. Работники могут обращаться к специалистам, пользоваться инструментами и заботиться о своем состоянии. HR получит доступ к обезличенной аналитике и сможет заранее заметить риски конфликтов, выгорания или перегруза в командах.</p>
+          <p>Специалисты проходят строгий отбор: опыт от 3 лет, высшее образование и минимум 50 часов супервизий. Запуск EAP-платформы занимает от 1 до 10 дней в зависимости от задачи и инфраструктуры компании.</p>
+          <p>Посмотрите, как может быть устроена такая программа: <a href="https://prosebya.ru/psikholog-dlya-sotrudnikov">психолог для сотрудников от Просебя</a>.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary btn--l" href="https://prosebya.ru/business#form">Оставить заявку</a>
+          <a class="link-arrow" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Как это работает <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="article-aside">
+      <nav class="toc" aria-label="Содержание">
+        <div class="toc__title">Содержание</div>
+        <ol class="toc__list">
+          <li><a href="#snachala-poschitayte-cenu-odnogo-uhoda">Сначала посчитайте цену одного ухода</a></li>
+          <li><a href="#razdelite-vybytie-dobrovolnuyu-i-upravlyaemuyu-tekuchest">Разделите выбытие, добровольную и управляемую текучесть</a></li>
+          <li><a href="#bolshaya-chast-prichin-mozhet-nahoditsya-vnutri-kompanii">Большая часть причин может находиться внутри компании</a></li>
+          <li><a href="#diagnostika-svoi-cifry-a-ne-otraslevoy-benchmark">Диагностика: свои цифры, а не отраслевой бенчмарк</a></li>
+          <li><a href="#adresnye-mery-pod-naydennye-prichiny">Адресные меры под найденные причины</a></li>
+          <li><a href="#zamer-proverte-chto-mera-srabotala">Замер: проверьте, что мера сработала</a></li>
+        </ol>
+      </nav>
+    </aside>
+  </div>
+
+  <section class="related" aria-labelledby="related-title">
+    <div class="related__head">
+      <h2 id="related-title">Похожие статьи</h2>
+      <a class="link-arrow" href="../index.html?cat=tekuchest-i-vygoranie">Все статьи категории <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <ul class="cards" id="related"></ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+        <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+      </a>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Психологическая поддержка сотрудников</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a></li>
+        <li><a class="link-quiet" href="../index.html">Блог</a></li>
+      </ul>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="mailto:service@prosebya.ru">service@prosebya.ru</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/">Поддержка пользователей</a></li>
+      </ul>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__legal">
+        <a href="https://prosebya.ru/legal">Юридические документы</a>
+        <p>ООО «ПРОСЕБЯ» (ИНН 9725119144, ОГРН 1237700218832) — разработка цифровых сервисов для управления психологическим здоровьем. № 36 286 в реестре ИТ-компаний Минцифры. Москва, Крылатская улица, 17, корп. 1</p>
+      </div>
+      <div class="site-footer__apps">
+        <div class="site-footer__stores">
+          <a class="store" href="#">App Store</a>
+          <a class="store" href="#">RuStore</a>
+          <a class="store" href="#">Google Play</a>
+        </div>
+        <div class="site-footer__copy">© 2022–2026 ООО «ПРОСЕБЯ»</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>window.BLOG_BASE = "../";</script>
+<script src="../assets/posts.js"></script>
+<script src="../assets/blog.js"></script>
+<script>
+  Blog.mountHeader();
+  Blog.mountArticle({
+    body: document.getElementById("article-body"),
+    progress: document.getElementById("read-progress"),
+  });
+  // Похожие: 3 свежие статьи той же категории, без текущей
+  const current = "kak-snizit-tekuchest-personala";
+  const cat = BLOG_POSTS.find(p => p.slug === current).cat;
+  document.getElementById("related").append(
+    ...BLOG_POSTS.filter(p => p.cat === cat && p.slug !== current).slice(0, 3).map(p => Blog.renderCard(p))
+  );
+</script>
+</body>
+</html>

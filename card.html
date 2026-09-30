@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карточка статьи</title>
+<link rel="stylesheet" href="assets/blog.css">
+<style>
+  /* Обвязка витрины, не часть компонента */
+  .demo { padding-top: 64px; padding-bottom: 96px; }
+  .demo h1 { margin: 0; font-size: 44px; line-height: 52px; font-weight: 500; letter-spacing: -0.01em; }
+  .demo > p { max-width: 560px; margin: 8px 0 48px; font-size: 16px; line-height: 24px; color: var(--color-text-secondary); }
+  .demo h2 { margin: 64px 0 24px; font-size: var(--text-meta); line-height: var(--leading-meta); font-weight: 500; color: var(--color-text-secondary); }
+  @media (max-width: 767px) { .demo { padding-top: 32px; } .demo h1 { font-size: 30px; line-height: 38px; } }
+</style>
+</head>
+<body>
+<main class="container demo">
+  <h1>Карточка статьи</h1>
+  <p>Наведите мышь, нажмите, пройдите по карточкам клавишей Tab. Вся страница листинга — в index.html.</p>
+
+  <ul class="cards" id="cards"></ul>
+
+  <h2>Без обложки и загрузка</h2>
+  <ul class="cards" id="states"></ul>
+</main>
+
+<script src="assets/posts.js"></script>
+<script src="assets/blog.js"></script>
+<script>
+  const bySlug = s => BLOG_POSTS.find(p => p.slug === s);
+  document.getElementById("cards").append(
+    ...["zachem-kompanii-korporativnyy-psiholog", "privlechenie-i-uderzhanie-personala", "exit-intervyu"]
+      .map(s => Blog.renderCard(bySlug(s)))
+  );
+  document.getElementById("states").append(
+    Blog.renderCard({ ...bySlug("skolko-stoit-korporativnyy-psiholog"), img: null }),
+    Blog.renderSkeleton()
+  );
+</script>
+</body>
+</html>
