@@ -1,0 +1,7 @@
+{
+  "_comment": "Строки заголовка для таблиц: на Tilda их нет. Предложение дизайнера — согласовать с редакцией.",
+  "stay-intervyu": ["Вопрос", "Сотрудник 1", "Сотрудник 2"],
+  "skolko-stoit-korporativnyy-psiholog": ["Параметр", "Поставщик 1", "Поставщик 2"],
+  "socpaket-kotoryy-cenyat": ["Метрика", "Льгота 1", "Льгота 2"],
+  "wellbeing-platforma-ili-agregator-psihologov": ["Критерий", "Агрегатор психологов", "Well-being платформа"]
+}

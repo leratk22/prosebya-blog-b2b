@@ -76,9 +76,27 @@ def fmt_date(iso):
     return f"{int(d)} {MONTHS[int(m) - 1]} {y}"
 
 
-def cover_url(img):
-    d, name = img.split("/")
-    return f"https://optim.tildacdn.com/{d}/-/format/webp/{name}.webp"
+CARD_SIZES = "(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px"
+
+
+def render_card(post, base, eager=False):
+    """Карточка статьи. Разметка совпадает с renderCard в assets/blog.js."""
+    c = f"{base}assets/covers/{post['slug']}"
+    loading = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    return (
+        '\n      <li class="card">'
+        f'\n        <div class="card__cover"><img src="{c}-416.webp" srcset="{c}-416.webp 416w, {c}-832.webp 832w"'
+        f' sizes="{CARD_SIZES}" width="416" height="312" alt="" {loading} decoding="async"'
+        ' onload="this.classList.add(\'is-loaded\')"></div>'
+        f'\n        <div class="card__category">{escape(post["cat"])}</div>'
+        f'\n        <h3 class="card__title"><a class="card__link" href="{base}blog/{post["slug"]}.html">{escape(post["title"])}</a></h3>'
+        f'\n        <p class="card__excerpt">{escape(post["excerpt"])}</p>'
+        '\n        <div class="card__meta">'
+        f'\n          <span>{ICON_DATE}<time datetime="{post["date"]}">{fmt_date(post["date"])}</time></span>'
+        f'\n          <span>{ICON_TIME}<span>{post["read"]} мин</span></span>'
+        '\n        </div>'
+        '\n      </li>'
+    )
 
 
 # ---------- разбор текста Tilda ----------
@@ -170,7 +188,7 @@ def parse(raw, slugs):
 
 # ---------- отрисовка ----------
 
-def render_blocks(blocks, table_name):
+def render_blocks(blocks, table_name, table_header=None):
     html, toc, used = [], [], set()
     for kind, val in blocks:
         if kind == "h2":
@@ -191,9 +209,12 @@ def render_blocks(blocks, table_name):
             body = "".join(
                 "<tr>" + f'<th scope="row">{r[0]}</th>' + "".join(f"<td>{c}</td>" for c in r[1:]) + "</tr>"
                 for r in val)
+            head = ""
+            if table_header:  # на Tilda у таблиц нет шапки — берём из content/table-headers.json
+                head = "<thead><tr>" + "".join(f'<th scope="col">{escape(h)}</th>' for h in table_header) + "</tr></thead>"
             html.append(f'''<div class="table-block" data-name="{table_name}">
           <div class="table-scroll" tabindex="0" role="region" aria-label="Таблица">
-            <table><tbody>{body}</tbody></table>
+            <table>{head}<tbody>{body}</tbody></table>
           </div>
           <div class="table-actions">
             <button class="table-action" type="button" data-table-copy>{ICON_COPY}<span>Скопировать таблицу</span></button>
@@ -248,37 +269,100 @@ def reading_minutes(blocks):
     return max(3, math.ceil(words / 180))
 
 
+# Черновые описания категорий — заменить текстами редакции
+CATEGORY_LEADS = {
+    "tekuchest-i-vygoranie": "Почему люди уходят и выгорают, как это измерить и что компания может изменить до заявления об уходе.",
+    "lgoty-i-motivaciya": "Какие льготы сотрудники ценят на деле, как считать их использование и где место психологической поддержке.",
+    "vybor-eap": "Как выбрать программу поддержки сотрудников: форматы, цены, отличия от ДМС и вопросы провайдеру.",
+    "byudzhet-i-roi": "Как посчитать эффект поддержки в деньгах и защитить бюджет перед руководством.",
+    "vnedrenie": "Как запустить программу поддержки и добиться, чтобы ей действительно пользовались.",
+    "metriki-i-upravlenie": "Как измерять состояние команды на обезличенных данных и управлять им, а не ощущениями.",
+}
+BLOG_LEAD = "Как бизнес работает с психологическим состоянием команды. Для HR-директоров, HR BP и руководителей."
+PER_PAGE = 12
+
+
+def plural(n, one, few, many):
+    if n % 10 == 1 and n % 100 != 11:
+        return one
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return few
+    return many
+
+
+def build_listings(posts, cats):
+    """index.html и category/<slug>.html: шапка, чипы и первые 12 карточек сразу в HTML."""
+    shell = (ROOT / "tools" / "listing-shell.html").read_text()
+    shell = shell.split("-->\n", 1)[1]  # служебный комментарий шаблона
+    pages = [(None, ROOT / "index.html", "")] + [
+        (slug, ROOT / "category" / f"{slug}.html", "../") for slug in cats.values()]
+    (ROOT / "category").mkdir(exist_ok=True)
+    counts = {name: sum(p["cat"] == name for p in posts) for name in cats}
+    for cat_slug, path, base in pages:
+        name = next((n for n, s in cats.items() if s == cat_slug), None)
+        items = [p for p in posts if not name or p["cat"] == name]
+        chips = [(None, "Все", len(posts))] + [(s, n, counts[n]) for n, s in cats.items()]
+        chips_html = "".join(
+            f'\n      <li><a class="chip" href="{base}{"category/" + s + ".html" if s else "index.html"}"'
+            f'{" aria-current=\"page\"" if s == cat_slug else ""}>{n}<span class="chip__count">{c}</span></a></li>'
+            for s, n, c in chips)
+        cards = "".join(render_card(p, base, eager=i < 3) for i, p in enumerate(items[:PER_PAGE]))
+        left = len(items) - PER_PAGE
+        repl = {
+            "{{BASE}}": base,
+            "{{DOC_TITLE}}": f"{name} — блог Просебя" if name else "Блог о поддержке сотрудников — Просебя",
+            "{{DESCRIPTION}}": escape(CATEGORY_LEADS.get(cat_slug, BLOG_LEAD)),
+            "{{CRUMB_HIDDEN}}": "" if name else " hidden",
+            "{{TITLE}}": escape(name or "Блог"),
+            "{{LEAD}}": escape(CATEGORY_LEADS.get(cat_slug, BLOG_LEAD)),
+            "{{CHIPS}}": chips_html,
+            "{{CARDS}}": cards,
+            "{{MORE_HIDDEN}}": "" if left > 0 else " hidden",
+            "{{MORE_LABEL}}": f"Показать ещё {min(left, PER_PAGE)}" if left > 0 else "Показать ещё",
+            "{{CAT_NAME}}": name or "",
+        }
+        page = shell
+        for k, v in repl.items():
+            page = page.replace(k, v)
+        assert "{{" not in page, re.findall(r"\{\{\w+\}\}", page)
+        path.write_text(page)
+    print(f"Листинг и {len(cats)} {plural(len(cats), 'категория', 'категории', 'категорий')}: index.html, category/")
+
+
 def build():
     posts = load_posts()
     cats = categories()
     slugs = {p["slug"] for p in posts}
-    shell = (ROOT / "tools" / "article-shell.html").read_text()
+    headers = json.loads((ROOT / "content" / "table-headers.json").read_text())
+    shell = (ROOT / "tools" / "article-shell.html").read_text().split("-->\n", 1)[1]
     OUT.mkdir(exist_ok=True)
-    reads, report = {}, []
+    report = []
 
+    # 1-й проход: разбор текста и время чтения (нужно карточкам)
+    parsed = {}
     for post in posts:
         slug = post["slug"]
-        raw = (RAW / f"{slug}.html").read_text()
-        meta = json.loads((META / f"{slug}.json").read_text())
-        blocks = parse(raw, slugs)
-
-        # лид не повторяем в тексте
+        blocks = parse((RAW / f"{slug}.html").read_text(), slugs)
         dropped_lead = False
         if blocks and blocks[0][0] == "p" and plain(blocks[0][1]).rstrip(".") == post["excerpt"].rstrip("."):
-            blocks = blocks[1:]
+            blocks = blocks[1:]  # лид не повторяем в тексте
             dropped_lead = True
+        last_h2 = max(i for i, b in enumerate(blocks) if b[0] == "h2")  # реклама Просебя → CTA
+        post["read"] = reading_minutes(blocks[:last_h2])
+        parsed[slug] = (blocks, last_h2, dropped_lead)
 
-        # последний раздел — реклама Просебя → CTA
-        last_h2 = max(i for i, b in enumerate(blocks) if b[0] == "h2")
+    # 2-й проход: страницы статей
+    for post in posts:
+        slug = post["slug"]
+        blocks, last_h2, dropped_lead = parsed[slug]
+        meta = json.loads((META / f"{slug}.json").read_text())
         cta_title = blocks[last_h2][1]
         cta_paras = [v for k, v in blocks[last_h2 + 1:] if k == "p"]
         cta_lists = [v for k, v in blocks[last_h2 + 1:] if k in ("ul", "ol")]
         body_blocks = blocks[:last_h2]
 
-        prose, toc = render_blocks(body_blocks, slug)
+        prose, toc = render_blocks(body_blocks, slug, headers.get(slug))
         sources = sources_from(body_blocks)
-        minutes = reading_minutes(body_blocks)
-        reads[slug] = minutes
 
         toc_items = "".join(f'\n          <li><a href="#{i}">{escape(t)}</a></li>' for i, t in toc) + "\n        "
         sources_html = ""
@@ -288,17 +372,18 @@ def build():
                 + (f' <span class="sources__ctx">— {escape(c)}</span>' if c and c.lower() != n.lower() else "")
                 + "</span></li>"
                 for h, n, c in sources)
-            sources_html = f'''
+            sources_html = f"""
       <section class="sources" aria-labelledby="sources-title">
         <h2 id="sources-title">Источники</h2>
         <ol>{items}
         </ol>
       </section>
-'''
+"""
         cta_body = "".join(f"\n          <p>{p}</p>" for p in cta_paras)
         cta_list = ""
         if cta_lists:
             cta_list = "\n        <ul>" + "".join(f"<li>{i}</li>" for lst in cta_lists for i in lst) + "</ul>"
+        related = [p for p in posts if p["cat"] == post["cat"] and p["slug"] != slug][:3]
 
         page = shell
         repl = {
@@ -311,9 +396,7 @@ def build():
             "{{LEAD}}": escape(post["excerpt"]),
             "{{DATE_ISO}}": post["date"],
             "{{DATE}}": fmt_date(post["date"]),
-            "{{READ}}": f"{minutes} мин",
-            "{{COVER}}": cover_url(post["img"]),
-            "{{COVER_CLASS}}": " article-cover--framed" if post["framed"] else "",
+            "{{READ}}": f"{post['read']} мин",
             "{{TOC_COUNT}}": str(len(toc)),
             "{{TOC_ITEMS}}": toc_items,
             "{{PROSE}}": prose,
@@ -321,6 +404,7 @@ def build():
             "{{CTA_TITLE}}": cta_title,
             "{{CTA_BODY}}": cta_body,
             "{{CTA_LIST}}": cta_list,
+            "{{RELATED}}": "".join(render_card(p, "../") for p in related),
             "{{ICON_DATE}}": ICON_DATE,
             "{{ICON_TIME}}": ICON_TIME,
             "{{ICON_ARROW}}": ICON_ARROW,
@@ -331,17 +415,17 @@ def build():
         assert "{{" not in page, re.findall(r"\{\{\w+\}\}", page)
         (OUT / f"{slug}.html").write_text(page)
         tables = sum(1 for b in body_blocks if b[0] == "table")
-        report.append(f"{slug}: {len(toc)} разд., {minutes} мин, табл. {tables}, источн. {len(sources)}"
+        report.append(f"{slug}: {len(toc)} разд., {post['read']} мин, табл. {tables}, источн. {len(sources)}"
                       + (", лид-дубль убран" if dropped_lead else ""))
 
-    # время чтения → posts.js
+    # время чтения → posts.js (для карточек, которые дописывает «Показать ещё»)
     js_path = ROOT / "assets" / "posts.js"
     js = js_path.read_text()
-    for slug, minutes in reads.items():
-        js = re.sub(rf'(slug: "{re.escape(slug)}",[^\n]*?read: )\d+', rf"\g<1>{minutes}", js)
-    js = js.replace("// read — примерное время чтения: на Tilda его нет, в WordPress считать по объёму текста.",
-                    "// read — время чтения по объёму текста (180 слов в минуту), считает tools/build.py.")
+    for post in posts:
+        js = re.sub(rf'(slug: "{re.escape(post["slug"])}",[^\n]*?read: )\d+', rf"\g<1>{post['read']}", js)
     js_path.write_text(js)
+
+    build_listings(posts, cats)
     print("\n".join(report))
     print(f"\nГотово: {len(posts)} статей в {OUT.relative_to(ROOT)}/")
 

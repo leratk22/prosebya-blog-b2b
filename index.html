@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Блог о поддержке сотрудников — Просебя</title>
-<link rel="icon" href="https://static.tildacdn.com/tild3466-6233-4539-a362-353234643636/2.png">
+<meta name="description" content="Как бизнес работает с психологическим состоянием команды. Для HR-директоров, HR BP и руководителей.">
+<link rel="icon" href="assets/favicon.png">
 <link rel="preload" href="fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/blog.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 
@@ -74,15 +76,144 @@
   </section>
 
   <nav aria-label="Категории">
-    <ul class="chips" id="chips"></ul>
+    <ul class="chips" id="chips">
+      <li><a class="chip" href="index.html" aria-current="page">Все<span class="chip__count">36</span></a></li>
+      <li><a class="chip" href="category/tekuchest-i-vygoranie.html">Текучесть и выгорание<span class="chip__count">12</span></a></li>
+      <li><a class="chip" href="category/lgoty-i-motivaciya.html">Льготы и мотивация<span class="chip__count">7</span></a></li>
+      <li><a class="chip" href="category/vybor-eap.html">Выбор EAP<span class="chip__count">7</span></a></li>
+      <li><a class="chip" href="category/byudzhet-i-roi.html">Бюджет и ROI<span class="chip__count">4</span></a></li>
+      <li><a class="chip" href="category/vnedrenie.html">Внедрение<span class="chip__count">3</span></a></li>
+      <li><a class="chip" href="category/metriki-i-upravlenie.html">Метрики и управление<span class="chip__count">3</span></a></li>
+    </ul>
   </nav>
 
-  <a class="prev-link link-quiet" id="prev-link" href="index.html" hidden>← Предыдущие статьи</a>
+  <a class="prev-link link-quiet" id="prev-link" href="" hidden>← Предыдущие статьи</a>
 
-  <ul class="cards" id="cards"></ul>
+  <ul class="cards" id="cards">
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/skolko-stoit-korporativnyy-psiholog-416.webp" srcset="assets/covers/skolko-stoit-korporativnyy-psiholog-416.webp 416w, assets/covers/skolko-stoit-korporativnyy-psiholog-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" fetchpriority="high" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Выбор EAP</div>
+        <h3 class="card__title"><a class="card__link" href="blog/skolko-stoit-korporativnyy-psiholog.html">Сколько стоит корпоративный психолог и от чего зависит цена</a></h3>
+        <p class="card__excerpt">Из чего складывается стоимость корпоративной психологической поддержки, какие модели оплаты встречаются на рынке и что важно сравнить перед выбором провайдера.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-22">22 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/korporativnyy-psiholog-shtatnyy-ili-autsors-416.webp" srcset="assets/covers/korporativnyy-psiholog-shtatnyy-ili-autsors-416.webp 416w, assets/covers/korporativnyy-psiholog-shtatnyy-ili-autsors-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" fetchpriority="high" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Выбор EAP</div>
+        <h3 class="card__title"><a class="card__link" href="blog/korporativnyy-psiholog-shtatnyy-ili-autsors.html">Корпоративный психолог: штатный или на аутсорсе</a></h3>
+        <p class="card__excerpt">Штатный психолог или внешний сервис: сравниваем по конфиденциальности, охвату, стоимости. Почему близость к работодателю снижает обращаемость.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-21">21 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>6 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/zachem-kompanii-korporativnyy-psiholog-416.webp" srcset="assets/covers/zachem-kompanii-korporativnyy-psiholog-416.webp 416w, assets/covers/zachem-kompanii-korporativnyy-psiholog-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" fetchpriority="high" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Выбор EAP</div>
+        <h3 class="card__title"><a class="card__link" href="blog/zachem-kompanii-korporativnyy-psiholog.html">Зачем компании корпоративный психолог и что он реально делает</a></h3>
+        <p class="card__excerpt">Четыре формата работы корпоративного психолога, цифры Работа.ру и SHRM и почему штатная ставка не гарантирует реальную обращаемость.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-20">20 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>7 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/privlechenie-i-uderzhanie-personala-416.webp" srcset="assets/covers/privlechenie-i-uderzhanie-personala-416.webp 416w, assets/covers/privlechenie-i-uderzhanie-personala-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/privlechenie-i-uderzhanie-personala.html">Привлечение и удержание: почему важно считать стоимость ухода</a></h3>
+        <p class="card__excerpt">Рынок труда развернулся, но спор сместился к деньгам. Почему удержание чаще дешевле найма и как HR посчитать это в 2026 году.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-19">19 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/kontroffer-stoit-li-uderzhivat-dengami-416.webp" srcset="assets/covers/kontroffer-stoit-li-uderzhivat-dengami-416.webp 416w, assets/covers/kontroffer-stoit-li-uderzhivat-dengami-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/kontroffer-stoit-li-uderzhivat-dengami.html">Контроффер: стоит ли удерживать сотрудника деньгами</a></h3>
+        <p class="card__excerpt">Как часто делают контрофферы, почему деньги редко закрывают причину ухода и когда удержание оправдано. Разбор с цифрами Antal, Gallup и CIPD.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-18">18 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/uderzhanie-lineynogo-personala-416.webp" srcset="assets/covers/uderzhanie-lineynogo-personala-416.webp 416w, assets/covers/uderzhanie-lineynogo-personala-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/uderzhanie-lineynogo-personala.html">Удержание линейного персонала: ритейл, склад, производство</a></h3>
+        <p class="card__excerpt">Текучесть линии в рознице доходит до 85%, а уход одного стоит около 40% оклада. Что удерживает продавцов и склад вместо сложных бонусов.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-17">17 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>6 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/exit-intervyu-416.webp" srcset="assets/covers/exit-intervyu-416.webp 416w, assets/covers/exit-intervyu-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/exit-intervyu.html">Exit-интервью: как извлечь пользу из ухода сотрудника</a></h3>
+        <p class="card__excerpt">Кто должен вести выходное интервью, почему уходящий недоговаривает и какие вопросы дают данные, по которым реально снижают текучесть.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-16">16 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>6 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/stay-intervyu-416.webp" srcset="assets/covers/stay-intervyu-416.webp 416w, assets/covers/stay-intervyu-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/stay-intervyu.html">Stay-интервью: как узнать, что держит и что выталкивает людей</a></h3>
+        <p class="card__excerpt">Метод Финнегана: пять вопросов, кто ведёт разговор, чем stay-интервью отличается от выходного и что честно известно про его пользу.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-15">15 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>6 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/tekuchest-na-ispytatelnom-sroke-416.webp" srcset="assets/covers/tekuchest-na-ispytatelnom-sroke-416.webp 416w, assets/covers/tekuchest-na-ispytatelnom-sroke-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/tekuchest-na-ispytatelnom-sroke.html">Текучесть на испытательном сроке: почему уходят новички</a></h3>
+        <p class="card__excerpt">Почему новички уходят до конца испытания и что решают первые 44 дня: данные Work Institute и BambooHR, нормы ТК и шаги руководителю.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-14">14 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>6 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/uderzhanie-klyuchevyh-specialistov-416.webp" srcset="assets/covers/uderzhanie-klyuchevyh-specialistov-416.webp 416w, assets/covers/uderzhanie-klyuchevyh-specialistov-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/uderzhanie-klyuchevyh-specialistov.html">Удержание ключевых специалистов: как не потерять незаменимых</a></h3>
+        <p class="card__excerpt">Почему уход ключевого дороже всего, как заметить его заранее и чем удержать вместо разовой прибавки. Данные Gallup и ВЦИОМ, разговор до заявления.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-13">13 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/programma-uderzhaniya-sotrudnikov-416.webp" srcset="assets/covers/programma-uderzhaniya-sotrudnikov-416.webp 416w, assets/covers/programma-uderzhaniya-sotrudnikov-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/programma-uderzhaniya-sotrudnikov.html">Программа удержания сотрудников: из чего она состоит</a></h3>
+        <p class="card__excerpt">Разбираем счёт за уход сотрудника и собираем программу удержания из шести блоков: диагностика, адаптация, руководители, нагрузка, состояние, замер.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-12">12 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 мин</span></span>
+        </div>
+      </li>
+      <li class="card">
+        <div class="card__cover"><img src="assets/covers/kak-snizit-tekuchest-personala-416.webp" srcset="assets/covers/kak-snizit-tekuchest-personala-416.webp 416w, assets/covers/kak-snizit-tekuchest-personala-832.webp 832w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px" width="416" height="312" alt="" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')"></div>
+        <div class="card__category">Текучесть и выгорание</div>
+        <h3 class="card__title"><a class="card__link" href="blog/kak-snizit-tekuchest-personala.html">Как снизить текучесть персонала: системный подход</a></h3>
+        <p class="card__excerpt">Считаем цену ухода, отделяем управляемую текучесть и строим удержание по шагам: диагностика, адресные меры, замер результата.</p>
+        <div class="card__meta">
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-11">11 августа 2026</time></span>
+          <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>5 мин</span></span>
+        </div>
+      </li>
+  </ul>
 
   <div class="more" id="more">
-    <a class="btn btn--secondary btn--l" id="more-btn" href="?page=2">Показать ещё</a>
+    <a class="btn btn--secondary btn--l" id="more-btn" href="?page=2">Показать ещё 12</a>
   </div>
 </main>
 
@@ -122,56 +253,31 @@
   </div>
 </footer>
 
+<script>window.BLOG_BASE = ""; window.BLOG_CATEGORY = "";</script>
 <script src="assets/posts.js"></script>
 <script src="assets/blog.js"></script>
 <script>
-  // Черновые описания категорий — заменить текстами редакции
-  const CATEGORY_LEADS = {
-    "tekuchest-i-vygoranie": "Почему люди уходят и выгорают, как это измерить и что компания может изменить до заявления об уходе.",
-    "lgoty-i-motivaciya": "Какие льготы сотрудники ценят на деле, как считать их использование и где место психологической поддержке.",
-    "vybor-eap": "Как выбрать программу поддержки сотрудников: форматы, цены, отличия от ДМС и вопросы провайдеру.",
-    "byudzhet-i-roi": "Как посчитать эффект поддержки в деньгах и защитить бюджет перед руководством.",
-    "vnedrenie": "Как запустить программу поддержки и добиться, чтобы ей действительно пользовались.",
-    "metriki-i-upravlenie": "Как измерять состояние команды на обезличенных данных и управлять им, а не ощущениями.",
-  };
+  // Первые 12 карточек уже в HTML. «Показать ещё» дописывает следующие из posts.js.
+  const posts = BLOG_CATEGORY ? BLOG_POSTS.filter(p => p.cat === BLOG_CATEGORY) : BLOG_POSTS;
+  const list = document.getElementById("cards");
+  const startPage = Math.max(1, parseInt(new URLSearchParams(location.search).get("page"), 10) || 1);
 
-  const params = new URLSearchParams(location.search);
-  const catSlug = params.get("cat");
-  const category = BLOG_CATEGORIES.find(c => c.slug === catSlug);
-  const startPage = Math.max(1, parseInt(params.get("page"), 10) || 1);
-  const posts = category ? BLOG_POSTS.filter(p => p.cat === category.name) : BLOG_POSTS;
-
-  // Шапка страницы: блог или категория
-  if (category) {
-    document.title = `${category.name} — блог Просебя`;
-    document.getElementById("crumb").hidden = false;
-    document.getElementById("page-title").textContent = category.name;
-    document.getElementById("page-lead").textContent = CATEGORY_LEADS[category.slug];
-  }
-
-  // Чипы: ссылки на страницы категорий, у каждой — число статей
-  const chips = [{ slug: null, name: "Все", n: BLOG_POSTS.length }]
-    .concat(BLOG_CATEGORIES.map(c => ({ ...c, n: BLOG_POSTS.filter(p => p.cat === c.name).length })));
-  document.getElementById("chips").innerHTML = chips.map(c => {
-    const href = c.slug ? `index.html?cat=${c.slug}` : "index.html";
-    const current = (c.slug || null) === (category ? category.slug : null);
-    return `<li><a class="chip" href="${href}"${current ? ' aria-current="page"' : ""}>${c.name}<span class="chip__count">${c.n}</span></a></li>`;
-  }).join("");
-  document.querySelector('.chip[aria-current="page"]')?.scrollIntoView({ block: "nearest", inline: "center" });
-
-  // Прямой заход на ?page=N: показываем «← Предыдущие» (в WordPress — /page/N/ со ссылкой на /page/N-1/)
+  // Прямой заход на ?page=N: показываем N-ю страницу и «← Предыдущие»
+  // (в WordPress это отдельная страница /page/N/ со ссылкой на /page/N-1/)
   if (startPage > 1) {
+    list.innerHTML = "";
     const prev = document.getElementById("prev-link");
-    prev.hidden = false;
     const url = new URL(location.href);
     startPage - 1 > 1 ? url.searchParams.set("page", startPage - 1) : url.searchParams.delete("page");
     prev.href = url.pathname + url.search;
+    prev.hidden = false;
   }
+  document.querySelector('.chip[aria-current="page"]')?.scrollIntoView({ block: "nearest", inline: "center" });
 
   Blog.mountHeader();
   Blog.mountFeed({
-    list: document.getElementById("cards"),
-    posts: startPage > 1 ? posts.slice((startPage - 1) * Blog.PER_PAGE) : posts,
+    list,
+    posts: posts.slice((startPage - 1) * Blog.PER_PAGE),
     button: document.getElementById("more-btn"),
     moreWrap: document.getElementById("more"),
     pageOffset: startPage - 1,

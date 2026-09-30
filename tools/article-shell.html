@@ -7,10 +7,12 @@
 <title>{{SEO_TITLE}}</title>
 <meta name="description" content="{{SEO_DESCRIPTION}}">
 <link rel="canonical" href="https://prosebya.ru/blog-b2b/{{SLUG}}">
-<link rel="icon" href="https://static.tildacdn.com/tild3466-6233-4539-a362-353234643636/2.png">
+<link rel="icon" href="../assets/favicon.png">
 <link rel="preload" href="../fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="../assets/covers/{{SLUG}}-832.webp" imagesrcset="../assets/covers/{{SLUG}}-832.webp 832w, ../assets/covers/{{SLUG}}-1440.webp 1440w" imagesizes="(max-width: 767px) calc(100vw - 32px), 720px" fetchpriority="high">
 <link rel="stylesheet" href="../assets/blog.css">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 
@@ -70,7 +72,7 @@
       <header>
         <ol class="breadcrumbs" aria-label="Навигация">
           <li><a href="../index.html">Блог</a></li>
-          <li><a href="../index.html?cat={{CAT_SLUG}}">{{CAT}}</a></li>
+          <li><a href="../category/{{CAT_SLUG}}.html">{{CAT}}</a></li>
         </ol>
         <h1 class="article-title">{{TITLE}}</h1>
         <p class="article-lead">{{LEAD}}</p>
@@ -91,8 +93,8 @@
             </span>
           </button>
         </div>
-        <figure class="article-cover{{COVER_CLASS}}">
-          <img src="{{COVER}}" width="720" height="540" alt="" fetchpriority="high">
+        <figure class="article-cover">
+          <img src="../assets/covers/{{SLUG}}-832.webp" srcset="../assets/covers/{{SLUG}}-832.webp 832w, ../assets/covers/{{SLUG}}-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 32px), 720px" width="720" height="540" alt="" fetchpriority="high">
         </figure>
       </header>
 
@@ -141,9 +143,10 @@
   <section class="related" aria-labelledby="related-title">
     <div class="related__head">
       <h2 id="related-title">Похожие статьи</h2>
-      <a class="link-arrow" href="../index.html?cat={{CAT_SLUG}}">Все статьи категории {{ICON_ARROW}}</a>
+      <a class="link-arrow" href="../category/{{CAT_SLUG}}.html">Все статьи категории {{ICON_ARROW}}</a>
     </div>
-    <ul class="cards" id="related"></ul>
+    <ul class="cards" id="related">{{RELATED}}
+    </ul>
   </section>
 </main>
 
@@ -183,8 +186,6 @@
   </div>
 </footer>
 
-<script>window.BLOG_BASE = "../";</script>
-<script src="../assets/posts.js"></script>
 <script src="../assets/blog.js"></script>
 <script>
   Blog.mountHeader();
@@ -192,12 +193,6 @@
     body: document.getElementById("article-body"),
     progress: document.getElementById("read-progress"),
   });
-  // Похожие: 3 свежие статьи той же категории, без текущей
-  const current = "{{SLUG}}";
-  const cat = BLOG_POSTS.find(p => p.slug === current).cat;
-  document.getElementById("related").append(
-    ...BLOG_POSTS.filter(p => p.cat === cat && p.slug !== current).slice(0, 3).map(p => Blog.renderCard(p))
-  );
 </script>
 </body>
 </html>

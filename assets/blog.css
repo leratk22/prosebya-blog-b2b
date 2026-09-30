@@ -85,7 +85,7 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --dur-hover: calc(150ms * var(--motion-scale));   /* подчёркивания, фон кнопок */
   --dur-cover: calc(250ms * var(--motion-scale));   /* приближение обложки */
-  --dur-fade: calc(200ms * var(--motion-scale));    /* появление картинки */
+  --dur-fade: 200ms;                                  /* появление картинки — не замедляем, иначе страница кажется медленной */
   --dur-enter: calc(300ms * var(--motion-scale));   /* появление карточек */
   --stagger: calc(50ms * var(--motion-scale));
   --dur-press: 160ms;
@@ -382,14 +382,11 @@ a { color: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
   transition:
     opacity var(--dur-fade) ease-out,
     transform var(--dur-cover) var(--ease-out);
 }
-/* Обложки со вшитой рамкой: срезаем её приближением (временно, до замены файлов) */
-.card__cover--framed img { scale: 1.16; }
-.card__cover img.is-loaded { opacity: 1; }
+.js .card__cover img:not(.is-loaded) { opacity: 0; } /* без JS картинки видны сразу */
 .card__cover svg { width: 100%; height: 100%; }
 
 .card__category {
@@ -666,7 +663,7 @@ a { color: inherit; }
   flex-shrink: 0;
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border-default);
-  background: var(--color-bg-cool) url("https://static.tildacdn.com/tild3466-6233-4539-a362-353234643636/2.png") 50% 50% / auto 58% no-repeat;
+  background: var(--color-bg-cool) url("favicon.png") 50% 50% / auto 58% no-repeat;
 }
 
 /* «Скопировать ссылку» */
@@ -710,7 +707,6 @@ a { color: inherit; }
   background: var(--color-bg-cream);
 }
 .article-cover img { width: 100%; height: 100%; object-fit: cover; }
-.article-cover--framed img { scale: 1.16; } /* обложка со вшитой рамкой — до замены файла */
 @media (max-width: 767px) {
   .article-meta { flex-wrap: wrap; }
   .article-meta .copy-link { display: none; } /* на мобильном — только внизу статьи */
@@ -883,7 +879,7 @@ a { color: inherit; }
   vertical-align: top;
   border-bottom: 1px solid var(--color-border-default);
 }
-.table-scroll tr:last-child td { border-bottom: 0; }
+.table-scroll tbody tr:last-child > * { border-bottom: 0; }
 .table-scroll thead th { background: var(--color-bg-cool); font-weight: var(--font-weight-medium); }
 .table-scroll tbody th { font-weight: var(--font-weight-regular); width: 30%; }
 .table-actions { display: flex; flex-wrap: wrap; gap: 4px 20px; }

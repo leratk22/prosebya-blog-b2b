@@ -1,7 +1,6 @@
 /* Просебя · b2b-блог · поведение страниц.
    В WordPress карточки и страницы отдаёт сервер; здесь JS только имитирует это для демо. */
 (() => {
-  const CDN = "https://optim.tildacdn.com/";
   const PER_PAGE = 12;
   const LOAD_DELAY = 700; // имитация сети
   const PLACEHOLDER =
@@ -27,17 +26,17 @@
     return many;
   }
 
-  function coverUrl(img) {
-    const [dir, name] = img.split("/");
-    return `${CDN}${dir}/-/format/webp/${name}.webp`; // WebP вместо PNG 1680 px: ~150 КБ вместо ~2,5 МБ
-  }
+  // Обложки лежат в assets/covers/<slug>-<ширина>.webp (готовит tools/images.py).
+  // sizes повторяет сетку: 1 колонка на телефоне, 2 на планшете, 3 по 416 px на десктопе.
+  const CARD_SIZES = "(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(50vw - 60px), 416px";
+  const coverBase = post => `${window.BLOG_BASE || ""}assets/covers/${post.slug}`;
 
   function renderCard(post, { index = 0, isNew = false } = {}) {
     const li = document.createElement("li");
     li.className = "card" + (isNew ? " is-new" : "");
     if (isNew) li.style.setProperty("--i", index);
     li.innerHTML = `
-      <div class="card__cover${post.framed ? " card__cover--framed" : ""}"></div>
+      <div class="card__cover"></div>
       <div class="card__category"></div>
       <h3 class="card__title"><a class="card__link" href="${cardHref(post)}"></a></h3>
       <p class="card__excerpt"></p>
@@ -52,7 +51,10 @@
       img.loading = "lazy";
       img.decoding = "async";
       img.addEventListener("load", () => img.classList.add("is-loaded"), { once: true });
-      img.src = coverUrl(post.img);
+      const b = coverBase(post);
+      img.src = `${b}-416.webp`;
+      img.srcset = `${b}-416.webp 416w, ${b}-832.webp 832w`;
+      img.sizes = CARD_SIZES;
       cover.append(img);
       if (img.complete && img.naturalWidth) img.classList.add("is-loaded");
     } else {
@@ -84,7 +86,8 @@
     const pages = Math.ceil(posts.length / PER_PAGE);
     const pageUrl = n => urlForPage(n + pageOffset);
 
-    list.append(...posts.slice(0, page * PER_PAGE).map(p => renderCard(p)));
+    // карточки первой страницы обычно уже есть в HTML — дорисовываем, только если список пуст
+    if (!list.children.length) list.append(...posts.slice(0, PER_PAGE).map(p => renderCard(p)));
     const update = () => {
       const left = posts.length - page * PER_PAGE;
       moreWrap.hidden = left <= 0;
