@@ -265,6 +265,24 @@ def sources_from(blocks):
     return out
 
 
+SOURCE_TITLES = {}
+
+
+def source_item(href, publisher):
+    """Пункт «Источников»: ссылкой — название материала (content/sources.json), серым — издатель.
+    Слова из текста статьи, в которые была зашита ссылка, сюда не попадают."""
+    if not SOURCE_TITLES and (ROOT / "content" / "sources.json").exists():
+        SOURCE_TITLES.update(json.loads((ROOT / "content" / "sources.json").read_text()))
+    title = SOURCE_TITLES.get(href, {}).get("title", "")
+    p = urlparse(href)
+    if not title and p.netloc.endswith("doi.org"):
+        title, publisher = f"DOI {p.path.lstrip('/')}", "научная статья"
+    if title:
+        return (f'\n          <li><span><a href="{escape(href)}">{escape(title)}</a>'
+                f' <span class="sources__ctx">— {escape(publisher)}</span></span></li>')
+    return f'\n          <li><span><a href="{escape(href)}">{escape(publisher)}</a></span></li>'
+
+
 def reading_minutes(blocks):
     words = 0
     for kind, val in blocks:
@@ -387,11 +405,7 @@ def build():
         toc_items = "".join(f'\n          <li><a href="#{i}">{escape(t)}</a></li>' for i, t in toc) + "\n        "
         sources_html = ""
         if sources:
-            items = "".join(
-                f'\n          <li><span><a href="{escape(h)}">{escape(n)}</a>'
-                + (f' <span class="sources__ctx">— {escape(c)}</span>' if c and c.lower() != n.lower() else "")
-                + "</span></li>"
-                for h, n, c in sources)
+            items = "".join(source_item(h, n) for h, n, _ in sources)
             sources_html = f"""
       <section class="sources" aria-labelledby="sources-title">
         <h2 id="sources-title">Источники</h2>
