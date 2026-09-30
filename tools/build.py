@@ -359,12 +359,67 @@ def bust_cache():
     for name in ("blog.css", "blog.js", "posts.js"):
         versions[name] = hashlib.md5((ROOT / "assets" / name).read_bytes()).hexdigest()[:8]
     pages = [ROOT / "index.html", ROOT / "card.html", ROOT / "article-blocks.html",
-             *sorted((ROOT / "category").glob("*.html")), *sorted(OUT.glob("*.html"))]
+             *sorted((ROOT / "category").glob("*.html")), *sorted((ROOT / "author").glob("*.html")),
+             *sorted(OUT.glob("*.html"))]
     for page in pages:
         html = page.read_text()
         for name, v in versions.items():
             html = re.sub(rf'(assets/{re.escape(name)})(\?v=\w+)?"', rf'\1?v={v}"', html)
         page.write_text(html)
+
+
+AUTHOR = {
+    "slug": "prosebya",
+    "name": "Редакция Просебя",
+    "role": "Психологи, HR-эксперты и редакторы",
+    # черновик — согласовать с редакцией
+    "bio": ("Пишем для HR-директоров, HR BP и руководителей о том, как работать с психологическим состоянием "
+            "команды: текучесть и выгорание, льготы, выбор программы поддержки. Опираемся на исследования "
+            "и опыт внедрения EAP в компаниях."),
+}
+
+
+def build_author(posts):
+    """author/<slug>.html — шаблон листинга, но вместо шапки с чипами блок автора.
+    Сейчас автор один (редакция); для авторов-людей — фото вместо фавиконки, должность и био."""
+    shell = (ROOT / "tools" / "listing-shell.html").read_text().split("-->\n", 1)[1]
+    head_start = shell.index('  <section class="listing-head"')
+    head_end = shell.index("</nav>", head_start) + len("</nav>")
+    n = len(posts)
+    author_html = f"""  <section class="author-head" aria-labelledby="page-title">
+    <div class="crumb-slot">
+      <a class="crumb" href="{{{{BASE}}}}index.html">
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3.5L5 7l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Блог
+      </a>
+    </div>
+    <div class="author-head__row">
+      <span class="avatar avatar--xl" aria-hidden="true"></span>
+      <div class="author-head__text">
+        <h1 id="page-title">{escape(AUTHOR["name"])}</h1>
+        <p class="author-head__role">{escape(AUTHOR["role"])} · {n} {plural(n, "статья", "статьи", "статей")}</p>
+        <p class="author-head__bio">{escape(AUTHOR["bio"])}</p>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-head">Статьи автора</h2>"""
+    shell = shell[:head_start] + author_html + shell[head_end:]
+    left = n - PER_PAGE
+    repl = {
+        "{{BASE}}": "../",
+        "{{DOC_TITLE}}": f"{AUTHOR['name']} — блог Просебя",
+        "{{DESCRIPTION}}": escape(AUTHOR["bio"]),
+        "{{CARDS}}": "".join(render_card(p, "../", eager=i < 3) for i, p in enumerate(posts[:PER_PAGE])),
+        "{{MORE_HIDDEN}}": "" if left > 0 else " hidden",
+        "{{MORE_LABEL}}": f"Показать ещё {min(left, PER_PAGE)}" if left > 0 else "Показать ещё",
+        "{{CAT_NAME}}": "",
+    }
+    for k, v in repl.items():
+        shell = shell.replace(k, v)
+    assert "{{" not in shell, re.findall(r"\{\{\w+\}\}", shell)
+    (ROOT / "author").mkdir(exist_ok=True)
+    (ROOT / "author" / f"{AUTHOR['slug']}.html").write_text(shell)
 
 
 def build():
@@ -460,6 +515,7 @@ def build():
     js_path.write_text(js)
 
     build_listings(posts, cats)
+    build_author(posts)
     bust_cache()
     print("\n".join(report))
     print(f"\nГотово: {len(posts)} статей в {OUT.relative_to(ROOT)}/")
