@@ -10,6 +10,7 @@
 
 Запуск: python3 tools/build.py
 """
+import hashlib
 import json
 import math
 import re
@@ -329,6 +330,21 @@ def build_listings(posts, cats):
     print(f"Листинг и {len(cats)} {plural(len(cats), 'категория', 'категории', 'категорий')}: index.html, category/")
 
 
+def bust_cache():
+    """Метка версии у стилей и скриптов (?v=<хеш содержимого>): после обновления браузер
+    не возьмёт из кэша старый файл к новой странице. GitHub Pages кэширует файлы на 10 минут."""
+    versions = {}
+    for name in ("blog.css", "blog.js", "posts.js"):
+        versions[name] = hashlib.md5((ROOT / "assets" / name).read_bytes()).hexdigest()[:8]
+    pages = [ROOT / "index.html", ROOT / "card.html", ROOT / "article-blocks.html",
+             *sorted((ROOT / "category").glob("*.html")), *sorted(OUT.glob("*.html"))]
+    for page in pages:
+        html = page.read_text()
+        for name, v in versions.items():
+            html = re.sub(rf'(assets/{re.escape(name)})(\?v=\w+)?"', rf'\1?v={v}"', html)
+        page.write_text(html)
+
+
 def build():
     posts = load_posts()
     cats = categories()
@@ -426,6 +442,7 @@ def build():
     js_path.write_text(js)
 
     build_listings(posts, cats)
+    bust_cache()
     print("\n".join(report))
     print(f"\nГотово: {len(posts)} статей в {OUT.relative_to(ROOT)}/")
 
