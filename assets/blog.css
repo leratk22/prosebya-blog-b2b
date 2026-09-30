@@ -466,17 +466,27 @@ a { color: inherit; }
 
 /* Скелетон */
 .card--skeleton { gap: 12px; pointer-events: none; }
+/* Блик идёт одной волной по всем плашкам: фон привязан к окну (fixed), а не к каждой плашке.
+   Это индикатор загрузки, поэтому --motion-scale на него не действует. */
 .sk {
-  background: var(--color-bg-cool);
   border-radius: 6px;
-  animation: sk-pulse 1200ms ease-in-out infinite;
+  background-color: var(--color-bg-cool-strong); /* на bg-cool белый блик не виден */
+  background-image: linear-gradient(100deg,
+    transparent 35%, rgb(255 255 255 / 0.9) 50%, transparent 65%);
+  background-size: 200vw 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  animation: sk-shimmer 1600ms linear infinite;
 }
 .sk--cover { aspect-ratio: 4 / 3; border-radius: var(--radius-image); }
 .sk--label { width: 34%; height: 12px; margin-top: 8px; }
 .sk--title { width: 92%; height: 20px; }
 .sk--title2 { width: 62%; height: 20px; }
 .sk--meta { width: 82%; height: 14px; }
-@keyframes sk-pulse { 50% { opacity: 0.55; } }
+@keyframes sk-shimmer {
+  from { background-position: 100vw 0; }
+  to { background-position: -100vw 0; }
+}
 
 /* Появление новых карточек */
 .card.is-new {
@@ -846,6 +856,23 @@ a { color: inherit; }
 .figures__source { font-size: var(--text-meta); line-height: var(--leading-meta); color: var(--color-text-secondary); }
 @media (max-width: 767px) { .figures__row { grid-template-columns: 1fr; gap: 24px; } }
 
+/* Картинка с подписью */
+.prose-image { display: flex; flex-direction: column; gap: 12px; margin: 0; }
+.prose-image img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-image);
+  background: var(--color-bg-cream);
+}
+.prose-image figcaption {
+  font-size: var(--text-meta);
+  line-height: var(--leading-meta);
+  color: var(--color-text-secondary);
+}
+.prose > .prose-image, .prose > .prose-image + * { margin-top: 32px; }
+
 /* Выноска */
 .callout {
   display: flex;
@@ -1003,6 +1030,7 @@ a { color: inherit; }
 @media (hover: hover) and (pointer: fine) { .link-arrow:hover svg { transform: translateX(3px); } }
 @media (max-width: 767px) {
   .cta { padding: 24px; border-radius: var(--radius-m); }
+  .cta__actions { flex-direction: column; align-items: center; gap: 20px; }
   .cta__actions .btn { width: 100%; }
 }
 
@@ -1048,7 +1076,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .card:has(.card__link:active), .btn:active, .chip:active { transform: none; }
   .card:hover .card__cover img { transform: none; }
-  .sk { animation: none; }
+  .sk { animation: none; background-image: none; }
   .card.is-new { animation-name: card-fade; }
   @keyframes card-fade { from { opacity: 0; } }
 }

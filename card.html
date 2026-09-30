@@ -4,40 +4,63 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Карточка статьи</title>
-<link rel="stylesheet" href="assets/blog.css?v=5d7291ab">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="assets/blog.css?v=a7913cc1">
 <script>document.documentElement.classList.add("js")</script>
 <style>
   /* Обвязка витрины, не часть компонента */
   .demo { padding-top: 64px; padding-bottom: 96px; }
   .demo h1 { margin: 0; font-size: 44px; line-height: 52px; font-weight: 500; letter-spacing: -0.01em; }
   .demo > p { max-width: 560px; margin: 8px 0 48px; font-size: 16px; line-height: 24px; color: var(--color-text-secondary); }
-  .demo h2 { margin: 64px 0 24px; font-size: var(--text-meta); line-height: var(--leading-meta); font-weight: 500; color: var(--color-text-secondary); }
-  @media (max-width: 767px) { .demo { padding-top: 32px; } .demo h1 { font-size: 30px; line-height: 38px; } }
+  .states {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px var(--grid-gap-x);
+    align-items: start;
+  }
+  .state { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .state__label { font-size: var(--text-meta); line-height: var(--leading-meta); font-weight: 500; color: var(--color-text-secondary); }
+  .state__note { margin: 0; font-size: var(--text-meta); line-height: var(--leading-meta); color: var(--color-text-secondary); }
+  .state .cards { grid-template-columns: 1fr; }
+  @media (max-width: 1279px) { .states { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 767px) {
+    .demo { padding-top: 32px; }
+    .demo h1 { font-size: 30px; line-height: 38px; }
+    .states { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <main class="container demo">
   <h1>Карточка статьи</h1>
-  <p>Наведите мышь, нажмите, пройдите по карточкам клавишей Tab. Вся страница листинга — в index.html.</p>
+  <p>Состояния одного компонента. Наведите мышь, нажмите, пройдите по карточке клавишей Tab. Вся страница листинга — в <a href="index.html">index.html</a>.</p>
 
-  <ul class="cards" id="cards"></ul>
-
-  <h2>Без обложки и загрузка</h2>
-  <ul class="cards" id="states"></ul>
+  <div class="states">
+    <section class="state" aria-labelledby="s-default">
+      <div class="state__label" id="s-default">Обычная</div>
+      <ul class="cards" id="state-default"></ul>
+      <p class="state__note">При наведении обложка приближается на 3%, у заголовка появляется жёлтое подчёркивание. Картинка проявляется за 0,2 с после загрузки.</p>
+    </section>
+    <section class="state" aria-labelledby="s-nocover">
+      <div class="state__label" id="s-nocover">Без обложки</div>
+      <ul class="cards" id="state-nocover"></ul>
+      <p class="state__note">Кремовая заглушка с фирменной линией, если у статьи нет картинки.</p>
+    </section>
+    <section class="state" aria-labelledby="s-loading">
+      <div class="state__label" id="s-loading">Загрузка</div>
+      <ul class="cards" id="state-loading"></ul>
+      <p class="state__note">Скелетон для «Показать ещё»: блик проходит одной волной по всем плашкам за 1,6 с. При «уменьшить движение» — статичный.</p>
+    </section>
+  </div>
 </main>
 
 <script src="assets/posts.js?v=d59acf94"></script>
 <script src="assets/blog.js?v=700eade9"></script>
 <script>
   const bySlug = s => BLOG_POSTS.find(p => p.slug === s);
-  document.getElementById("cards").append(
-    ...["zachem-kompanii-korporativnyy-psiholog", "privlechenie-i-uderzhanie-personala", "exit-intervyu"]
-      .map(s => Blog.renderCard(bySlug(s)))
-  );
-  document.getElementById("states").append(
-    Blog.renderCard({ ...bySlug("skolko-stoit-korporativnyy-psiholog"), img: null }),
-    Blog.renderSkeleton()
-  );
+  document.getElementById("state-default").append(Blog.renderCard(bySlug("zachem-kompanii-korporativnyy-psiholog")));
+  document.getElementById("state-nocover").append(Blog.renderCard({ ...bySlug("skolko-stoit-korporativnyy-psiholog"), img: null }));
+  document.getElementById("state-loading").append(Blog.renderSkeleton());
 </script>
 </body>
 </html>

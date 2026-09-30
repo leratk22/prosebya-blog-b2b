@@ -104,6 +104,10 @@ def render_card(post, base, eager=False):
 
 BULLET = re.compile(r"^(?:•|—|–|-)\s+")
 NUMBER = re.compile(r"^\d{1,2}[.)]\s+")
+# маркер может стоять внутри выделения: <strong>• Текст</strong>
+LEAD_TAGS = r"^((?:\s*<(?:strong|em)>)*)\s*"
+BULLET_HTML = re.compile(LEAD_TAGS + r"(?:•|—|–|-)\s+")
+NUMBER_HTML = re.compile(LEAD_TAGS + r"\d{1,2}[.)]\s+")
 
 
 def clean_inline(html, slugs):
@@ -139,7 +143,7 @@ def text_blocks(div_html, slugs):
                     blocks.append(("p", "<br>".join(para)))
                     para = []
                 item = clean_inline(line, slugs)
-                item = BULLET.sub("", item, count=1) if kind == "ul" else NUMBER.sub("", item, count=1)
+                item = (BULLET_HTML if kind == "ul" else NUMBER_HTML).sub(r"\1", item, count=1)
                 if blocks and blocks[-1][0] == kind:
                     blocks[-1][1].append(item)
                 else:
