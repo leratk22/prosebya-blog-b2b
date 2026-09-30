@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "content" / "raw"
 META = ROOT / "content" / "meta"
 OUT = ROOT / "blog"
+SITE = "https://leratk22.github.io/prosebya-blog-b2b/"  # абсолютный адрес нужен для og:image
 
 MONTHS = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
           "сентября", "октября", "ноября", "декабря"]
@@ -333,6 +334,7 @@ def build_listings(posts, cats):
         left = len(items) - PER_PAGE
         repl = {
             "{{BASE}}": base,
+            "{{SITE}}": SITE,
             "{{DOC_TITLE}}": f"{name} — блог Просебя" if name else "Блог о поддержке сотрудников — Просебя",
             "{{DESCRIPTION}}": escape(CATEGORY_LEADS.get(cat_slug, BLOG_LEAD)),
             "{{CRUMB_HIDDEN}}": "" if name else " hidden",
@@ -358,7 +360,7 @@ def bust_cache():
     versions = {}
     for name in ("blog.css", "blog.js", "posts.js"):
         versions[name] = hashlib.md5((ROOT / "assets" / name).read_bytes()).hexdigest()[:8]
-    pages = [ROOT / "index.html", ROOT / "card.html", ROOT / "article-blocks.html",
+    pages = [ROOT / "index.html", ROOT / "404.html", ROOT / "card.html", ROOT / "article-blocks.html",
              *sorted((ROOT / "category").glob("*.html")), *sorted((ROOT / "author").glob("*.html")),
              *sorted(OUT.glob("*.html"))]
     for page in pages:
@@ -408,6 +410,7 @@ def build_author(posts):
     left = n - PER_PAGE
     repl = {
         "{{BASE}}": "../",
+        "{{SITE}}": SITE,
         "{{DOC_TITLE}}": f"{AUTHOR['name']} — блог Просебя",
         "{{DESCRIPTION}}": escape(AUTHOR["bio"]),
         "{{CARDS}}": "".join(render_card(p, "../", eager=i < 3) for i, p in enumerate(posts[:PER_PAGE])),
@@ -420,6 +423,71 @@ def build_author(posts):
     assert "{{" not in shell, re.findall(r"\{\{\w+\}\}", shell)
     (ROOT / "author").mkdir(exist_ok=True)
     (ROOT / "author" / f"{AUTHOR['slug']}.html").write_text(shell)
+
+
+NF_ART = (
+    '<svg class="nf-art__svg" viewBox="0 0 520 390" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
+    '<g fill="none" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M -40 256 C 10 246, 100 240, 196 238"/><path d="M 132 90 C 108 140, 84 190, 60 240"/>'
+    '<path d="M 154 118 C 152 190, 155 260, 150 324"/>'
+    '<path d="M 258 96 C 196 102, 198 322, 262 322 C 328 322, 332 94, 266 94 C 248 94, 236 102, 228 116"/>'
+    '<path d="M 432 90 C 408 140, 384 190, 360 240"/><path d="M 352 240 C 420 238, 480 236, 560 228"/>'
+    '<path d="M 454 118 C 452 190, 455 260, 450 324"/></g></svg>'
+)
+
+
+def build_404(posts, cats):
+    """404.html. GitHub Pages отдаёт его по любому несуществующему адресу, в том числе вложенному,
+    поэтому пути считаются от <base>, который скрипт ставит на корень сайта."""
+    shell = (ROOT / "tools" / "listing-shell.html").read_text().split("-->\n", 1)[1]
+    counts = {name: sum(p["cat"] == name for p in posts) for name in cats}
+    chips = f'\n        <li><a class="chip" href="index.html">Все<span class="chip__count">{len(posts)}</span></a></li>' + "".join(
+        f'\n        <li><a class="chip" href="category/{s}.html">{n}<span class="chip__count">{counts[n]}</span></a></li>'
+        for n, s in cats.items())
+    main = f"""<main class="container">
+  <section class="nf-hero" aria-labelledby="page-title">
+    <div class="nf-hero__text">
+      <p class="nf-hero__label">Ошибка 404</p>
+      <h1 id="page-title">Такой страницы нет</h1>
+      <p class="nf-hero__lead">Возможно, статья переехала при обновлении блога или в адресе опечатка. Все материалы на месте — начните с листинга или выберите тему.</p>
+      <div class="nf-hero__actions">
+        <a class="btn btn--primary btn--l" href="index.html">Все статьи блога</a>
+        <a class="link-arrow" href="https://prosebya.ru/">На главную Просебя {ICON_ARROW}</a>
+      </div>
+      <nav class="nf-hero__topics" aria-label="Темы блога">
+        <p class="nf-hero__label">Или выберите тему</p>
+        <ul class="chips">{chips}
+        </ul>
+      </nav>
+    </div>
+    <div class="nf-art">{NF_ART}</div>
+  </section>
+
+  <section class="related nf-fresh" aria-labelledby="fresh-title">
+    <div class="related__head">
+      <h2 id="fresh-title">Свежие статьи</h2>
+      <a class="link-arrow" href="index.html">Все статьи {ICON_ARROW}</a>
+    </div>
+    <ul class="cards">{"".join(render_card(p, "") for p in posts[:3])}
+    </ul>
+  </section>
+</main>"""
+    shell = shell[:shell.index('<main class="container">')] + main + shell[shell.index("</main>") + len("</main>"):]
+    scripts_start = shell.index('<script>window.BLOG_BASE')
+    shell = shell[:scripts_start] + '<script src="{{BASE}}assets/blog.js"></script>\n<script>Blog.mountHeader();</script>\n</body>\n</html>\n'
+    # <base> до первой относительной ссылки в <head>
+    shell = shell.replace('<meta name="viewport" content="width=device-width, initial-scale=1">',
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        '<meta name="robots" content="noindex">\n'
+        '<script>document.write(\'<base href="\' + (location.hostname.endsWith("github.io") ? "/prosebya-blog-b2b/" : "/") + \'">\')</script>', 1)
+    # теги соцсетей 404 не нужны
+    shell = re.sub(r'<meta (?:property="og:[^"]+"|name="twitter:card") content="[^"]*">\n', "", shell)
+    repl = {"{{BASE}}": "", "{{DOC_TITLE}}": "Страница не найдена — блог Просебя",
+            "{{DESCRIPTION}}": "Такой страницы нет. Все статьи блога Просебя — в листинге."}
+    for k, v in repl.items():
+        shell = shell.replace(k, v)
+    assert "{{" not in shell, re.findall(r"\{\{\w+\}\}", shell)
+    (ROOT / "404.html").write_text(shell)
 
 
 def build():
@@ -476,6 +544,7 @@ def build():
 
         page = shell
         repl = {
+            "{{SITE}}": SITE,
             "{{SEO_TITLE}}": escape(meta["seo_title"] or post["title"]),
             "{{SEO_DESCRIPTION}}": escape(meta["seo_description"] or post["excerpt"]),
             "{{SLUG}}": slug,
@@ -516,6 +585,7 @@ def build():
 
     build_listings(posts, cats)
     build_author(posts)
+    build_404(posts, cats)
     bust_cache()
     print("\n".join(report))
     print(f"\nГотово: {len(posts)} статей в {OUT.relative_to(ROOT)}/")

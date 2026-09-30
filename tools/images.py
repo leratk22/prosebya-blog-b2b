@@ -8,13 +8,16 @@
 Нужен cwebp (brew install webp). Запуск: python3 tools/images.py
 """
 import re
+import shutil
 import subprocess
 import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "tools" / ".cache" / "covers"   # оригиналы PNG, в git не попадают
+SRC = ROOT / "originals" / "covers"   # оригиналы PNG с Tilda (1680×1288), в git не попадают — 81 МБ
 OUT = ROOT / "assets" / "covers"
+OG = ROOT / "assets" / "og"          # картинки для соцсетей: JPG 1200×630
+OG_DEFAULT = "zachem-kompanii-korporativnyy-psiholog"  # для листинга, категорий, автора, 404
 WIDTHS = (416, 832, 1440)
 FRAME = 96      # рамка 64 px + запас на скруглённые углы фото внутри неё
 QUALITY = 78
@@ -45,9 +48,23 @@ def crop_box(w, h, framed):
     return x0 + (w - cw) // 2, y0 + (h - ch) // 2, cw, ch
 
 
+def og_image(src, dst, framed):
+    """Превью для соцсетей: центр обложки 1200×630 (1,9:1), JPG — WebP понимают не все соцсети."""
+    w, h = size(src)
+    if framed:
+        w -= 2 * FRAME
+    ch = round(w * 630 / 1200)
+    tmp = dst.with_suffix(".tmp.png")
+    subprocess.run(["sips", "-c", str(ch), str(w), str(src), "--out", str(tmp)], check=True, capture_output=True)
+    subprocess.run(["sips", "-z", "630", "1200", "-s", "format", "jpeg", "-s", "formatOptions", "82",
+                    str(tmp), "--out", str(dst)], check=True, capture_output=True)
+    tmp.unlink()
+
+
 def main():
     SRC.mkdir(parents=True, exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
+    OG.mkdir(parents=True, exist_ok=True)
     total = 0
     for slug, img, framed in posts():
         src = SRC / f"{slug}.png"
@@ -61,8 +78,11 @@ def main():
                             "-crop", str(x), str(y), str(cw), str(ch), "-resize", str(w), "0",
                             str(src), "-o", str(dst)], check=True)
             total += dst.stat().st_size
+        og_image(src, OG / f"{slug}.jpg", framed)
         print(f"{slug}: {cw}×{ch}{' (рамка обрезана)' if framed else ''}")
-    print(f"\nГотово: {total // 1024} КБ в {OUT.relative_to(ROOT)}/")
+    shutil.copy(OG / f"{OG_DEFAULT}.jpg", OG / "blog.jpg")
+    og_total = sum(f.stat().st_size for f in OG.glob("*.jpg"))
+    print(f"\nГотово: {total // 1024} КБ в {OUT.relative_to(ROOT)}/, превью {og_total // 1024} КБ в {OG.relative_to(ROOT)}/")
 
 
 if __name__ == "__main__":
