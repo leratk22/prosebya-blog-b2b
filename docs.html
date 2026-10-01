@@ -47,6 +47,10 @@
   .type-row:last-child { border-bottom: 0; }
   .type-row small { font-size: var(--text-meta); line-height: var(--leading-meta); color: var(--color-text-secondary); }
 
+  .doc-src { display: inline-block; margin-left: 4px; font-size: var(--text-label); line-height: var(--leading-label); color: var(--color-text-secondary);
+    text-decoration: underline 1px var(--color-border-default); text-underline-offset: 3px; }
+  .doc-src::after { content: " ↗"; }
+  .doc-src:hover { color: var(--color-text-primary); }
   .doc-frame .site-header { position: static; }
   .doc-frame .site-footer { margin-top: 0; }
   .doc-cards { width: 100%; }
@@ -106,6 +110,14 @@
         <li><a href="#author">Автор</a></li>
         <li><a href="#header">Шапка сайта</a></li>
         <li><a href="#footer">Подвал</a></li>
+        <li><a href="#wp-overview">Перенос на WordPress</a></li>
+        <li><a href="#wp-urls">Адреса и редиректы</a></li>
+        <li><a href="#wp-launch">Тест и запуск</a></li>
+        <li><a href="#wp-meta">Заголовки и canonical</a></li>
+        <li><a href="#wp-schema">Разметка</a></li>
+        <li><a href="#wp-pagination">Пагинация</a></li>
+        <li><a href="#wp-images">Картинки</a></li>
+        <li><a href="#wp-theme">Шаблоны и скорость</a></li>
       </ol>
     </nav>
   </aside>
@@ -634,6 +646,89 @@
       <table class="doc-spec">
         <tr><th>Вид</th><td>фон <code>bg-dark</code> #22263B, текст белый meta; юридический текст label <code>slate-300</code></td></tr>
         <tr><th>Телефон</th><td>всё одной колонкой, кнопка на всю ширину</td></tr>
+      </table>
+    </section>
+
+    <!-- ===================== ПЕРЕНОС НА WORDPRESS ===================== -->
+    <div class="doc-group">Перенос на WordPress</div>
+
+    <section class="doc-section" id="wp-overview">
+      <h2>Как пользоваться разделом</h2>
+      <p>Рекомендации собраны только по официальной документации WordPress, Google Search Central и справке Яндекс Вебмастера — ссылка на источник стоит у каждого пункта. Главная цель — переехать с Tilda, не потеряв позиции в поиске: адреса статей сохраняются, всё, что меняется, закрывается постоянными редиректами.</p>
+    </section>
+
+    <section class="doc-section" id="wp-urls">
+      <h2>Адреса и редиректы</h2>
+      <p>Адрес — то, по чему поисковики и внешние ссылки находят статью, поэтому его лучше не менять, а всё, что меняется, закрыть редиректами.</p>
+      <table class="doc-spec">
+        <tr><th>Сохранить адреса статей</th><td>Постоянные ссылки: свой формат <code>/blog-b2b/%postname%/</code>. Слаги статей в WordPress — те же, что на Tilda (они в <code>assets/posts.js</code>). Постоянные ссылки «никогда не должны меняться». <a class="doc-src" href="https://wordpress.org/documentation/article/customize-permalinks/">WordPress: постоянные ссылки</a></td></tr>
+        <tr><th>Категории и автор</th><td>Основа для рубрик — <code>blog-b2b/category</code> → <code>/blog-b2b/category/&lt;slug&gt;/</code>; убрать основу из адреса нельзя. Архив автора — <code>/author/&lt;имя&gt;/</code>. <a class="doc-src" href="https://wordpress.org/documentation/article/customize-permalinks/">WordPress: постоянные ссылки</a></td></tr>
+        <tr><th>Карта старых и новых адресов</th><td>До запуска составить таблицу «старый URL → новый URL» по карте сайта и аналитике. Для статей это <code>/blog-b2b/&lt;slug&gt;</code> → <code>/blog-b2b/&lt;slug&gt;/</code>; проверить каждый адрес из списка. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google: переезд с изменением URL</a></td></tr>
+        <tr><th>Только 301 на сервере</th><td>Всё, что меняет адрес, — постоянный серверный редирект 301 (или 308), не JavaScript и не meta refresh. Держать редиректы минимум год, лучше всегда. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/301-redirects">Google: редиректы</a> <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google: переезд с изменением URL</a> <a class="doc-src" href="https://yandex.ru/support/webmaster/ru/recommendations/changing-site-structure.html">Яндекс: смена структуры и дизайна</a></td></tr>
+        <tr><th>Убрать поддомен Tilda</th><td>Сейчас ссылки внутри блога ведут на <code>tilda.prosebya.ru/blog-b2b/…</code>. Настроить 301 с этих адресов на <code>prosebya.ru/blog-b2b/…</code>: Яндекс не учитывает <code>rel="canonical"</code> между разными поддоменами (так в блоге Яндекса на 2019 год), а редирект — самый сильный сигнал для Google. <a class="doc-src" href="https://webmaster.yandex.ru/blog/nekanonicheskie-stranitsy-v-poiske">Блог Яндекса для вебмастеров, 2019</a> <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Google: канонические URL</a></td></tr>
+        <tr><th>Внутренние ссылки</th><td>Ссылки внутри статей сразу ставить на новые адреса, а не на редиректы. Сборщик прототипа уже так делает. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google: переезд с изменением URL</a></td></tr>
+        <tr><th>Тот же домен</th><td>Блог должен остаться на <code>prosebya.ru/blog-b2b/</code>. Перенос на поддомен (например, <code>blog.prosebya.ru</code>) — это смена адресов всех страниц со всеми последствиями переезда. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google: переезд с изменением URL</a></td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="wp-launch">
+      <h2>Тестовый сайт и запуск</h2>
+      <table class="doc-spec">
+        <tr><th>Закрыть тестовый сайт</th><td>Галочка «Попросить поисковые системы не индексировать сайт» добавляет <code>noindex, nofollow</code>; это просьба, а не запрет доступа — тест лучше ещё и закрыть паролем. <a class="doc-src" href="https://wordpress.org/documentation/article/settings-reading-screen/">WordPress: настройки чтения</a></td></tr>
+        <tr><th>Не запрещать в robots.txt</th><td>Если закрыть страницы в robots.txt, поисковик не увидит <code>noindex</code> и может проиндексировать адрес по внешним ссылкам. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/block-indexing">Google: noindex</a></td></tr>
+        <tr><th>При запуске</th><td>Снять галочку и проверить, что на страницах нет <code>noindex</code> и неправильного <code>canonical</code>. <a class="doc-src" href="https://yandex.ru/support/webmaster/ru/recommendations/changing-site-structure.html">Яндекс: смена структуры и дизайна</a></td></tr>
+        <tr><th>Карта сайта</th><td>В WordPress она встроена: <code>/wp-sitemap.xml</code> со статьями, рубриками и авторами, ссылка на неё сама попадает в robots.txt. Если SEO-плагин делает свою карту — оставить одну. <a class="doc-src" href="https://make.wordpress.org/core/2020/07/22/new-xml-sitemaps-functionality-in-wordpress-5-5/">WordPress: карта сайта в ядре</a></td></tr>
+        <tr><th>Сообщить поисковикам</th><td>Отправить карту в Search Console и Яндекс Вебмастер, проверить, что новые адреса отвечают кодом 200, отправить важные страницы на переобход — в Яндексе они попадают в поиск в течение двух недель. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google: переезд с изменением URL</a> <a class="doc-src" href="https://yandex.ru/support/webmaster/ru/recommendations/changing-site-structure.html">Яндекс: смена структуры и дизайна</a></td></tr>
+        <tr><th>Следить после запуска</th><td>Отчёт об индексировании в Search Console: старые адреса должны уходить, новые — появляться. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google: переезд с изменением URL</a></td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="wp-meta">
+      <h2>Заголовки, описания, canonical</h2>
+      <table class="doc-spec">
+        <tr><th>Title и description</th><td>Перенести из <code>content/meta/&lt;slug&gt;.json</code> в поля SEO-плагина. У каждой страницы — свои: по Яндексу, одинаковые заголовки и описания «ухудшают видимость сайта в поисковой выдаче». <a class="doc-src" href="https://developers.google.com/search/docs/appearance/title-link">Google: заголовки страниц</a> <a class="doc-src" href="https://yandex.ru/support/webmaster/ru/indexing-options/title-description-doubles.html">Яндекс: одинаковые заголовки и описания</a></td></tr>
+        <tr><th>Заголовки листинга</th><td>У категорий и автора — свои title, а не копия главной блога; у страниц пагинации — с номером: «Блог — страница 2». <a class="doc-src" href="https://yandex.ru/support/webmaster/ru/indexing-options/title-description-doubles.html">Яндекс: одинаковые заголовки и описания</a> <a class="doc-src" href="https://developers.google.com/search/docs/appearance/title-link">Google: заголовки страниц</a></td></tr>
+        <tr><th>Canonical</th><td>Каждая страница ссылается на себя полным адресом с <code>https://</code>; адрес в canonical, в карте сайта и во внутренних ссылках один и тот же. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Google: канонические URL</a> <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google: переезд с изменением URL</a></td></tr>
+        <tr><th>Картинка для соцсетей</th><td><code>og:image</code> — по одной на статью из <code>assets/og/</code>. Google тоже учитывает её как основную картинку страницы. <a class="doc-src" href="https://developers.google.com/search/docs/appearance/google-images">Google: картинки</a></td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="wp-schema">
+      <h2>Структурированные данные</h2>
+      <table class="doc-spec">
+        <tr><th>Статья</th><td>Разметка <code>BlogPosting</code>: <code>headline</code>, <code>image</code>, <code>datePublished</code> и <code>dateModified</code> в формате ISO 8601, <code>author</code> с именем и ссылкой на страницу автора. Картинки — от 50 тыс. пикселей, желательно в пропорциях 16:9, 4:3 и 1:1. <a class="doc-src" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google: разметка Article</a></td></tr>
+        <tr><th>Хлебные крошки</th><td>Разметка <code>BreadcrumbList</code> для пути «Блог → категория → статья»: у каждого пункта <code>position</code>, <code>name</code> и <code>item</code>. <a class="doc-src" href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb">Google: разметка BreadcrumbList</a></td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="wp-pagination">
+      <h2>Пагинация и «Показать ещё»</h2>
+      <table class="doc-spec">
+        <tr><th>Свой адрес у страницы</th><td>Каждая страница списка — отдельный адрес <code>/page/N/</code>, который открывается напрямую. <a class="doc-src" href="https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading">Google: пагинация и подгрузка</a></td></tr>
+        <tr><th>Canonical</th><td>Здесь поисковики расходятся. Google: не делать первую страницу канонической для всей серии — у каждой страницы свой canonical. <a class="doc-src" href="https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading">Google: пагинация и подгрузка</a> Яндекс в блоге для вебмастеров (2019): для листингов «имеет смысл» указывать канонической первую страницу. <a class="doc-src" href="https://webmaster.yandex.ru/blog/nekanonicheskie-stranitsy-v-poiske">Блог Яндекса для вебмастеров, 2019</a> Предлагаю у каждой страницы свой canonical, как у Google, а окончательно решить с SEO-специалистом.</td></tr>
+        <tr><th>Кнопка — это ссылка</th><td>«Показать ещё» — обычная ссылка <code>&lt;a href="/page/N+1/"&gt;</code>: по ней робот находит следующие статьи, скрипт только перехватывает клик. Так сделано в прототипе. <a class="doc-src" href="https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading">Google: пагинация и подгрузка</a></td></tr>
+        <tr><th>rel="next/prev"</th><td>Google их больше не использует; добавлять не обязательно. <a class="doc-src" href="https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading">Google: пагинация и подгрузка</a></td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="wp-images">
+      <h2>Картинки</h2>
+      <table class="doc-spec">
+        <tr><th>Обычные img</th><td>Обложки — через <code>&lt;img&gt;</code>, а не фоном в CSS: картинки из CSS Google не индексирует. <a class="doc-src" href="https://developers.google.com/search/docs/appearance/google-images">Google: картинки</a></td></tr>
+        <tr><th>Размеры</th><td>WordPress сам выводит <code>srcset</code> и <code>sizes</code> для зарегистрированных размеров: добавить ширины 416, 832 и 1440 и передать <code>sizes</code> из <code>assets/blog.js</code>. <a class="doc-src" href="https://developer.wordpress.org/apis/responsive-images/">WordPress: адаптивные картинки</a> <a class="doc-src" href="https://developers.google.com/search/docs/appearance/google-images">Google: картинки</a></td></tr>
+        <tr><th>Alt и имена файлов</th><td>Alt описывает, что на картинке, без списка ключевых слов; имена файлов — понятные. В <code>assets/covers/</code> файлы уже названы по слагам. <a class="doc-src" href="https://developers.google.com/search/docs/appearance/google-images">Google: картинки</a></td></tr>
+        <tr><th>Формат</th><td>WebP поддерживается Google Search. <a class="doc-src" href="https://developers.google.com/search/docs/appearance/google-images">Google: картинки</a></td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="wp-theme">
+      <h2>Шаблоны, скорость, 404</h2>
+      <table class="doc-spec">
+        <tr><th>Шаблоны</th><td>Листинг — <code>home</code>, категория — <code>category</code>, автор — <code>author</code>, статья — <code>single</code>, 404 — <code>404</code>. Иерархия одна для классических и блочных тем; в блочной теме это файлы <code>.html</code> в <code>templates/</code>. <a class="doc-src" href="https://developer.wordpress.org/themes/basics/template-hierarchy/">WordPress: иерархия шаблонов</a></td></tr>
+        <tr><th>Шрифт</th><td>Euclid Circular A подключить в <code>theme.json</code> через <code>fontFace</code> из файлов темы (<code>file:./assets/fonts/…woff2</code>). <a class="doc-src" href="https://developer.wordpress.org/themes/global-settings-and-styles/settings/typography/">WordPress: шрифты в theme.json</a></td></tr>
+        <tr><th>Текст в HTML</th><td>Всё, что должно попадать в поиск, — в HTML сразу, без JavaScript. В прототипе так и есть: карточки и тексты приходят разметкой. <a class="doc-src" href="https://yandex.ru/support/webmaster/ru/recommendations/changing-site-structure.html">Яндекс: смена структуры и дизайна</a></td></tr>
+        <tr><th>Core Web Vitals</th><td>Цели: LCP до 2,5 с, INP до 200 мс, CLS до 0,1. Отчёт — в Search Console. <a class="doc-src" href="https://developers.google.com/search/docs/appearance/core-web-vitals">Google: Core Web Vitals</a></td></tr>
+        <tr><th>404</th><td>Страница «не найдено» должна отвечать кодом 404 (или 410), а не 200 — иначе это «мягкая 404». В WordPress за это отвечает шаблон <code>404</code>. <a class="doc-src" href="https://developers.google.com/search/docs/crawling-indexing/http-network-errors">Google: коды ответа</a> <a class="doc-src" href="https://developer.wordpress.org/themes/basics/template-hierarchy/">WordPress: иерархия шаблонов</a></td></tr>
       </table>
     </section>
   </main>
