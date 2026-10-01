@@ -17,7 +17,7 @@
 | `article-blocks.html` | Витрина блоков статьи: ключевые цифры, выноска, таблица сравнения |
 | `card.html` | Карточка статьи и её состояния |
 
-Дизайн-система и макеты — в Paper, спецификация и аудит — в документе проекта.
+Дизайн-система и макеты — в [Paper](https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS) (открывается без аккаунта): [основа](https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS/p-1-0), [компоненты](https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS/p-2-0), [шаблоны страниц](https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS/p-3-0). Спецификация и аудит — в документе проекта.
 
 ## Как запустить локально
 
