@@ -166,7 +166,7 @@
     }
 
     // Оглавление: подсветка текущего раздела
-    const tocLinks = [...document.querySelectorAll(".toc__list a")];
+    const tocLinks = [...document.querySelectorAll(".toc:not([data-demo]) .toc__list a")];
     const headings = tocLinks.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
     if (headings.length) {
       const setCurrent = id => tocLinks.forEach(a => a.setAttribute("aria-current", String(a.hash === "#" + id)));

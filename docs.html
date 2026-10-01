@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Компоненты блога — Просебя</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preload" href="fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/blog.css?v=a063cb94">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+  /* Обвязка документации, не часть компонентов */
+  .docs { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 64px; padding-top: 48px; padding-bottom: 96px; }
+  .docs .toc { top: 32px; }
+  .docs .toc__list a { font-size: var(--text-meta); line-height: var(--leading-meta); padding: 5px 0 5px 14px; }
+  .docs-intro h1 { margin: 0; font-size: var(--text-h1); line-height: var(--leading-h1); font-weight: 500; letter-spacing: var(--tracking-tight); }
+  .docs-intro p { max-width: 640px; margin: 12px 0 0; font-size: var(--text-body-s); line-height: var(--leading-body-s); color: var(--color-text-secondary); }
+  .docs-intro a, .doc-section > p a { text-decoration: underline 2px var(--color-accent); text-underline-offset: 4px; color: var(--color-text-primary); }
+
+  .doc-group { margin: 80px 0 0; padding-top: 24px; border-top: 1px solid var(--color-border-default);
+    font-size: var(--text-meta); line-height: var(--leading-meta); font-weight: 500; color: var(--color-text-secondary); }
+  .doc-section { padding-top: 40px; scroll-margin-top: 24px; }
+  .doc-section h2 { margin: 0; font-size: var(--text-h2); line-height: var(--leading-h2); font-weight: 500; letter-spacing: var(--tracking-tight); }
+  .doc-section > p { max-width: 680px; margin: 8px 0 0; font-size: var(--text-body-s); line-height: var(--leading-body-s); color: var(--color-text-secondary); }
+
+  .doc-demo { margin-top: 24px; padding: 32px; border: 1px solid var(--color-border-default); border-radius: var(--radius-m);
+    display: flex; flex-wrap: wrap; align-items: flex-start; gap: 32px; background: var(--color-bg-page); }
+  .doc-demo--stack { flex-direction: column; align-items: stretch; }
+  .doc-demo--flush { display: block; padding: 0; overflow: hidden; }
+  .doc-state { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .doc-state__label { font-size: var(--text-label); line-height: var(--leading-label); font-weight: 500; color: var(--color-text-secondary); }
+  .doc-text { width: 100%; max-width: var(--container-text); }
+  .doc-text.prose { padding-top: 0; }
+
+  .doc-spec { width: 100%; margin-top: 16px; border-collapse: collapse; font-size: var(--text-meta); line-height: var(--leading-meta); }
+  .doc-spec th, .doc-spec td { padding: 10px 16px 10px 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--color-border-default); }
+  .doc-spec th { width: 200px; font-weight: 500; }
+  .doc-spec code, .doc-section code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; background: var(--color-bg-cool); padding: 1px 5px; border-radius: 4px; }
+
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; width: 100%; }
+  .swatch { display: flex; flex-direction: column; gap: 8px; font-size: var(--text-meta); line-height: var(--leading-meta); }
+  .swatch__chip { height: 64px; border-radius: var(--radius-s); border: 1px solid var(--color-border-default); }
+  .swatch small { color: var(--color-text-secondary); font-size: var(--text-label); line-height: var(--leading-label); }
+  .type-row { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--color-border-default); width: 100%; }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row small { font-size: var(--text-meta); line-height: var(--leading-meta); color: var(--color-text-secondary); }
+
+  .doc-frame .site-header { position: static; }
+  .doc-frame .site-footer { margin-top: 0; }
+  .doc-cards { width: 100%; }
+  .doc-cards .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  @media (max-width: 1023px) {
+    .docs { grid-template-columns: 1fr; }
+    .docs > aside { display: none; }
+    .doc-cards .cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 767px) {
+    .doc-demo { padding: 20px; gap: 24px; }
+    .doc-spec th { width: 120px; }
+    .type-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 164 46">
+    <path d="M12.525 35.379H21.031V9.085H0V35.379H8.506V15.653H12.525V35.379Z"/>
+    <path d="M93.185 39.529H74.658V45.57H93.185V39.529Z"/>
+    <path d="M39.505 8.508C36.043 8.508 34.385 10.666 33.72 13.824H33.102L32.644 9.141H26.092V45.569H34.503V31.635H35.029C35.652 34.127 37.096 35.839 40.065 35.839C45.51 35.839 46.844 28.895 46.844 20.994C46.844 13.705 44.271 8.508 39.507 8.508M36.215 29.223C34.62 29.223 33.962 27.146 33.962 21.835C33.962 16.523 34.885 15.069 36.215 15.069C37.373 15.069 38.379 16.578 38.379 21.686C38.379 27.789 37.48 29.223 36.215 29.223Z"/>
+    <path d="M133.024 11.309C129.408 11.309 127.832 13.211 127.124 15.756L126.577 15.69C126.8 11.531 128.401 8.516 133.023 7.988C135.609 7.693 140.744 7.308 140.744 7.308V0C140.744 0 138.434 0.215 133.023 0.981C122.743 2.435 120.406 9.753 120.406 19.763C120.406 30.558 124.063 35.839 131.057 35.839C138.051 35.839 141.49 30.817 141.49 22.606C141.49 18.002 140.772 11.309 133.024 11.309ZM130.977 29.338C129.333 29.338 128.875 27.744 128.875 23.144C128.875 18.545 129.59 16.949 130.977 16.949C132.365 16.949 133.024 18.197 133.024 23.144C133.024 28.091 132.62 29.338 130.977 29.338Z"/>
+    <path d="M157.254 9.085H152.302C147.154 9.085 143.93 11.913 143.93 17.877C143.93 22.023 146.014 24.241 148.651 25.328L142.5 35.38H150.97L155.311 26.17C155.542 26.149 155.766 26.126 155.984 26.098V35.38H164V9.085H157.255H157.254ZM155.456 23.588C153.073 23.588 152.342 21.868 152.342 18.633C152.342 15.62 153.153 13.976 154.993 13.976C155.583 13.976 155.963 14.041 155.963 14.041L155.984 13.963V23.588H155.456Z"/>
+    <path d="M84.186 29.166C82.366 29.166 82.194 26.227 82.194 22.515C82.194 17.602 82.229 15.126 84.049 15.126C85.869 15.126 86.012 17.482 86.012 21.733H93.981C94.275 15.126 92.989 8.452 83.919 8.452C75.707 8.452 73.858 14.377 73.858 22.104C73.858 33.199 78.326 35.84 84.182 35.84C89.67 35.84 93.981 32.665 93.981 25.339H86.012C86.012 27.933 85.552 29.166 84.186 29.166Z"/>
+    <path d="M60.498 8.452C54.603 8.452 49.984 11.798 49.984 21.872C49.984 31.947 53.262 35.84 60.498 35.84C67.734 35.84 71.067 32.128 71.067 21.872C71.067 11.616 66.434 8.452 60.498 8.452ZM60.498 29.338C58.395 29.338 58.358 26.087 58.358 21.872C58.358 17.96 58.538 15.298 60.498 15.298C62.458 15.298 62.709 18.082 62.709 21.872C62.709 25.662 62.599 29.338 60.498 29.338Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M105.161 24.593C105.351 28.058 106.092 29.466 107.634 29.466H107.635C108.79 29.466 109.44 28.509 109.57 26.67H117.524C117.03 33.055 113.605 35.84 107.7 35.84C101.395 35.84 96.925 33.2 96.925 22.104C96.925 14.377 98.775 8.452 106.987 8.452C116.498 8.452 118.284 15.301 117.523 24.594L117.519 24.593H105.161ZM105.124 20.977H109.548C109.492 17.17 108.973 14.827 107.265 14.827C105.644 14.827 105.201 16.974 105.124 20.977Z"/>
+  </symbol>
+</svg>
+<div class="container docs">
+  <aside>
+    <nav class="toc" aria-label="Разделы">
+      <div class="toc__title">Компоненты</div>
+      <ol class="toc__list">
+        <li><a href="#colors">Цвета</a></li>
+        <li><a href="#type">Типографика</a></li>
+        <li><a href="#motion">Движение</a></li>
+        <li><a href="#buttons">Кнопки</a></li>
+        <li><a href="#links">Ссылки</a></li>
+        <li><a href="#chips">Чипы категорий</a></li>
+        <li><a href="#crumbs">Хлебные крошки</a></li>
+        <li><a href="#more">Показать ещё</a></li>
+        <li><a href="#card">Карточка статьи</a></li>
+        <li><a href="#article-head">Шапка статьи</a></li>
+        <li><a href="#toc">Оглавление</a></li>
+        <li><a href="#text">Текст статьи</a></li>
+        <li><a href="#lists">Списки</a></li>
+        <li><a href="#figures">Ключевые цифры</a></li>
+        <li><a href="#callout">Выноска</a></li>
+        <li><a href="#quote">Цитата</a></li>
+        <li><a href="#image">Картинка с подписью</a></li>
+        <li><a href="#table">Таблица</a></li>
+        <li><a href="#sources">Источники</a></li>
+        <li><a href="#share">Поделиться</a></li>
+        <li><a href="#cta">CTA</a></li>
+        <li><a href="#author">Автор</a></li>
+        <li><a href="#header">Шапка сайта</a></li>
+        <li><a href="#footer">Подвал</a></li>
+      </ol>
+    </nav>
+  </aside>
+
+  <main>
+    <header class="docs-intro">
+      <h1>Компоненты блога</h1>
+      <p>Все элементы b2b-блога Просебя на настоящих стилях из <code>assets/blog.css</code>. Примеры живые: наведите мышь, нажмите, пройдите клавишей Tab. Макеты — в Paper, страницы — <a href="index.html">листинг</a>, <a href="blog/zachem-kompanii-korporativnyy-psiholog.html">статья</a>, <a href="author/prosebya.html">автор</a>, <a href="404.html">404</a>.</p>
+    </header>
+
+    <!-- ===================== ОСНОВА ===================== -->
+    <div class="doc-group">Основа</div>
+
+    <section class="doc-section" id="colors">
+      <h2>Цвета</h2>
+      <p>В вёрстке используем только смысловые токены. Жёлтый — для действий и акцента, как цвет текста не используем: контраст 1,8:1.</p>
+      <div class="doc-demo">
+        <div class="swatches">
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-text-primary)"></span><b>text-primary</b><small>#000000 · заголовки, текст</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-text-secondary)"></span><b>text-secondary</b><small>#727687 · мета, подписи</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-bg-page)"></span><b>bg-page</b><small>#FFFFFF · фон страниц</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-bg-cool)"></span><b>bg-cool</b><small>#F4F6FA · выноска, чипы, шапка таблицы</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-bg-cool-strong)"></span><b>bg-cool-strong</b><small>#EAEFF8 · CTA, скелетон</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-bg-cream)"></span><b>bg-cream</b><small>#FFF9E6 · заглушка обложки</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-bg-dark)"></span><b>bg-dark</b><small>#22263B · подвал</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-bg-selected)"></span><b>bg-selected</b><small>#FEDB50 · активный чип</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-accent)"></span><b>accent · action-primary</b><small>#FFB800 · кнопка, подчёркивания, маркеры</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-action-primary-hover)"></span><b>action-primary-hover</b><small>#F6A300 · кнопка при наведении</small></div>
+          <div class="swatch"><span class="swatch__chip" style="background:var(--color-border-default)"></span><b>border-default</b><small>#D2DAE7 · линии, рамки</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section" id="type">
+      <h2>Типографика</h2>
+      <p>Euclid Circular A, начертания 400 и 500. Размер / интерлиньяж в пикселях; во второй колонке — значение на телефоне (до 767 px).</p>
+      <div class="doc-demo doc-demo--stack" style="gap:0">
+        <div class="type-row"><small>display · 56/64<br>моб. 36/44</small><span style="font-size:var(--text-display);line-height:var(--leading-display);font-weight:500;letter-spacing:-0.01em">Блог</span></div>
+        <div class="type-row"><small>h1 · 44/52<br>моб. 30/36</small><span style="font-size:var(--text-h1);line-height:var(--leading-h1);font-weight:500;letter-spacing:-0.01em">Заголовок статьи</span></div>
+        <div class="type-row"><small>h2 · 30/38<br>моб. 24/32</small><span style="font-size:var(--text-h2);line-height:var(--leading-h2);font-weight:500;letter-spacing:-0.01em">Раздел статьи</span></div>
+        <div class="type-row"><small>h3 · 22/30<br>моб. 20/28</small><span style="font-size:var(--text-h3);line-height:var(--leading-h3);font-weight:500">Подраздел</span></div>
+        <div class="type-row"><small>lead · 22/32<br>моб. 18/26</small><span style="font-size:var(--text-lead);line-height:var(--leading-lead)">Лид статьи и описание листинга</span></div>
+        <div class="type-row"><small>body · 18/30<br>моб. 17/26</small><span style="font-size:var(--text-body);line-height:var(--leading-body)">Текст статьи в колонке 720 px</span></div>
+        <div class="type-row"><small>card-title · 20/26<br>моб. 18/24</small><span style="font-size:var(--text-card-title);line-height:var(--leading-card-title);font-weight:500">Заголовок карточки</span></div>
+        <div class="type-row"><small>body-s · 16/24</small><span style="font-size:var(--text-body-s);line-height:var(--leading-body-s)">Таблица, оглавление, источники</span></div>
+        <div class="type-row"><small>ui · 15/20 (анонс 15/22)</small><span style="font-size:var(--text-ui);line-height:20px;font-weight:500">Кнопки и чипы</span></div>
+        <div class="type-row"><small>meta · 14/20</small><span style="font-size:var(--text-meta);line-height:var(--leading-meta);color:var(--color-text-secondary)">20 августа 2026 · 7 мин</span></div>
+        <div class="type-row"><small>label · 12/16</small><span style="font-size:var(--text-label);line-height:var(--leading-label);font-weight:500">Служебные подписи</span></div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Трекинг</th><td>−1% у заголовков от 30 px, у остального 0</td></tr>
+        <tr><th>Начертания</th><td>400 — текст, 500 — заголовки, кнопки, чипы, метки. 600 и жирнее не используем</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="motion">
+      <h2>Движение</h2>
+      <p>Декоративные длительности умножаются на <code>--motion-scale</code> (сейчас 5 — медленная версия). Нажатие и загрузку не замедляем. При «уменьшить движение» остаются только плавные появления.</p>
+      <table class="doc-spec">
+        <tr><th>Наведение</th><td>750 мс, ease — подчёркивания, фон кнопок и чипов. Только мышь</td></tr>
+        <tr><th>Обложка карточки</th><td>scale(1.03) за 1250 мс, ease-out <code>cubic-bezier(0.23, 1, 0.32, 1)</code></td></tr>
+        <tr><th>Нажатие</th><td>160 мс: кнопки и чипы scale(0.97), карточка scale(0.98). Цвет не меняем</td></tr>
+        <tr><th>Появление картинки</th><td>opacity 0 → 1 за 200 мс после загрузки</td></tr>
+        <tr><th>Новые карточки</th><td>opacity и сдвиг 8 px за 1500 мс, по очереди через 250 мс</td></tr>
+        <tr><th>Скелетон</th><td>блик волной по всем плашкам за 1600 мс</td></tr>
+        <tr><th>Прогресс чтения</th><td>без анимации</td></tr>
+      </table>
+    </section>
+
+    <!-- ===================== ДЕЙСТВИЯ И НАВИГАЦИЯ ===================== -->
+    <div class="doc-group">Действия и навигация</div>
+
+    <section class="doc-section" id="buttons">
+      <h2>Кнопки</h2>
+      <p>Скругление pill. Primary — одно главное действие на экране, secondary — второстепенное.</p>
+      <div class="doc-demo">
+        <div class="doc-state"><span class="doc-state__label">Primary M · 40</span><a class="btn btn--primary" href="#buttons">Оставить заявку</a></div>
+        <div class="doc-state"><span class="doc-state__label">Primary L · 56</span><a class="btn btn--primary btn--l" href="#buttons">Оставить заявку</a></div>
+        <div class="doc-state"><span class="doc-state__label">Secondary L · 56</span><a class="btn btn--secondary btn--l" href="#buttons">Показать ещё 12</a></div>
+        <div class="doc-state"><span class="doc-state__label">Загрузка</span><a class="btn btn--secondary btn--l" aria-busy="true" href="#buttons">Загружаем…</a></div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Размеры</th><td>M — высота 40, поля 20; L — высота 56, поля 32. Текст ui 15/20, 500</td></tr>
+        <tr><th>Primary</th><td>фон <code>action-primary</code> #FFB800, при наведении #F6A300</td></tr>
+        <tr><th>Secondary</th><td>контур 1,5 px чёрный, фон прозрачный, при наведении <code>bg-cool</code></td></tr>
+        <tr><th>Состояния</th><td>нажатие scale(0.97); фокус — кольцо 2 px; загрузка — прозрачность 40%, текст «Загружаем…»</td></tr>
+        <tr><th>Телефон</th><td>в CTA и 404 кнопка на всю ширину, ссылка под ней по центру</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="links">
+      <h2>Ссылки</h2>
+      <p>Три вида: в тексте, тихая (меню, подвал, автор) и со стрелкой (переход к списку).</p>
+      <div class="doc-demo">
+        <div class="doc-state"><span class="doc-state__label">В тексте</span><div class="prose" style="padding-top:0"><p style="margin:0"><a href="#links">По данным исследования</a> Работа.ру</p></div></div>
+        <div class="doc-state"><span class="doc-state__label">Тихая</span><a class="link-quiet" href="#links" style="font-size:var(--text-meta);line-height:var(--leading-meta)">Для бизнеса</a></div>
+        <div class="doc-state"><span class="doc-state__label">Со стрелкой</span><a class="link-arrow" href="#links">Все статьи категории <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        <div class="doc-state"><span class="doc-state__label">Скопировать ссылку</span><button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button></div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>В тексте</th><td>подчёркивание 2 px <code>accent</code>, отступ 4; при наведении подчёркивание чёрное</td></tr>
+        <tr><th>Тихая</th><td>без подчёркивания; при наведении появляется жёлтое 2 px</td></tr>
+        <tr><th>Со стрелкой</th><td>ui 15/20, 500; при наведении стрелка сдвигается на 3 px</td></tr>
+        <tr><th>Скопировать ссылку</th><td>высота 32, при наведении подложка <code>bg-cool</code>; после нажатия 2 с «Ссылка скопирована». Соцсетей нет</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="chips">
+      <h2>Чипы категорий</h2>
+      <p>Ссылки на страницы категорий, а не фильтр на месте. Число статей — для доверия.</p>
+      <div class="doc-demo doc-demo--stack">
+        <ul class="chips" style="margin:0">
+          <li><a class="chip" href="#chips" aria-current="page">Все<span class="chip__count">36</span></a></li>
+          <li><a class="chip" href="#chips">Текучесть и выгорание<span class="chip__count">12</span></a></li>
+          <li><a class="chip" href="#chips">Льготы и мотивация<span class="chip__count">7</span></a></li>
+          <li><a class="chip" href="#chips">Выбор EAP<span class="chip__count">7</span></a></li>
+        </ul>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Размер</th><td>высота 32, поля 12, скругление 8, зазор 6. Текст ui 15/20</td></tr>
+        <tr><th>Обычный</th><td>фон <code>bg-cool</code>, число <code>text-secondary</code>; наведение — <code>bg-cool-strong</code></td></tr>
+        <tr><th>Текущий</th><td>фон <code>bg-selected</code> #FEDB50, текст 500, число чёрное, <code>aria-current="page"</code></td></tr>
+        <tr><th>Телефон</th><td>одна строка, прокрутка вбок от края экрана</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="crumbs">
+      <h2>Хлебные крошки</h2>
+      <p>В статье — путь «Блог / категория», на категории и авторе — «← Блог». Строка под «← Блог» есть и на главной, пустая, чтобы заголовок не прыгал.</p>
+      <div class="doc-demo">
+        <div class="doc-state"><span class="doc-state__label">В статье</span><ol class="breadcrumbs"><li><a href="#crumbs">Блог</a></li><li><a href="#crumbs">Выбор EAP</a></li></ol></div>
+        <div class="doc-state"><span class="doc-state__label">Категория, автор</span><a class="crumb" href="#crumbs"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3.5L5 7l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Блог</a></div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Текст</th><td>meta 14/20, <code>text-secondary</code>; разделитель «/» цвета <code>slate-300</code>; при наведении — чёрный</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="more">
+      <h2>Показать ещё</h2>
+      <p>Пагинация листинга, категории и автора: по 12 карточек. Кнопка — ссылка на <code>/page/N/</code>, скрипт дописывает карточки и меняет адрес.</p>
+      <div class="doc-demo doc-demo--stack"><div class="more" style="margin:0"><a class="btn btn--secondary btn--l" href="#more">Показать ещё 12</a></div></div>
+      <table class="doc-spec">
+        <tr><th>Вид</th><td>secondary L на линии <code>border-default</code></td></tr>
+        <tr><th>Загрузка</th><td>кнопка «Загружаем…», в сетке скелетоны; затем карточки появляются по очереди, фокус — на первую новую</td></tr>
+        <tr><th>Прямой заход</th><td>на <code>/page/N/</code> — эта страница целиком и ссылка «← Предыдущие статьи»</td></tr>
+        <tr><th>Конец</th><td>когда статьи закончились, кнопка исчезает</td></tr>
+      </table>
+    </section>
+
+    <!-- ===================== КАРТОЧКА ===================== -->
+    <div class="doc-group">Карточка</div>
+
+    <section class="doc-section" id="card">
+      <h2>Карточка статьи</h2>
+      <p>Один компонент для листинга, категорий, автора, похожих статей и 404. Кликабельна целиком. Подробная витрина — <a href="card.html">card.html</a>.</p>
+      <div class="doc-demo doc-cards">
+        <ul class="cards" id="doc-cards"></ul>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Ширина</th><td>416 на десктопе (3 в ряд), ½ на планшете, 343 на телефоне, 280 в карусели похожих</td></tr>
+        <tr><th>Обложка</th><td>4:3, скругление <code>radius-image</code> 8. WebP 416/832 через <code>srcset</code>. Без обложки — кремовая заглушка с фирменной линией</td></tr>
+        <tr><th>Отступы</th><td>обложка → категория 20, категория → заголовок 8, заголовок → анонс 8, анонс → мета 16</td></tr>
+        <tr><th>Текст</th><td>категория meta 500 с жёлтой точкой 8 px; заголовок card-title до 3 строк; анонс 15/22 до 3 строк; мета с иконками календаря и часов 14 px</td></tr>
+        <tr><th>Состояния</th><td>наведение — обложка 103% и жёлтое подчёркивание заголовка; нажатие scale(0.98); фокус — кольцо 2 px вокруг карточки; загрузка — скелетон</td></tr>
+      </table>
+    </section>
+
+    <!-- ===================== СТАТЬЯ ===================== -->
+    <div class="doc-group">Статья</div>
+
+    <section class="doc-section" id="article-head">
+      <h2>Шапка статьи</h2>
+      <p>Крошки, H1, лид, строка автора с датой и временем чтения, обложка в ширину колонки.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text">
+          <ol class="breadcrumbs"><li><a href="#article-head">Блог</a></li><li><a href="#article-head">Выбор EAP</a></li></ol>
+          <h1 class="article-title">Зачем компании корпоративный психолог и что он реально делает</h1>
+          <p class="article-lead">Четыре формата работы корпоративного психолога, цифры Работа.ру и SHRM и почему штатная ставка не гарантирует реальную обращаемость.</p>
+          <div class="article-meta">
+            <div class="article-meta__info">
+              <a class="author link-quiet" href="author/prosebya.html"><span class="avatar" aria-hidden="true"></span>Просебя</a>
+              <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1.75" y="2.75" width="10.5" height="9.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M1.75 5.75H12.25M4.75 1.5V3.5M9.25 1.5V3.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><time datetime="2026-08-20">20 августа 2026</time></span>
+              <span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M7 4.2V7L8.8 8.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>7 мин</span>
+            </div>
+            <button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button>
+          </div>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Отступы</th><td>крошки → H1 16, H1 → лид 24, лид → мета 24, мета → обложка 32</td></tr>
+        <tr><th>Строка автора</th><td>линии сверху и снизу <code>border-default</code>, поля 16. Аватар 32 с фавиконкой на <code>bg-cool</code>, имя — ссылка на страницу автора</td></tr>
+        <tr><th>Обложка</th><td>720 × 540, WebP 832/1440, загружается первой (<code>fetchpriority="high"</code>)</td></tr>
+        <tr><th>Телефон</th><td>«Скопировать ссылку» убираем из шапки — она есть в конце статьи</td></tr>
+        <tr><th>Прогресс чтения</th><td>жёлтая полоса 3 px под шапкой сайта, только в статье</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="toc">
+      <h2>Оглавление</h2>
+      <p>Пункты — заголовки H2. На десктопе прилипает справа, на планшете и телефоне — сворачиваемый блок перед текстом.</p>
+      <div class="doc-demo">
+        <div class="doc-state" style="width:304px"><span class="doc-state__label">Десктоп · 304</span>
+          <nav class="toc" data-demo style="position:static" aria-label="Пример оглавления">
+            <div class="toc__title">Содержание</div>
+            <ol class="toc__list">
+              <li><a href="#toc">Что делает корпоративный психолог</a></li>
+              <li><a href="#toc" aria-current="true">Откуда появился формат EAP</a></li>
+              <li><a href="#toc">Штатный или внешний психолог</a></li>
+            </ol>
+          </nav>
+        </div>
+        <div class="doc-state" style="width:343px;max-width:100%"><span class="doc-state__label">Планшет и телефон</span>
+          <details class="toc-mobile" style="display:block;margin:0" open>
+            <summary>Содержание (3)<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+            <ol><li><a href="#toc">Что делает корпоративный психолог</a></li><li><a href="#toc">Откуда появился формат EAP</a></li><li><a href="#toc">Штатный или внешний психолог</a></li></ol>
+          </details>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Десктоп</th><td>без подложки; линия слева 2 px <code>bg-cool</code>, у текущего раздела — жёлтая, текст чёрный 500; остальные серые. Отступ от шапки при прилипании 32</td></tr>
+        <tr><th>Мобильный</th><td>фон <code>bg-cool</code>, скругление 8, поля 16; закрывается после выбора пункта</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="text">
+      <h2>Текст статьи</h2>
+      <p>Колонка 720 px. Отступы задаются на уровне текста, а не у каждого блока.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text prose">
+          <h2>Что делает корпоративный психолог</h2>
+          <p>Психолог помогает сотруднику разобраться со стрессом, тревогой, <a href="#text">эмоциональным выгоранием</a> и рабочими конфликтами.</p>
+          <h3>Групповые программы</h3>
+          <p>Специалист проводит лекции, вебинары и практические занятия для сотрудников, команд и руководителей.</p>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Абзацы</th><td>body 18/30, между абзацами 20</td></tr>
+        <tr><th>H2</th><td>30/38, 500, сверху 48, после — 12</td></tr>
+        <tr><th>H3</th><td>22/30, 500, сверху 32, после — 12</td></tr>
+        <tr><th>Блоки</th><td>цифры, выноска, цитата, картинка, таблица — отступ 32 сверху и снизу</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="lists">
+      <h2>Списки</h2>
+      <p>Только настоящие списки. Точки и цифры текстом из Tilda сборщик превращает в списки.</p>
+      <div class="doc-demo">
+        <div class="doc-state" style="flex:1 1 300px"><span class="doc-state__label">Маркированный</span>
+          <div class="prose" style="padding-top:0"><ul><li>Сколько сотрудников воспользовались поддержкой?</li><li>Какие форматы востребованы?</li></ul></div></div>
+        <div class="doc-state" style="flex:1 1 300px"><span class="doc-state__label">Нумерованный</span>
+          <div class="prose" style="padding-top:0"><ol><li>Конфиденциальность и защита личных данных.</li><li>Стигматизация.</li></ol></div></div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Маркер</th><td>жёлтая точка 6 px, отступ текста 24</td></tr>
+        <tr><th>Номер</th><td>500, отступ текста 32</td></tr>
+        <tr><th>Пункты</th><td>body 18/30, между пунктами 8</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="figures">
+      <h2>Ключевые цифры</h2>
+      <p>1–3 цифры из исследования в ряд; на телефоне — столбиком. Под рядом — источник.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text prose">
+          <div class="figures" style="margin:0">
+            <dl class="figures__row">
+              <div class="figure"><dt>63%</dt><dd>компаний следят за психологическим состоянием сотрудников</dd></div>
+              <div class="figure"><dt>82%</dt><dd>из них не дают персоналу никаких инструментов поддержки</dd></div>
+              <div class="figure"><dt>4%</dt><dd>компаний держат корпоративного психолога</dd></div>
+            </dl>
+            <div class="figures__source">Источник: Работа.ру, февраль 2024</div>
+          </div>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Цифра</th><td>figure 48/56 (моб. 36/44), 500, −1%, табличные цифры; над ней жёлтая полоска 24 × 4</td></tr>
+        <tr><th>Подпись</th><td>body-s 16/24; источник meta <code>text-secondary</code>, через 12</td></tr>
+        <tr><th>Фон</th><td>без подложки</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="callout">
+      <h2>Выноска</h2>
+      <p>Совет или главная мысль раздела. Не больше одной на раздел.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text prose">
+          <aside class="callout" style="margin:0"><p class="callout__title">Главный барьер — конфиденциальность</p><p>Сотруднику важно знать, что обращение анонимно и работодатель не получит данных с консультации.</p></aside>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Вид</th><td>фон <code>bg-cool</code>, скругление 16, поля 24 (моб. 16)</td></tr>
+        <tr><th>Текст</th><td>заголовок body 500 — необязательный; текст body</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="quote">
+      <h2>Цитата</h2>
+      <p>Слова эксперта или HR с подписью. В текущих статьях не встречается — блок на будущее.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text prose">
+          <figure class="quote" style="margin:0">
+            <div class="quote__body">
+              <blockquote>Мы перестали ждать заявлений об уходе и стали раз в квартал спрашивать, что держит людей. Причины ухода стали видны заранее.</blockquote>
+              <figcaption><span class="quote__avatar" aria-hidden="true">ИФ</span><span><span class="quote__name">Имя Фамилия</span><span class="quote__role">HR-директор розничной сети</span></span></figcaption>
+            </div>
+          </figure>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Вид</th><td>без фона, жёлтая полоса 4 px слева, отступ 24 (моб. 16)</td></tr>
+        <tr><th>Текст</th><td>22/32 (моб. 18/26); подпись meta: имя 500, должность <code>text-secondary</code>; аватар 40 — фото или инициалы на <code>bg-cool-strong</code></td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="image">
+      <h2>Картинка с подписью</h2>
+      <p>Схема или иллюстрация в ширину колонки текста.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text prose">
+          <figure class="prose-image" style="margin:0">
+            <img src="assets/covers/korporativnyy-psiholog-shtatnyy-ili-autsors-832.webp" srcset="assets/covers/korporativnyy-psiholog-shtatnyy-ili-autsors-832.webp 832w, assets/covers/korporativnyy-psiholog-shtatnyy-ili-autsors-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 72px), 720px" width="720" height="540" alt="Кабинет психолога в офисе" loading="lazy" decoding="async">
+            <figcaption>Кабинет штатного психолога рядом с командой: к нему легко дойти, но не всем легко решиться зайти</figcaption>
+          </figure>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Картинка</th><td>720 px, скругление <code>radius-image</code> 8, ленивая загрузка, <code>alt</code> обязателен</td></tr>
+        <tr><th>Подпись</th><td>meta 14/20 <code>text-secondary</code>, через 12</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="table">
+      <h2>Таблица</h2>
+      <p>Строка заголовка обязательна. Под таблицей — копирование (вставляется в Excel и Google Таблицы) и скачивание CSV.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text prose">
+          <div class="table-block" data-name="primer" style="margin:0">
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Пример таблицы">
+              <table>
+                <thead><tr><th scope="col">Вопрос</th><th scope="col">Сотрудник 1</th><th scope="col">Сотрудник 2</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Что держит?</th><td>Команда, руководитель</td><td>Удобный график</td></tr>
+                  <tr><th scope="row">Что выталкивает?</th><td>Нагрузка, нет роста</td><td>Отношения в команде</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-actions">
+              <button class="table-action" type="button" data-table-copy><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="4.25" y="4.25" width="8" height="8" rx="1.75" fill="none" stroke="currentColor" stroke-width="1.25"/><path d="M9.75 2.25H3.75C2.92 2.25 2.25 2.92 2.25 3.75V9.75" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg><span>Скопировать таблицу</span></button>
+              <button class="table-action" type="button" data-table-csv><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2V9M7 9L4.25 6.25M7 9L9.75 6.25M2.5 11.75H11.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Скачать CSV</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Вид</th><td>рамка <code>border-default</code>, скругление 16; ячейки 12 × 16, body-s; шапка на <code>bg-cool</code>, 500</td></tr>
+        <tr><th>Телефон</th><td>таблица прокручивается вбок, первый столбец 156 px закреплён</td></tr>
+        <tr><th>Действия</th><td>meta 500 <code>text-secondary</code> с иконками 14; после копирования 2 с «Таблица скопирована»</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="sources">
+      <h2>Источники</h2>
+      <p>В конце текста. Ссылкой — название материала, серым — издатель. Слова из текста, в которые была зашита ссылка, не повторяем.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text">
+          <section class="sources" style="margin:0;padding:0;border:0">
+            <h2>Источники</h2>
+            <ol>
+              <li><span><a href="https://www.gallup.com/workplace/646538/employee-turnover-preventable-often-ignored.aspx">42% of Employee Turnover Is Preventable but Often Ignored</a> <span class="sources__ctx">— Gallup</span></span></li>
+              <li><span><a href="https://doi.org/10.1108/MRR-02-2021-0148">DOI 10.1108/MRR-02-2021-0148</a> <span class="sources__ctx">— научная статья</span></span></li>
+            </ol>
+          </section>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Вид</th><td>линия сверху, отступ 32; заголовок h3; пункты body-s с номером <code>text-secondary</code>; ссылка с жёлтым подчёркиванием и ↗</td></tr>
+        <tr><th>Без названия</th><td>научная статья — номер DOI; остальное — название издателя</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="share">
+      <h2>Поделиться</h2>
+      <p>После текста и источников, перед CTA. Только копирование ссылки.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text"><div class="share-row" style="margin:0"><span>Статья была полезна? Поделитесь с коллегами</span><button class="copy-link" type="button" data-copy-link>
+            <span class="copy-link__idle">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5L9.5 6.5M7 4.5L8.3 3.2C9.4 2.1 11.2 2.1 12.3 3.2C13.4 4.3 13.4 6.1 12.3 7.2L11 8.5M9 11.5L7.7 12.8C6.6 13.9 4.8 13.9 3.7 12.8C2.6 11.7 2.6 9.9 3.7 8.8L5 7.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Скопировать ссылку
+            </span>
+            <span class="copy-link__done" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ссылка скопирована
+            </span>
+          </button></div></div>
+      </div>
+    </section>
+
+    <section class="doc-section" id="cta">
+      <h2>CTA</h2>
+      <p>Один на статью, всегда в конце. Текст — из последнего раздела статьи про Просебя.</p>
+      <div class="doc-demo doc-demo--stack">
+        <div class="doc-text">
+          <section class="cta" style="margin:0">
+            <div><h2>Психологическая поддержка для ваших сотрудников</h2><p>Онлайн-сессии с психологами и психотерапевтами, инструменты самопомощи, диагностика и вебинары в одной EAP-платформе.</p></div>
+            <ul><li>Специалисты с опытом от 3 лет и минимум 50 часами супервизий</li><li>HR видит обезличенную аналитику по командам</li></ul>
+            <div class="cta__actions"><a class="btn btn--primary btn--l" href="#cta">Оставить заявку</a><a class="link-arrow" href="#cta">Как это работает <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </section>
+        </div>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Вид</th><td>фон <code>bg-cool-strong</code>, скругление 24 (моб. 16), поля 48 (моб. 24), между частями 24</td></tr>
+        <tr><th>Пункты</th><td>необязательные; жёлтый кружок 20 с галочкой, body-s</td></tr>
+        <tr><th>Телефон</th><td>кнопка на всю ширину, ссылка под ней по центру</td></tr>
+      </table>
+    </section>
+
+    <!-- ===================== СТРАНИЦЫ ===================== -->
+    <div class="doc-group">Страницы</div>
+
+    <section class="doc-section" id="author">
+      <h2>Автор</h2>
+      <p>Шапка страницы автора. Сейчас автор один — редакция; для авторов-людей вместо фавиконки фото.</p>
+      <div class="doc-demo doc-demo--stack">
+        <section class="author-head" style="padding-top:0">
+          <div class="author-head__row">
+            <span class="avatar avatar--xl" aria-hidden="true"></span>
+            <div class="author-head__text">
+              <h1 style="font-size:var(--text-h1);line-height:var(--leading-h1)">Редакция Просебя</h1>
+              <p class="author-head__role">Психологи, HR-эксперты и редакторы · 36 статей</p>
+              <p class="author-head__bio">Пишем для HR-директоров, HR BP и руководителей о том, как работать с психологическим состоянием команды.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <table class="doc-spec">
+        <tr><th>Аватар</th><td>120 (моб. 80), рамка <code>border-default</code>, фон <code>bg-cool</code>, знак 58% высоты</td></tr>
+        <tr><th>Текст</th><td>имя display 56/64 (моб. 36/44); роль и число статей meta <code>text-secondary</code>; био lead до 720 px</td></tr>
+        <tr><th>Телефон</th><td>столбиком: аватар над именем</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="header">
+      <h2>Шапка сайта</h2>
+      <p>Как на prosebya.ru. Прилипает к верху, после прокрутки — линия снизу. Меньше 1024 px — бургер и меню на весь экран.</p>
+      <div class="doc-demo doc-demo--flush doc-frame"><header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+      <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+    </a>
+    <nav class="site-nav" aria-label="Основное меню">
+      <a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Корпоративный психолог</a>
+      <a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a>
+      <a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a>
+      <a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </nav>
+    <button class="site-header__burger" type="button" data-menu-open aria-expanded="false" aria-controls="mobile-menu" aria-label="Открыть меню">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header></div>
+      <table class="doc-spec">
+        <tr><th>Высота</th><td>64 (моб. 56); логотип SVG 114 × 32 (моб. 100 × 28)</td></tr>
+        <tr><th>Меню</th><td>meta 14/20, зазор 32, тихие ссылки; кнопка primary M</td></tr>
+        <tr><th>Мобильное меню</th><td>на весь экран: пункты 24/32 через 24, кнопка L внизу на всю ширину; закрывается крестиком и Esc</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="footer">
+      <h2>Подвал</h2>
+      <p>Как на prosebya.ru, на всю ширину, контент по контейнеру 1312. Ссылка «Блог» ведёт на /blog-b2b.</p>
+      <div class="doc-demo doc-demo--flush doc-frame"><footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <a class="site-footer__logo" href="https://prosebya.ru/" aria-label="Просебя — на главную">
+        <svg fill="var(--color-accent)"><use href="#logo"/></svg>
+      </a>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="https://prosebya.ru/psikholog-dlya-sotrudnikov">Психологическая поддержка сотрудников</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/business">Для бизнеса</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/launch">Для людей</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/gifts">Сертификаты</a></li>
+        <li><a class="link-quiet" href="index.html">Блог</a></li>
+      </ul>
+      <ul class="site-footer__col">
+        <li><a class="link-quiet" href="mailto:service@prosebya.ru">service@prosebya.ru</a></li>
+        <li><a class="link-quiet" href="https://prosebya.ru/">Поддержка пользователей</a></li>
+      </ul>
+      <a class="btn btn--primary" href="https://prosebya.ru/business#form">Оставить заявку</a>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__legal">
+        <a href="https://prosebya.ru/legal">Юридические документы</a>
+        <p>ООО «ПРОСЕБЯ» (ИНН 9725119144, ОГРН 1237700218832) — разработка цифровых сервисов для управления психологическим здоровьем. № 36 286 в реестре ИТ-компаний Минцифры. Москва, Крылатская улица, 17, корп. 1</p>
+      </div>
+      <div class="site-footer__apps">
+        <div class="site-footer__stores">
+          <a class="store" href="#">App Store</a>
+          <a class="store" href="#">RuStore</a>
+          <a class="store" href="#">Google Play</a>
+        </div>
+        <div class="site-footer__copy">© 2022–2026 ООО «ПРОСЕБЯ»</div>
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <table class="doc-spec">
+        <tr><th>Вид</th><td>фон <code>bg-dark</code> #22263B, текст белый meta; юридический текст label <code>slate-300</code></td></tr>
+        <tr><th>Телефон</th><td>всё одной колонкой, кнопка на всю ширину</td></tr>
+      </table>
+    </section>
+  </main>
+</div>
+
+<script src="assets/posts.js?v=d59acf94"></script>
+<script src="assets/blog.js?v=a9a9ff50"></script>
+<script>
+  Blog.mountArticle({});  // подсветка раздела в оглавлении, копирование ссылки и таблицы
+  const bySlug = s => BLOG_POSTS.find(p => p.slug === s);
+  document.getElementById("doc-cards").append(
+    Blog.renderCard(bySlug("zachem-kompanii-korporativnyy-psiholog")),
+    Blog.renderCard({ ...bySlug("skolko-stoit-korporativnyy-psiholog"), img: null }),
+    Blog.renderSkeleton()
+  );
+</script>
+</body>
+</html>

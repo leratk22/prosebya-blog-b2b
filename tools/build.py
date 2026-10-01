@@ -360,7 +360,7 @@ def bust_cache():
     versions = {}
     for name in ("blog.css", "blog.js", "posts.js"):
         versions[name] = hashlib.md5((ROOT / "assets" / name).read_bytes()).hexdigest()[:8]
-    pages = [ROOT / "index.html", ROOT / "404.html", ROOT / "card.html", ROOT / "article-blocks.html",
+    pages = [ROOT / "index.html", ROOT / "404.html", ROOT / "card.html", ROOT / "article-blocks.html", ROOT / "docs.html",
              *sorted((ROOT / "category").glob("*.html")), *sorted((ROOT / "author").glob("*.html")),
              *sorted(OUT.glob("*.html"))]
     for page in pages:

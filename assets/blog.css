@@ -958,6 +958,34 @@ a { color: inherit; }
 }
 .prose > .prose-image, .prose > .prose-image + * { margin-top: 32px; }
 
+/* Цитата: слова эксперта или HR. Без фона — жёлтая полоса слева */
+.quote { display: flex; gap: 24px; margin: 0; }
+.quote::before {
+  content: "";
+  width: 4px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+.quote__body { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.quote blockquote { margin: 0; font-size: var(--text-h3); line-height: var(--leading-lead); }
+.quote figcaption { display: flex; align-items: center; gap: 12px; font-size: var(--text-meta); line-height: var(--leading-meta); }
+.quote__avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-cool-strong);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+.quote__name { display: block; font-weight: var(--font-weight-medium); }
+.quote__role { display: block; color: var(--color-text-secondary); }
+@media (max-width: 767px) { .quote { gap: 16px; } }
+
 /* Выноска */
 .callout {
   display: flex;
