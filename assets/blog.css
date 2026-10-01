@@ -642,20 +642,13 @@ a { color: inherit; }
 .site-footer__apps { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
 .site-footer__stores { display: flex; gap: 8px; }
 .store {
-  width: 88px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgb(255 255 255 / 0.3);
+  display: block;
   border-radius: 6px;
-  font-size: 11px;
-  line-height: 14px;
-  text-decoration: none;
-  transition: border-color var(--dur-hover) ease;
+  transition: opacity var(--dur-hover) ease;
 }
+.store img { display: block; width: 111px; height: 36px; }
 @media (hover: hover) and (pointer: fine) {
-  .store:hover { border-color: rgb(255 255 255 / 0.7); }
+  .store:hover { opacity: 0.75; }
 }
 .site-footer__copy { color: var(--color-slate-300); }
 .site-footer :focus-visible { outline-color: var(--color-white); }
