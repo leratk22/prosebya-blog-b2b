@@ -124,6 +124,7 @@ body {
 }
 img { display: block; max-width: 100%; }
 a { color: inherit; }
+.site-header__logo, .site-footer__logo, .store { text-decoration: none; } /* ссылки-картинки */
 [hidden] { display: none !important; }
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
@@ -881,14 +882,15 @@ a { color: inherit; }
 }
 .prose h2 + *, .prose h3 + * { margin-top: 12px; }
 .prose h2 + h3 { margin-top: 24px; }
-.prose a {
+/* Ссылка «в тексте»: в теле статьи и в тексте CTA (у кнопок и ссылок со стрелкой свои классы) */
+.prose a, .cta a:not([class]) {
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
   text-decoration-color: var(--color-accent);
   transition: text-decoration-color var(--dur-hover) ease;
 }
-@media (hover: hover) and (pointer: fine) { .prose a:hover { text-decoration-color: var(--color-text-primary); } }
+@media (hover: hover) and (pointer: fine) { .prose a:hover, .cta a:not([class]):hover { text-decoration-color: var(--color-text-primary); } }
 .prose strong { font-weight: var(--font-weight-medium); }
 
 /* Блоки внутри текста — отступ 32 сверху и снизу */
