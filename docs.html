@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" href="fonts/EuclidCircularA-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/EuclidCircularA-Medium-WebXL.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/blog.css?v=9cd0f52d">
+<link rel="stylesheet" href="assets/blog.css?v=2191960f">
 <script>document.documentElement.classList.add("js")</script>
 <style>
   /* Обвязка документации, не часть компонентов */
@@ -28,6 +28,7 @@
   .doc-demo { margin-top: 24px; padding: 32px; border: 1px solid var(--color-border-default); border-radius: var(--radius-m);
     display: flex; flex-wrap: wrap; align-items: flex-start; gap: 32px; background: var(--color-bg-page); }
   .doc-demo--stack { flex-direction: column; align-items: stretch; }
+  .doc-demo > * { max-width: 100%; min-width: 0; } /* содержимое примера не шире рамки — длинные ряды прокручиваются внутри */
   .doc-demo--flush { display: block; padding: 0; overflow: hidden; }
   .doc-state { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
   .doc-state__label { font-size: var(--text-label); line-height: var(--leading-label); font-weight: 500; color: var(--color-text-secondary); }
@@ -57,14 +58,33 @@
   .doc-cards .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
   @media (max-width: 1023px) {
-    .docs { grid-template-columns: 1fr; }
+    .docs { grid-template-columns: minmax(0, 1fr); }
     .docs > aside { display: none; }
     .doc-cards .cards { grid-template-columns: 1fr; }
   }
+  .docs-toc-mobile { display: none; }
+  @media (max-width: 1023px) {
+    .docs-toc-mobile { display: block; margin-top: 24px; }
+    .docs-toc-mobile ol { gap: 12px; }
+  }
   @media (max-width: 767px) {
-    .doc-demo { padding: 20px; gap: 24px; }
-    .doc-spec th { width: 120px; }
+    .docs { padding-top: 24px; padding-bottom: 64px; }
+    .docs-intro h1 { font-size: var(--text-h1); line-height: var(--leading-h1); }
+    .doc-group { margin-top: 56px; }
+    .doc-section { padding-top: 32px; }
+    .doc-section h2 { font-size: var(--text-h2); line-height: var(--leading-h2); }
+    .doc-demo { padding: 16px; gap: 20px; }
+    .doc-demo--flush { padding: 0; }
+    .doc-state { max-width: 100%; }
+    /* таблица параметров: название над значением */
+    .doc-spec, .doc-spec tbody, .doc-spec tr, .doc-spec th, .doc-spec td { display: block; width: auto; }
+    .doc-spec tr { padding: 10px 0; border-bottom: 1px solid var(--color-border-default); }
+    .doc-spec th, .doc-spec td { padding: 0; border: 0; }
+    .doc-spec th { margin-bottom: 4px; }
+    .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .swatch__chip { height: 48px; }
     .type-row { grid-template-columns: 1fr; gap: 4px; }
+    .type-row span { overflow-wrap: anywhere; }
   }
 </style>
 </head>
@@ -127,6 +147,44 @@
       <h1>Компоненты блога</h1>
       <p>Все элементы b2b-блога Просебя на настоящих стилях из <code>assets/blog.css</code>. Примеры живые: наведите мышь, нажмите, пройдите клавишей Tab. Макеты — в <a href="https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS">Paper</a>: <a href="https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS/p-1-0">основа</a>, <a href="https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS/p-2-0">компоненты</a>, <a href="https://app.paper.design/file/01M3PNEPG5A4GC5T33BX591BYS/p-3-0">шаблоны страниц</a> (открывается без аккаунта). Страницы — <a href="index.html">листинг</a>, <a href="blog/zachem-kompanii-korporativnyy-psiholog.html">статья</a>, <a href="author/prosebya.html">автор</a>, <a href="404.html">404</a>.</p>
     </header>
+    <details class="toc-mobile docs-toc-mobile">
+      <summary>Разделы<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <ol>
+        <li><a href="#colors">Цвета</a></li>
+        <li><a href="#type">Типографика</a></li>
+        <li><a href="#motion">Движение</a></li>
+        <li><a href="#buttons">Кнопки</a></li>
+        <li><a href="#links">Ссылки</a></li>
+        <li><a href="#chips">Чипы категорий</a></li>
+        <li><a href="#crumbs">Хлебные крошки</a></li>
+        <li><a href="#more">Показать ещё</a></li>
+        <li><a href="#card">Карточка статьи</a></li>
+        <li><a href="#article-head">Шапка статьи</a></li>
+        <li><a href="#toc">Оглавление</a></li>
+        <li><a href="#text">Текст статьи</a></li>
+        <li><a href="#lists">Списки</a></li>
+        <li><a href="#figures">Ключевые цифры</a></li>
+        <li><a href="#callout">Выноска</a></li>
+        <li><a href="#quote">Цитата</a></li>
+        <li><a href="#image">Картинка с подписью</a></li>
+        <li><a href="#table">Таблица</a></li>
+        <li><a href="#sources">Источники</a></li>
+        <li><a href="#share">Поделиться</a></li>
+        <li><a href="#cta">CTA</a></li>
+        <li><a href="#author">Автор</a></li>
+        <li><a href="#header">Шапка сайта</a></li>
+        <li><a href="#footer">Подвал</a></li>
+        <li><a href="#wp-overview">Перенос на WordPress</a></li>
+        <li><a href="#wp-urls">Адреса и редиректы</a></li>
+        <li><a href="#wp-launch">Тест и запуск</a></li>
+        <li><a href="#wp-meta">Заголовки и canonical</a></li>
+        <li><a href="#wp-schema">Разметка</a></li>
+        <li><a href="#wp-pagination">Пагинация</a></li>
+        <li><a href="#wp-images">Картинки</a></li>
+        <li><a href="#wp-theme">Шаблоны и скорость</a></li>
+      </ol>
+    </details>
+
 
     <!-- ===================== ОСНОВА ===================== -->
     <div class="doc-group">Основа</div>
@@ -338,7 +396,7 @@
       <h2>Оглавление</h2>
       <p>Пункты — заголовки H2. На десктопе прилипает справа, на планшете и телефоне — сворачиваемый блок перед текстом.</p>
       <div class="doc-demo">
-        <div class="doc-state" style="width:304px"><span class="doc-state__label">Десктоп · 304</span>
+        <div class="doc-state" style="width:304px;max-width:100%"><span class="doc-state__label">Десктоп · 304</span>
           <nav class="toc" data-demo style="position:static" aria-label="Пример оглавления">
             <div class="toc__title">Содержание</div>
             <ol class="toc__list">
@@ -737,7 +795,8 @@
 <script src="assets/posts.js?v=d59acf94"></script>
 <script src="assets/blog.js?v=a9a9ff50"></script>
 <script>
-  Blog.mountArticle({});  // подсветка раздела в оглавлении, копирование ссылки и таблицы
+  Blog.mountArticle({});
+  document.querySelectorAll('.docs-toc-mobile a').forEach(a => a.addEventListener('click', () => a.closest('details').removeAttribute('open')));  // подсветка раздела в оглавлении, копирование ссылки и таблицы
   const bySlug = s => BLOG_POSTS.find(p => p.slug === s);
   document.getElementById("doc-cards").append(
     Blog.renderCard(bySlug("zachem-kompanii-korporativnyy-psiholog")),
